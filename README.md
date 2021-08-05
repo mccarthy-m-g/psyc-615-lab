@@ -1,5 +1,7 @@
 # PSYC 615 Lab
 
+Applications of the general linear model to research design and analysis.
+
 ## Cloning this repository to your computer
 
 You can clone this repository to your computer by either:
