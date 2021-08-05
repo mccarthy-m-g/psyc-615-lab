@@ -1,6 +1,6 @@
 # PSYC 615 Lab
 
-The PSYC 615 lab covers applications of the general linear model to research design and analysis. This repository contains materials for the lab for students using R or jamovi.
+The PSYC 615 lab covers applications of the general linear model to research design and analysis. This repository contains lab materials for students using R or jamovi.
 
 ## R
 
