@@ -1,16 +1,6 @@
 # PSYC 615 Lab
 
-Applications of the general linear model to research design and analysis.
-
-## Cloning this repository to your computer
-
-You can clone this repository to your computer by either:
-
-1.  Using the [GitHub Desktop](https://desktop.github.com) application.
-2.  Using RStudio's [git integration](https://happygitwithr.com).
-3.  Downloading a `.zip` file of the repository directly from GitHub.
-
-All three of these options will get the repository onto your computer. Option 1 or 2 allow you to see when changes to the repository have been made (and to apply those changes on your computer). Option 3 does not allow this capability, but it is the simplest method.
+The PSYC 615 lab covers applications of the general linear model to research design and analysis. This repository contains materials for the lab for students using R or jamovi.
 
 ## R
 
@@ -59,3 +49,13 @@ The jamovi user guide has everything you need to get up and running with jamovi.
 #### [Learning statistics with jamovi](https://www.learnstatswithjamovi.com)
 
 Learning statistics with jamovi covers the contents of an introductory statistics class, as typically taught to undergraduate psychology students. The book discusses how to get started in jamovi and covers the analysis of contingency tables, correlation, t-tests, regression, ANOVA, and factor analysis.
+
+## Cloning this repository to your computer
+
+You can clone this repository to your computer by either:
+
+1.  Using the [GitHub Desktop](https://desktop.github.com) application.
+2.  Using RStudio's [git integration](https://happygitwithr.com).
+3.  Downloading a `.zip` file of the repository directly from GitHub.
+
+All three of these options will get the repository onto your computer. Option 1 or 2 allow you to see when changes to the repository have been made (and to apply those changes on your computer). Option 3 does not allow this capability, but it is the simplest method.
