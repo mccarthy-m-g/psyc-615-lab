@@ -1,0 +1,271 @@
+---
+title: "Help yourself: Assignment 1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Prerequisites
+
+To access the datasets, help pages, and functions that we will use in this *help yourself*, load the following packages:
+
+```{r prerequisites}
+here::i_am("labs/02_assumptions-ttests/help-yourself_assignment-1.Rmd")
+
+library(here)
+library(tidyverse)
+library(ggpubr)
+```
+
+If you run this code and get the error message "there is no package called 'tidyverse'" (or a different package name), you will need to first install it, then run `library()` once again.
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+You only need to install a package once, but you need to reload it every time you start a new session.
+
+If you need to be explicit about where a function (or dataset) comes from, you can use the special form `package::function()`. For example, `ggplot2::ggplot()` tells R explicitly that you are using the `ggplot()` function from the **ggplot2** package.
+
+Telling R explicitly where a function comes from is called *namespacing*. The code below will always be explicit about where functions from loaded packages come from so that it is easier for you to help yourself when you want to learn more about a given function. However, you do not need to namespace functions in your code for assignments so long as you have the prerequisite packages loaded in your session.
+
+## Creating data sets
+
+There are many ways to create data sets in R. If you want to create a data set where the code is laid out like a spreadsheet you can use the `tribble()` function from the **tibble** package. This is useful if you want to create a small data set with values you input manually. To get help using this function you can run `?tibble::tribble` in the R console.
+
+```{r tribble}
+simpsons <- tibble::tribble(
+  ~simpson, ~age,
+  "homer",  36,
+  "marge",  34,
+  "bart",   10,
+  "lisa",    8,
+  "maggie",  1
+)
+
+simpsons
+```
+
+Alternatively, if you want to create a data set where each column is a vector of values you can use the `tibble()` function from the tibble package. To get help using this function you can run `?tibble::tibble` in the R console.
+
+```{r tibble}
+# Here we recreate the data set from the code chunk above using the tibble
+# function
+simpson_name <- c("homer", "marge", "bart", "lisa", "maggie")
+simpson_age  <- c(36, 34, 10, 8, 1)
+
+simpsons <- tibble::tibble(simpson = simpson_name, age = simpson_age)
+
+simpsons
+```
+
+### Simulating data
+
+Creating data sets using the `tibble()` function is useful when you want to simulate data instead of entering it manually. R comes built in with a number of functions to simulate data with different distributions. You can see them all by running `?distributions` in the console. The most useful distribution to simulate in this course will be the normal distribution, which can be simulated with the `rnorm()` function. To get help using this function you can run `?rnorm` in the R console.
+
+```{r simulate}
+normal_distribution <- rnorm(n = 10, mean = 30, sd = 5)
+
+normal_distribution
+```
+
+All the simulation functions in R output vectors of values, which means you can use them with the `tibble()` function to create simulated data sets.
+
+```{r simulated-dataset}
+# Here we construct a data set using the simulated normal distribution from the
+# code chunk above, with an additional column containing the participant ID for
+# each simulated value
+simulated_dataset <- tibble::tibble(id = 1:10, value = normal_distribution)
+
+simulated_dataset
+```
+
+## Wrangling data
+
+It is often the case that the data you work with needs wrangling to make it fit for use. This could mean cleaning the data, but it could also mean adding new columns, removing rows, calculating new values, or transforming old values. The **dplyr** package has you covered for all of these actions and more. There are six main functions that will cover the majority of your data wrangling needs:
+
+### Selecting
+
+The `select()` function (`?dplyr::select`) allows you to select (and optionally rename) columns in a data frame.
+
+```{r select}
+dplyr::select(.data = simpsons, age)
+```
+
+### Filtering
+
+The `filter()` function (`?dplyr::filter`) is used to subset a data frame, retaining all rows that satisfy your conditions.
+
+```{r filter}
+dplyr::filter(.data = simpsons, simpson == "bart")
+```
+
+### Mutating
+
+The `mutate()` function (`?dplyr::mutate`) adds new columns and preserves existing ones
+
+```{r mutate}
+dplyr::mutate(.data = simpsons, age_in_2021 = age + 34)
+```
+
+### Grouping and summarizing
+
+The `group_by()` function (`?dplyr::group_by`) allows you to organize observations into groups and do data operations by group. The `ungroup()` function (`?dplyr::ungroup`) removes grouping.
+
+The `summarize()` function (`?dplyr::summarize`) allows you to compute summary statistics on a data set either as a whole or by group by pairing it with the `group_by()` function.
+
+```{r groupby-summarize}
+# First we need a variable to group by. We can create it using the mutate
+# function.
+simpsons <- dplyr::mutate(
+  .data = simpsons,
+  sex = c("male", "female", "male", "female", "female"),
+  .before = age
+)
+
+# Then we group the data by sex
+simpsons_grouped <- dplyr::group_by(.data = simpsons, sex)
+
+# And finally we calculate some summary statistics using our grouping variable
+simpsons_grouped <- dplyr::summarize(
+  .data = simpsons_grouped,
+  group_size = dplyr::n(),
+  mean_age = mean(age),
+  sd_age = sd(age)
+)
+
+simpsons_grouped
+```
+
+The `summarize()` function can also be used independently to get summary statistics for the whole sample.
+
+```{r summarize}
+dplyr::summarize(
+  .data = simpsons,
+  total_age = sum(age),
+  median_age = median(age),
+  mean_age = mean(age),
+  sd_age = sd(age)
+)
+```
+
+### Arranging
+
+The `arrange()` function (`?dplyr::arrange`) orders the rows of a data frame by the values of selected columns.
+
+```{r arrange-ascending}
+dplyr::arrange(.data = simpsons, age)
+```
+
+You can use the the `desc()` function (`?dplyr::desc`) to order the rows in descending order.
+
+```{r arrange-descending}
+dplyr::arrange(.data = simpsons, dplyr::desc(age))
+```
+
+## File paths
+
+Before you can read data you need to tell R where the data file is located. There are several ways to do this, some of them better than others.
+
+The easiest---but also easiest to break---way is to write a character string with a path to the file, relative to your current working directory. You can check your current working directory by running `getwd()` in the console. If you do this, you should see that your current working directory is the `psyc-615-lab` directory
+
+```{r string-path}
+string_path <- "data/help-yourself_01.csv"
+string_path
+```
+
+A better way is to use the `file.path()` function (`?file.path`), which constructs the path to a file from components in a platform-independent way. This avoids file paths breaking between different operating systems, since Windows uses backslashes and OSX and Linux use forward slashes. 
+
+```{r function-path}
+function_path <- file.path("data", "help-yourself_01.csv")
+function_path
+```
+
+The best way is to use the `here()` function (`?here::here`) from the **here** package. The `here()` function will always locate the files relative to your project root, in this case the `psyc-615-lab` directory. This is more consistent than locating files relative to your current working directory, and encourages the use of [project-oriented workflows](https://r4ds.had.co.nz/workflow-projects.html). You can use it as a drop-in replacement for `file.path()`.
+
+```{r here-path}
+here_path <- here::here("data", "help-yourself_01.csv")
+here_path
+```
+
+You should read the here package vignettes to learn more about using `here()` in general (`vignette("here", package = "here")`) and in R Markdown documents such as this one (`vignette("rmarkdown", package = "here")`). After reading, if you scroll to line 15 of this document you will note that the `here::i_am()` function has already been set up for you. But you may need to set it up on your own at other points in this course.
+
+## Reading data
+
+There are a number of functions you can use to read different data files in R. For this course there are only two you need to worry about. To read CSV data files you can use the `read_csv()` (`?readr::read_csv`) function from the **readr** package.
+
+```{r read-csv}
+csv_data <- readr::read_csv(here::here("data", "help-yourself_01.csv"))
+csv_data
+```
+
+To read SPSS `.sav` files you can use the `read_sav()` function (`?haven::read_sav`) from the **haven** package.
+
+```{r read-spss}
+sav_data <- haven::read_sav(here::here("data", "help-yourself_01.sav"))
+sav_data
+```
+
+## Visualizing data
+
+R is a powerhouse for visualizing data, and makes it easy to create publication ready plots and tables. 
+
+### Plots
+
+The plots you will make in this course will be simple, but if you enjoy data visualization then diving deeper into R's plotting capabilities is a great investment (check out the *#tidytuesday* tag on Twitter if you want a taste). Data visualization in R is typically done with the **ggplot2** package, which is based on a grammar of graphics that allow you to assemble plots step by step to your exact specifications. A companion to ggplot2 is the **ggpubr** package, which simplifies the creation of plots common to scientific publications in APA style.
+
+#### Histograms and box plots
+
+Histograms are useful for visualizing the distribution of observations for a given variable. The `gghistogram()` function (`?ggpubr::gghistogram`) can be used to create a histogram. You can change the number and width of bins with the optional `bins` and `binwidth` arguments.
+
+```{r gghistogram}
+ggpubr::gghistogram(data = csv_data, x = "anxiety")
+```
+
+An alternative way to visualize the distribution of observations for a given variable is with boxplots. This can be useful if you want to emphasize different percentiles of the data. The `ggboxplot()` function (`?ggpubr::ggboxplot`) can be used to create a box plot.
+
+```{r ggboxplot}
+ggpubr::ggboxplot(data = csv_data, y = "anxiety")
+```
+
+#### QQ plots
+
+```{r ggqqplot}
+ggpubr::ggqqplot(data = csv_data, x = "anxiety")
+```
+
+#### Bar plots and line plots
+
+Bar plots can be used to visualize group differences. The `ggbarplot()` function (`?ggpubr::ggbarplot`) can be used to create a bar plot. The optional `add` argument can be used to add descriptive statistics to the bars, such as means and confidence intervals.
+
+```{r ggbarplot}
+ggpubr::ggbarplot(data = csv_data, x = "group", y = "anxiety", add = "mean_ci")
+```
+
+An alternative to bar plots are line plots. These can be useful when visualizing changes in repeated measures data.
+
+```{r ggline}
+ggpubr::ggline(data = csv_data, x = "group", y = "anxiety", add = "mean_ci")
+```
+
+### Tables
+
+
+
+
+
+## Calculating descriptive statistics
+
+mean, sd, 
+
+## Determining normality
+
+skewness, kurtosis, 
+
+Shapiro-Wilk test
+Kolmogorov-Smirnov test
+
+Levene's test
