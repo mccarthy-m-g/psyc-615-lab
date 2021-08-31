@@ -1,0 +1,1 @@
+Note to future TAs. The cheatsheets in this directory were downloaded on Aug 31, 2021, from https://github.com/rstudio/cheatsheets. If any of the cheatsheets are out of date please replace them with the new versions.
