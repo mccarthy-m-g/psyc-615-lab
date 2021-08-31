@@ -17,6 +17,7 @@ here::i_am("labs/02_assumptions-ttests/help-yourself_assignment-1.Rmd")
 library(here)
 library(tidyverse)
 library(ggpubr)
+library(papaja)
 ```
 
 If you run this code and get the error message "there is no package called 'tidyverse'" (or a different package name), you will need to first install it, then run `library()` once again.
@@ -253,9 +254,21 @@ ggpubr::ggline(data = csv_data, x = "group", y = "anxiety", add = "mean_ci")
 
 ### Tables
 
+R also has great packages for making tables. Unfortunately you will not get to play around with these in this course. Partly because you will only ever make very simple tables in this course, and partly because R's best table making packages do not support Microsoft Word documents at the moment.
 
+The easiest way to output an APA style table in an R Markdown document is to use the `apa_table()` function (`?papaja::apa_table`) from the **papaja** package. This function takes a data frame and APA styles it when you knit your document, with an optional caption using the `caption` argument.
 
+```{r papaja-table}
+# If you run this code in the console the output will look like gibberish. You
+# need to knit the document to see the proper result.
+papaja::apa_table(simpsons, caption = "Table showing Simpsons ages")
+```
 
+However, you should note that the `apa_table()` function will not do all the APA styling work for you. Things such as capitalization, number of digits printed, and so forth must be either: (1) Handled beforehand in the data frame given to the `apa_table()` function; or (2) handled afterwords manually in Microsoft Word.
+
+... maybe include how to wrangle for apa styling
+
+<!-- Note to future TAs or students who are fine messing with development versions of R packages: The gt package will have word support in the future. As of Aug 31, 2021, there is a PR in development on Word support https://github.com/rstudio/gt/pull/811. Once this is complete gt will likely be a better option than papaja for APA tables. Here is a blogpost showing how to make APA-like tables with gt https://www.anthonyschmidt.co/post/2020-06-03-making-apa-tables-with-gt/. This could be used currently by creating a gt table then saving it as a png; it's not as good as a native table in Word but it's workable and would allow students to use gt's capabilities for formatting nice tables. -->
 
 ## Calculating descriptive statistics
 
@@ -269,3 +282,5 @@ Shapiro-Wilk test
 Kolmogorov-Smirnov test
 
 Levene's test
+
+## t-tests
