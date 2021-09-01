@@ -25,6 +25,7 @@ library(tidyverse)
 library(ggpubr)
 library(patchwork)
 library(papaja)
+library(psych)
 ```
 
 If you run this code and get the error message "there is no package called 'tidyverse'" (or a different package name), you will need to first install it, then run `library()` once again.
@@ -360,13 +361,39 @@ If you need to include any images in your R Markdown document you can use the `k
 knitr::include_graphics(here::here("images", "outlier.png"))
 ```
 
-## Calculating descriptive statistics
+## Descriptive statistics
 
-mean, sd, 
+The `mean()` function (`?mean`) takes a vector of numbers as input and returns the mean as output. 
 
-## Determining normality
+```{r mean}
+zero_to_one_hundred <- 0:100
 
-skewness, kurtosis, 
+mean(zero_to_one_hundred)
+```
+
+The `sd()` function (`?sd`) works the same way as the `mean()` function, but returns the standard deviation as output.
+
+```{r sd}
+some_numbers <- c(1, 15, 98, 45, 37, 56)
+
+sd(some_numbers)
+```
+
+The `skewness()` and `kurtosis()` functions (`?datawizard::skewness`) from the **datawizard** package can be used to calculate skewness and kurtosis. There are different algorithms for calculating skewness and kurtosis, these can be selected using the optional `type` argument (`type = 2` matches SPSS and SAS). 
+
+```{r skewness-kurtosis}
+datawizard::skewness(some_numbers)
+datawizard::kurtosis(some_numbers)
+```
+
+You can also use the `describe()` function (`?psych::describe`) from the **psych** package to calculate all your descriptive statistics at once. The optional `type` argument selects which algorithm to calculate skewness and kurtosis with (`type = 2` matches SPSS and SAS). Note that the `describe()` function will calculate descriptive statistics for all columns in a data frame, even if that would not make sense for all columns. You can wrangle your data frame beforehand with the `select()` function from the dplyr package if you only want to see output for the relevant columns.
+
+```{r describe}
+psych::describe(csv_data, type = 2)
+```
+
+## Statistical assumptions
+
 
 Shapiro-Wilk test
 Kolmogorov-Smirnov test
