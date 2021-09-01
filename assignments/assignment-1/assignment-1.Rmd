@@ -19,7 +19,7 @@ params:
   show_output: FALSE
 
 output: papaja::apa6_docx
-knit: ( function(input, ...) { source("../R/knit.R"); knit_assignment(input, ...) })
+knit: ( function(input, ...) { source("../../R/knit.R"); knit_assignment(input, ...) })
 ---
 
 ```{r setup, include=FALSE}
