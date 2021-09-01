@@ -1,10 +1,16 @@
 ---
 title: "Help yourself: Assignment 1"
-output: html_document
+author:
+  - name: "[Michael McCarthy](https://github.com/mccarthy-m-g)"
+    affiliation: "[PSYC 615 Lab](https://github.com/mccarthy-m-g/psyc-615-lab)"
+    email: michael.mccarthy@ucalgary.ca
+output:
+  bookdown::html_document2:
+    number_sections: false
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, comment = "#>", collapse = TRUE)
 ```
 
 ## Prerequisites
@@ -17,6 +23,7 @@ here::i_am("labs/02_assumptions-ttests/help-yourself_assignment-1.Rmd")
 library(here)
 library(tidyverse)
 library(ggpubr)
+library(patchwork)
 library(papaja)
 ```
 
@@ -214,7 +221,7 @@ sav_data
 
 R is a powerhouse for visualizing data, and makes it easy to create publication ready plots and tables. 
 
-### Plots
+### Creating plots
 
 The plots you will make in this course will be simple, but if you enjoy data visualization then diving deeper into R's plotting capabilities is a great investment (check out the *#tidytuesday* tag on Twitter if you want a taste). Data visualization in R is typically done with the **ggplot2** package, which is based on a grammar of graphics that allow you to assemble plots step by step to your exact specifications. A companion to ggplot2 is the **ggpubr** package, which simplifies the creation of plots common to scientific publications in APA style.
 
@@ -232,7 +239,9 @@ An alternative way to visualize the distribution of observations for a given var
 ggpubr::ggboxplot(data = csv_data, y = "anxiety")
 ```
 
-#### QQ plots
+#### Q-Q plots
+
+Quantile-Quantile plots are a useful visual aid for assessing whether the distribution of observations for a given variable approximate a theoretical distribution, such as a the normal distribution. The `ggqqplot()` function (`?ggpubr::ggqqplot`) can be used to create a Q-Q plot.
 
 ```{r ggqqplot}
 ggpubr::ggqqplot(data = csv_data, x = "anxiety")
@@ -252,6 +261,79 @@ An alternative to bar plots are line plots. These can be useful when visualizing
 ggpubr::ggline(data = csv_data, x = "group", y = "anxiety", add = "mean_ci")
 ```
 
+### Composing plots
+
+The plotting code above will serve your needs for most assignment questions in the course, but questions requiring APA style need a bit more formatting attention.
+
+#### Labels
+
+You may have noticed the axis labels in the plots above were all in lower case. Every plotting function in the ggpubr package has additional optional arguments---which you can see by going to the function's help page---that can be used to change plot labels. Here is an example with the `ggbarplot()` function; note the additional `xlab` and `ylab` arguments.
+
+```{r labels}
+ggpubr::ggbarplot(
+  data = csv_data,
+  x = "group",
+  y = "anxiety",
+  add = "mean_ci",
+  xlab = "Group",
+  ylab = "Anxiety"
+)
+```
+
+#### Moving the legend
+
+APA requires legends to be located within the plotting area, but ggplot2 places legends outside the plotting area by default. If your plot has a legend you can move it with the `apa_legend()` function. This is a custom function included in the PSYC 615 Lab repository, you can make it available by using the `source()` function. Options for the `position` argument are: "topleft", "topright", "topmiddle", "bottomleft", "bottomright", "bottommiddle", or "none".
+
+```{r legends}
+# The source function runs R script files so their contents can be made
+# available to use in R Markdown documents such as this one
+source(here::here("R", "apa_legend.R"))
+
+# The fill argument groups the data, resulting in a legend. The palette
+# argument is used to change the fill colour of the boxplots.
+grouped_boxplot <- ggpubr::ggboxplot(
+  data = csv_data,
+  y = "anxiety",
+  fill = "group",
+  palette = "grey"
+)
+
+# Use ggplot2 syntax (the + sign) to move the legend
+grouped_boxplot +
+  apa_legend(position = "topleft")
+```
+
+#### Multiple plots as a single figure
+
+The **patchwork** package makes it very easy to combine multiple plots into a single figure. Simply assign your plots to objects, then compose them using patchwork's syntax. Note: the patchwork library needs to be loaded for this to work; in this document it was loaded in the prerequisites section.
+
+```{r patchwork}
+# First create some plots
+plot_a <- ggpubr::gghistogram(data = csv_data, x = "anxiety")
+plot_b <- ggpubr::ggqqplot(data = csv_data, x = "anxiety")
+
+# Then compose them together and add an annotation to distinguish them
+plot_a + plot_b +
+  patchwork::plot_annotation(tag_levels = "A")
+```
+
+#### Figure captions
+
+APA style also requires figures to have captions. There are two ways to go about this in an R Markdown document. The first is to type the caption directly into the code chunk options of the chunk where your plot is output from, using the `fig.cap` chunk option (note: you need to look at the R Markdown file to see this, not the rendered document).
+
+```{r caption-a, fig.cap="A short figure caption."}
+ggpubr::ggboxplot(data = csv_data, y = "anxiety")
+```
+
+The second, and usually better, option is to place a reference to the caption in the code chunk options. You can see how this works below (note: you need to look at the R Markdown file to see this, not the rendered document).
+
+<!-- ---------------------------------------------------------------------- -->
+(ref:caption-b) When you have a long caption using the second option is better because it keeps your code chunk options short and clean.
+
+```{r caption-b, fig.cap="(ref:caption-b)"}
+ggpubr::ggboxplot(data = csv_data, y = "anxiety")
+```
+
 ### Tables
 
 R also has great packages for making tables. Unfortunately you will not get to play around with these in this course. Partly because you will only ever make very simple tables in this course, and partly because R's best table making packages do not support Microsoft Word documents at the moment.
@@ -260,15 +342,23 @@ The easiest way to output an APA style table in an R Markdown document is to use
 
 ```{r papaja-table}
 # If you run this code in the console the output will look like gibberish. You
-# need to knit the document to see the proper result.
-papaja::apa_table(simpsons, caption = "Table showing Simpsons ages")
+# need to knit the document as a PDF or Word file to see the proper result.
+apa_tab <- papaja::apa_table(simpsons, caption = "Table showing Simpsons ages")
 ```
 
 However, you should note that the `apa_table()` function will not do all the APA styling work for you. Things such as capitalization, number of digits printed, and so forth must be either: (1) Handled beforehand in the data frame given to the `apa_table()` function; or (2) handled afterwords manually in Microsoft Word.
 
-... maybe include how to wrangle for apa styling
+... maybe include how to wrangle for apa styling ...
 
 <!-- Note to future TAs or students who are fine messing with development versions of R packages: The gt package will have word support in the future. As of Aug 31, 2021, there is a PR in development on Word support https://github.com/rstudio/gt/pull/811. Once this is complete gt will likely be a better option than papaja for APA tables. Here is a blogpost showing how to make APA-like tables with gt https://www.anthonyschmidt.co/post/2020-06-03-making-apa-tables-with-gt/. This could be used currently by creating a gt table then saving it as a png; it's not as good as a native table in Word but it's workable and would allow students to use gt's capabilities for formatting nice tables. -->
+
+## Including images
+
+If you need to include any images in your R Markdown document you can use the `knitr::include_graphics()` function(`?knitr::include_graphics`)  from the **knitr** package. Note that you actually need to use the `knitr::` namespacing for this one. Images can also be given captions using the same method as with plots.
+
+```{r images}
+knitr::include_graphics(here::here("images", "outlier.png"))
+```
 
 ## Calculating descriptive statistics
 
@@ -284,3 +374,9 @@ Kolmogorov-Smirnov test
 Levene's test
 
 ## t-tests
+
+## Learning more
+
+add free resources
+
+stats of doom
