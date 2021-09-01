@@ -109,7 +109,7 @@ dplyr::select(.data = simpsons, age)
 The `filter()` function (`?dplyr::filter`) is used to subset a data frame, retaining all rows that satisfy your conditions.
 
 ```{r filter}
-dplyr::filter(.data = simpsons, simpson == "bart")
+dplyr::filter(.data = simpsons, simpson != "bart")
 ```
 
 ### Mutating
@@ -349,8 +349,6 @@ apa_tab <- papaja::apa_table(simpsons, caption = "Table showing Simpsons ages")
 
 However, you should note that the `apa_table()` function will not do all the APA styling work for you. Things such as capitalization, number of digits printed, and so forth must be either: (1) Handled beforehand in the data frame given to the `apa_table()` function; or (2) handled afterwords manually in Microsoft Word.
 
-... maybe include how to wrangle for apa styling ...
-
 <!-- Note to future TAs or students who are fine messing with development versions of R packages: The gt package will have word support in the future. As of Aug 31, 2021, there is a PR in development on Word support https://github.com/rstudio/gt/pull/811. Once this is complete gt will likely be a better option than papaja for APA tables. Here is a blogpost showing how to make APA-like tables with gt https://www.anthonyschmidt.co/post/2020-06-03-making-apa-tables-with-gt/. This could be used currently by creating a gt table then saving it as a png; it's not as good as a native table in Word but it's workable and would allow students to use gt's capabilities for formatting nice tables. -->
 
 ## Including images
@@ -362,6 +360,8 @@ knitr::include_graphics(here::here("images", "outlier.png"))
 ```
 
 ## Descriptive statistics
+
+### Mean and standard deviation
 
 The `mean()` function (`?mean`) takes a vector of numbers as input and returns the mean as output. 
 
@@ -379,12 +379,16 @@ some_numbers <- c(1, 15, 98, 45, 37, 56)
 sd(some_numbers)
 ```
 
+### Skewness and kurtosis
+
 The `skewness()` and `kurtosis()` functions (`?datawizard::skewness`) from the **datawizard** package can be used to calculate skewness and kurtosis. There are different algorithms for calculating skewness and kurtosis, these can be selected using the optional `type` argument (`type = 2` matches SPSS and SAS). 
 
 ```{r skewness-kurtosis}
 datawizard::skewness(some_numbers)
 datawizard::kurtosis(some_numbers)
 ```
+
+### Calculate all descriptive statistics with a single function
 
 You can also use the `describe()` function (`?psych::describe`) from the **psych** package to calculate all your descriptive statistics at once. The optional `type` argument selects which algorithm to calculate skewness and kurtosis with (`type = 2` matches SPSS and SAS). Note that the `describe()` function will calculate descriptive statistics for all columns in a data frame, even if that would not make sense for all columns. You can wrangle your data frame beforehand with the `select()` function from the dplyr package if you only want to see output for the relevant columns.
 
@@ -394,11 +398,44 @@ psych::describe(csv_data, type = 2)
 
 ## Statistical assumptions
 
+### Shapiro-Wilk test
 
-Shapiro-Wilk test
+The Shapiro-Wilk test of normality can be used to test whether the skewness of a variable is significantly different from a normal distribution. You can use the `shapiro.test()` function (`?shapiro.test`) to calculate the Shapiro-Wilk statistic ($W$) and the p-value for the test.
+
+```{r shapiro-wilk}
+shapiro.test(some_numbers)
+```
+
+The `shapiro.test()` function takes a numeric vector of values as its input, so you need to specify which column you would like to run the test for if your data is in a data frame. You can do this using either the `pull()` function (`?dplyr::pull`) from the dplyr package, or one of R's extract operators (`?Extract`).
+
+```{r shapiro-wilk-df}
+# The pull function lets you use a familiar syntax to other functions
+anxiety_values_pull <- dplyr::pull(.data = csv_data, var = anxiety)
+
+# R's extract operators have a unique syntax that is more concise. These are
+# all interchangeable so you may see different ones used by different people.
+anxiety_values_dollar <- csv_data$anxiety
+anxiety_values_sqbr   <- csv_data[["anxiety"]]
+
+# If you put any of the anxiety_values_ vectors in the shapiro.test() function
+# below you will see that you get the same result for each
+shapiro.test(anxiety_values_pull)
+```
+
+If you want easy programmatic access to the output of the `shapiro.test()` function you can use the `tidy()` function (`?broom::tidy`) from the **broom** package. This will tidy the output into a data frame, which you can then do other functions on. For instance, you might want to put the results in an APA table using the `apa_table()` function mentioned previously, or you might want to round the test statistic to two digits using the `round()` function.
+
+```{r shapiro-wilk-tidy}
+shapiro_test_anxiety <- shapiro.test(anxiety_values_pull)
+
+broom::tidy(shapiro_test_anxiety)
+```
+
+### Levene's test
+
+
+
 Kolmogorov-Smirnov test
 
-Levene's test
 
 ## t-tests
 
