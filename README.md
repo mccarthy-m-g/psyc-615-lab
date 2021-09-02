@@ -22,6 +22,12 @@ Please read and work through [Chapter 4](https://rstudio-education.github.io/hop
 
 Please also read and work through this week's **Help Yourself** R Markdown document for Assignment 1. You can find the R Markdown file at `labs/02_assumptions-ttests/help-yourself_assignment-1.Rmd`. This document contains everything you need to complete Assignment 1 (and a little bit extra). This first Help Yourself is a bit long because it covers basic processes you will need to use on other assignments---such as reading, wrangling, and visualizing data---as well as applications of the statistics you learned this week. The remaining Help Yourself documents should not be as long.
 
+Cheat sheets you might find helpful this week include the:
+
+- R Markdown cheat sheet found at `cheatsheets/rmarkdown.pdf`
+- Data Import cheat sheet found at `cheatsheets/data-import.pdf`
+- Data Transformation cheat sheet found at `cheatsheets/data-transformation.pdf`
+
 ### Week 3 (Sep 24)
 
 Please read and work through this week's Help Yourself R Markdown document for Assignment 2. You can find the R Markdown file at `labs/03_.../help-yourself_assignment-2.Rmd`.
