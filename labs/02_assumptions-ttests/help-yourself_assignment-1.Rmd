@@ -26,6 +26,9 @@ library(ggpubr)
 library(patchwork)
 library(papaja)
 library(psych)
+library(broom)
+library(car)
+library(effectsize)
 ```
 
 If you run this code and get the error message "there is no package called 'tidyverse'" (or a different package name), you will need to first install it, then run `library()` once again.
@@ -422,7 +425,7 @@ anxiety_values_sqbr   <- csv_data[["anxiety"]]
 shapiro.test(anxiety_values_pull)
 ```
 
-If you want easy programmatic access to the output of the `shapiro.test()` function you can use the `tidy()` function (`?broom::tidy`) from the **broom** package. This will tidy the output into a data frame, which you can then do other functions on. For instance, you might want to put the results in an APA table using the `apa_table()` function mentioned previously, or you might want to round the test statistic to two digits using the `round()` function.
+If you want easy programmatic access to the output of the `shapiro.test()` function you can use the `tidy()` function (`?broom::tidy`) from the **broom** package. This will tidy the output into a data frame, which you can then do other functions on. For instance, you might want to put the results in an APA table using the `apa_table()` function mentioned previously, or you might want to round the test statistic to two digits using the `round()` function. See the function help (`?broom::tidy.htest`) for details about what the value in each column means.
 
 ```{r shapiro-wilk-tidy}
 shapiro_test_anxiety <- shapiro.test(anxiety_values_pull)
@@ -432,12 +435,137 @@ broom::tidy(shapiro_test_anxiety)
 
 ### Levene's test
 
+Levene's test of homogeneity of variance can be used to test whether the variance of a variable is equal across groups. You can use the `leveneTest()` function (`?car::leveneTest`) from the **car** package to calculate the Levene's test statistic ($F$) and the p-value for the test. There are two ways to use this function, each giving the same result but with different syntax. Pick whichever you like.
 
+The first option requires you to extract the variable and group columns you want to use to calculate Levene's test from your data frame.
 
-Kolmogorov-Smirnov test
+```{r levene-extract}
+# Here we extract the numeric vector for anxiety and the character vector for
+# group from the `csv_data` data frame using the `$` extractor mentioned in the
+# previous section.
+car::leveneTest(y = csv_data$anxiety, group = csv_data$anxiety, center = mean)
+```
 
+The second option uses R's formula syntax, placing the variable column to the left of the tilde and the group column to the right, then specifying the data frame those columns belong to using the `data` argument.
+
+```{r levenes-formula}
+car::leveneTest(anxiety ~ group, center = mean, data = csv_data)
+```
+
+If you want easy programmatic access to the output of the `leveneTest()` function you can use the `tidy()` function (`?broom::tidy.leveneTest`) from the **broom** package here too (the `tidy()` function works with most statistical models in R). See the function help (`?broom::tidy.htest`) for details about what the value in each column means.
+
+```{r levenes-tidy}
+# Here we split this code up into multiple lines in order to follow the
+# tidyverse style guide. The guide states that when a line of code exceeds 80
+# characters it should be broken into multiple lines for readability.
+levenes_test_anxiety <- car::leveneTest(
+  anxiety ~ group,
+  center = mean,
+  data = csv_data
+)
+
+broom::tidy(levenes_test_anxiety)
+```
 
 ## t-tests
+
+All the different types of t-tests in R use the same `t.test()` function (`?t.test`), but each uses different optional arguments to determine which t-test is run. There are two ways to use this function for a given type of t-test, each way giving the same result but with different syntax (like with the `leveneTest()` function above).
+
+### Single Sample t-test
+
+The single sample t-test tests whether a group of values significantly differ from a specified value. It uses the optional `mu` argument to indicate the true value of the mean. You can either use this function with extracted values:
+
+```{r single-sample-ttest-extract}
+t.test(csv_data$anxiety, mu = 20)
+```
+
+Or with the formula syntax:
+
+```{r single-sample-ttest-formula}
+t.test(anxiety ~ 1, mu = 20, data = csv_data)
+```
+
+### Independent t-test
+
+The independent t-test tests whether the values in two distinct unrelated groups significantly differ from each other.
+
+You can either use this function with extracted values from each group:
+
+```{r independent-ttest-extract}
+# First you have to create separate data frames for each group. The filter
+# function is the easiest way to do this.
+spider_pic_group <- dplyr::filter(.data = csv_data, group == "Picture")
+spider_real_group <- dplyr::filter(.data = csv_data, group == "Real Spider")
+
+# Afterwords you can extract the same variable from each data frame to compare
+# the two groups.
+t.test(x = spider_pic_group$anxiety, y = spider_real_group$anxiety)
+```
+
+Or with the formula syntax, where the dependent variable goes to the left of the tilde and the independent variable goes to the right. (As you may have noticed by now R's formula syntax tends to result in cleaner, shorter code).
+
+```{r independent-ttest-formula}
+t.test(anxiety ~ group, data = csv_data)
+```
+
+### Dependent t-test
+
+The dependent t-test tests whether the values within the same group (or a matched group) significantly differ across two contexts. It uses the optional `paired` argument to indicate that the values in your data are dependent on each other.
+
+You can either use this function with extracted values from each group:
+
+```{r dependent-ttest-extract}
+# Here we can pretend participants first had their anxiety measured while
+# looking at pictures of spiders, then afterwords had their anxiety measured
+# while looking at real spiders.
+t.test(
+  x = spider_pic_group$anxiety,
+  y = spider_real_group$anxiety,
+  paired = TRUE
+)
+```
+
+Or with the formula syntax, where the dependent variable goes to the left of the tilde and the independent variable goes to the right.
+
+```{r dependent-ttest-formula}
+t.test(anxiety ~ group, paired = TRUE, data = csv_data)
+```
+
+### Tidy t-tests
+
+The output of the `t.test()` function can be tidied with the `tidy()` function  from the broom package. See the function help (`?broom::tidy.htest`) for details about what the value in each column means.
+
+```{r ttest-tidy}
+# This example uses the independent t-test code from the chunks above
+ttest_fit_anxiety <- t.test(anxiety ~ group, data = csv_data)
+
+broom::tidy(ttest_fit_anxiety)
+```
+
+### Cohen's d
+
+The `cohens_d()` function (`?effectsize::cohens_d`) from the **effectsize** package can be used to calculate Cohen's d ($d$).
+
+Just like with the `t-test()` function, you can either use this function with extracted values from each group.
+
+```{r cohens-d-extract}
+# This example calculates Cohen's d for the independent t-test in the code
+# chunks above
+effectsize::cohens_d(
+  x = spider_pic_group$anxiety,
+  y = spider_real_group$anxiety
+)
+```
+
+Or with the formula syntax, where the dependent variable goes to the left of the tilde and the independent variable goes to the right.
+
+```{r cohens-d-formula}
+# This example calculates Cohen's d for the independent t-test in the code
+# chunks above
+effectsize::cohens_d(anxiety ~ group, data = csv_data)
+```
+
+The simplest approach is to choose whichever syntax you used with the t.test() function, since you can then drop the arguments you used there directly into `cohens_d()` without any changes.
 
 ## Learning more
 
