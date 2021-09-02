@@ -14,9 +14,11 @@ Please read and work through the [Preface](https://rstudio-education.github.io/h
 
 Optionally, you can also go through Chapters 4 to 7 of the book if you would like. Otherwise you will go through them in the following week.
 
+Also check out the Base R and RStudio cheat sheets! They cover what you learned this week in a condensed manner (plus some extra tips and tricks) and are an excellent reference if you forget something. You can find the cheat sheets at `cheatsheets/base-r.pdf` and `rstudio-ide.pdf`.
+
 ### Week 2 (Sep 17)
 
-Please read and work through [Chapter 4](https://rstudio-education.github.io/hopr/project-2-playing-cards.html), [Chapter 5](https://rstudio-education.github.io/hopr/r-objects.html), [Chapter 6](https://rstudio-education.github.io/hopr/r-notation.html), and [Chapter 7](https://rstudio-education.github.io/hopr/modify.html) of [Hands-On Programming with R](https://rstudio-education.github.io/hopr/) before next week's lab. This will be your last reading from the Hands-On Programming with R book (although we encourage you to finish the remainder of the book when you have time). It is a valuable resource so refer back to it if you need a refresher on any of the R basics.
+Please read and work through [Chapter 4](https://rstudio-education.github.io/hopr/project-2-playing-cards.html), [Chapter 5](https://rstudio-education.github.io/hopr/r-objects.html), [Chapter 6](https://rstudio-education.github.io/hopr/r-notation.html), and [Chapter 7](https://rstudio-education.github.io/hopr/modify.html) of [Hands-On Programming with R](https://rstudio-education.github.io/hopr/) before next week's lab. This will be your last reading from the Hands-On Programming with R book (although we encourage you to finish the remainder of the book when you have time). It is a valuable resource so refer back to it if you need an in-depth refresher on any of the R basics.
 
 Please also read and work through this week's **Help Yourself** R Markdown document for Assignment 1. You can find the R Markdown file at `labs/02_assumptions-ttests/help-yourself_assignment-1.Rmd`. This document contains everything you need to complete Assignment 1 (and a little bit extra). This first Help Yourself is a bit long because it covers basic processes you will need to use on other assignments---such as reading, wrangling, and visualizing data---as well as applications of the statistics you learned this week. The remaining Help Yourself documents should not be as long.
 
