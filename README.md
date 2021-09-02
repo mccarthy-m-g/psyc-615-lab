@@ -2,6 +2,54 @@
 
 The PSYC 615 lab covers applications of the general linear model to research design and analysis. This repository contains lab materials for students using R or jamovi.
 
+------------------------------------------------------------------------
+
+## Weekly learning
+
+Each week you will learn something new in this lab. All of the learning material in this course is cumulative, so it is important not to skip anything.
+
+### Week 1 (Sep 10)
+
+Please read and work through the [Preface](https://rstudio-education.github.io/hopr/preface.html), [Chapter 1](https://rstudio-education.github.io/hopr/project-1-weighted-dice.html), [Chapter 2](https://rstudio-education.github.io/hopr/basics.html), and [Chapter 3](https://rstudio-education.github.io/hopr/packages.html) of [Hands-On Programming with R](https://rstudio-education.github.io/hopr/) before next week's lab. Make sure to program along with the book; it will help you learn better and set you up for success for the rest of the course. If you run into problems or have any questions write them down and ask about them in next week's lab.
+
+Optionally, you can also go through Chapters 4 to 7 of the book if you would like. Otherwise you will go through them in the following week.
+
+### Week 2 (Sep 17)
+
+Please read and work through [Chapter 4](https://rstudio-education.github.io/hopr/project-2-playing-cards.html), [Chapter 5](https://rstudio-education.github.io/hopr/r-objects.html), [Chapter 6](https://rstudio-education.github.io/hopr/r-notation.html), and [Chapter 7](https://rstudio-education.github.io/hopr/modify.html) of [Hands-On Programming with R](https://rstudio-education.github.io/hopr/) before next week's lab. This will be your last reading from the Hands-On Programming with R book (although we encourage you to finish the remainder of the book when you have time). It is a valuable resource so refer back to it if you need a refresher on any of the R basics.
+
+Please also read and work through this week's **Help Yourself** R Markdown document for Assignment 1. You can find the R Markdown file at `labs/02_assumptions-ttests/help-yourself_assignment-1.Rmd`. This document contains everything you need to complete Assignment 1 (and a little bit extra). This first Help Yourself is a bit long because it covers basic processes you will need to use on other assignments---such as reading, wrangling, and visualizing data---as well as application of the statistics you learned this week. The remaining Help Yourself documents should not be as long.
+
+### Week 3 (Sep 24)
+
+Please read and work through this week's Help Yourself R Markdown document for Assignment 2. You can find the R Markdown file at `labs/03_.../help-yourself_assignment-2.Rmd`.
+
+### Week 4 (Oct 1)
+
+Please read and work through this week's Help Yourself R Markdown document for Assignment 3. You can find the R Markdown file at `labs/04_.../help-yourself_assignment-3.Rmd`.
+
+### Week 5 (Oct 8)
+
+Please read and work through this week's Help Yourself R Markdown document for Assignment 4. You can find the R Markdown file at `labs/05_.../help-yourself_assignment-4.Rmd`.
+
+### Week 8 (Oct 29)
+
+Please read and work through this week's Help Yourself R Markdown document for Assignment 5. You can find the R Markdown file at `labs/06_.../help-yourself_assignment-5.Rmd`.
+
+### Week 9 (Nov 5)
+
+Please read and work through this week's Help Yourself R Markdown document for Assignment 6. You can find the R Markdown file at `labs/07_.../help-yourself_assignment-6.Rmd`.
+
+### Week 11 (Nov 19)
+
+Please read and work through this week's Help Yourself R Markdown document for Assignment 7. You can find the R Markdown file at `labs/08_.../help-yourself_assignment-7.Rmd`.
+
+### Week 12 (Nov 26)
+
+Please read and work through this week's Help Yourself R Markdown document for Assignment 8. You can find the R Markdown file at `labs/09_.../help-yourself_assignment-8.Rmd`.
+
+------------------------------------------------------------------------
+
 ## R
 
 R is an open source programming language for wrangling, visualizing, modelling, and communicating data, and so much more. It is widely used among researchers, statisticians, and data scientists in a variety of fields. There is an active and welcoming community of R users and programmers on Stack Overflow, GitHub, and Twitter, so it is often easy to get help or help yourself when you run into problems.
