@@ -1,12 +1,14 @@
 ---
 title: "Help yourself: Assignment 1"
 author:
-  - name: "[Michael McCarthy](https://github.com/mccarthy-m-g)"
-    affiliation: "[PSYC 615 Lab](https://github.com/mccarthy-m-g/psyc-615-lab)"
-    email: michael.mccarthy@ucalgary.ca
+  - name: "Michael McCarthy"
+    url: https://github.com/mccarthy-m-g
+    affiliation: "PSYC 615 Lab"
+    affiliation_url: https://github.com/mccarthy-m-g/psyc-615-lab
+repository_url: https://github.com/mccarthy-m-g/psyc-615-lab
 output:
-  bookdown::html_document2:
-    number_sections: false
+  distill::distill_article:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -219,6 +221,20 @@ To read SPSS `.sav` files you can use the `read_sav()` function (`?haven::read_s
 ```{r read-spss}
 sav_data <- haven::read_sav(here::here("data", "help-yourself_01.sav"))
 sav_data
+```
+
+### Viewing data sets
+
+There are a few ways to view data in R after you have imported it. If you just want to get a quick glimpse of the data you can use the `head()` or `tail()` functions (`?head`) to see the first or last 6 observations.
+
+```{r head}
+tail(csv_data)
+```
+
+If you want to view the entire data frame you can either click on the object it belongs to in the Environment pane in RStudio, or you can use the `View()` function (`?View`).
+
+```{r view, eval=FALSE}
+View(csv_data)
 ```
 
 ## Visualizing data
