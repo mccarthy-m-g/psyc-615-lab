@@ -14,7 +14,7 @@ Please read and work through the [Preface](https://rstudio-education.github.io/h
 
 Optionally, you can also go through Chapters 4 to 7 of the book if you would like. Otherwise you will go through them in the following week.
 
-Also check out the Base R and RStudio cheat sheets! They cover what you learned this week in a condensed manner (plus some extra tips and tricks) and are an excellent reference if you forget something. You can find the cheat sheets at `cheatsheets/base-r.pdf` and `rstudio-ide.pdf`.
+Also check out the Base R and RStudio cheat sheets! They cover what you learned this week in a condensed manner (plus some extra tips and tricks) and are an excellent reference if you forget something. You can find the cheat sheets at `cheatsheets/base-r.pdf` and `cheatsheets/rstudio-ide.pdf`.
 
 ### Week 2 (Sep 17)
 
