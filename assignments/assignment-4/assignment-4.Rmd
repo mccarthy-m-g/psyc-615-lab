@@ -113,16 +113,3 @@ Answers here.
 *What is the disadvantage of using EMMEANS through the UNIVARIATE dialog box? (0.5 BONUS marks)*
 
 Answers here. WE SHOULD CHANGE THIS ONE.
-
-<!-- Only display the section below if `params$show_output=TRUE` -->
-`r if (!params$show_output) '<!--'` 
-
-\newpage
-
-# All R Output
-
-```{r all-output}
-mget(ls())
-```
-
-`r if (!params$show_output) '-->'`

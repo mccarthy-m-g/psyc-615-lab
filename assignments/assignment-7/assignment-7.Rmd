@@ -134,16 +134,3 @@ Answers here.
 *For Question 3, could we statistically compare the most appropriate trend found for marijuana and the most appropriate trend found for alcohol? Explain why or why not.*
 
 Answers here.
-
-<!-- Only display the section below if `params$show_output=TRUE` -->
-`r if (!params$show_output) '<!--'` 
-
-\newpage
-
-# All R Output
-
-```{r all-output}
-mget(ls())
-```
-
-`r if (!params$show_output) '-->'`

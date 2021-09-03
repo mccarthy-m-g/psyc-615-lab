@@ -126,16 +126,3 @@ Answers here.
 *Bonus (0.5): Create a small dataset with one IV (3 levels) and 5 participants. Make the data so that sphericity is met in two instances, but not the third. Provide your work in two tables – in the first table, provide your data; in the second table, provide evidence of sphericity (for a hint, look at slide 7 for what should be included in these tables). APA formatting is not required, and you do not need to run Mauchly’s – just make the data so that the requirements for sphericity stated above are obvious (If the ratio from smallest to largest variance is <3, you should be good – but please note that this is not an official criterion for deciding sphericity, just one that you can use for the purposes of this question. In other words, if a question about sphericity were to appear on the final, don’t use this as a criterion or reasoning for determining if sphericity is met).*
 
 Answers here.
-
-<!-- Only display the section below if `params$show_output=TRUE` -->
-`r if (!params$show_output) '<!--'` 
-
-\newpage
-
-# All R Output
-
-```{r all-output}
-mget(ls())
-```
-
-`r if (!params$show_output) '-->'`

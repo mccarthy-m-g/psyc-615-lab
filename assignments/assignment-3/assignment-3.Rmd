@@ -134,16 +134,3 @@ Answers here.
 *You have two planned comparisons’ vectors: [-1,-1,2] and [-1,0,1]. What is the angle between these two vectors (in degrees) and what does this mean for their variance? (.5 BONUS mark)*
 
 Answers here.
-
-<!-- Only display the section below if `params$show_output=TRUE` -->
-`r if (!params$show_output) '<!--'` 
-
-\newpage
-
-# All R Output
-
-```{r all-output}
-mget(ls())
-```
-
-`r if (!params$show_output) '-->'`

@@ -9,6 +9,7 @@ cran_prerequisites <- c(
   "distill",
   "here",
   "tidyverse",
+  "stringi",
   "ggpubr",
   "patchwork",
   "psych",
