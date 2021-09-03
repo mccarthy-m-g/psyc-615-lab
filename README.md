@@ -27,6 +27,7 @@ Cheat sheets you might find helpful this week include the:
 - R Markdown cheat sheet found at `cheatsheets/rmarkdown.pdf`
 - Data Import cheat sheet found at `cheatsheets/data-import.pdf`
 - Data Transformation cheat sheet found at `cheatsheets/data-transformation.pdf`
+- Syntax cheat sheet found at `cheatsheets/syntax.pdf`
 
 ### Week 3 (Sep 24)
 
