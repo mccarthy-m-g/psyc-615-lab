@@ -1,0 +1,126 @@
+grad_student,sitcom,sitcom_type,sitcom_quality,laughs,binge,snacks,q2a_h1,q2a_h2,q2a_h3
+1,Modern Family,House,12,5,3,4,Home Type,House Type,NA
+2,Modern Family,House,18,7,6,5,Home Type,House Type,NA
+3,Modern Family,House,21,12,3,6,Home Type,House Type,NA
+4,Modern Family,House,15,5,5,5,Home Type,House Type,NA
+5,Modern Family,House,16,7,3,6,Home Type,House Type,NA
+6,Modern Family,House,18,9,4,5,Home Type,House Type,NA
+7,Modern Family,House,20,11,3,6,Home Type,House Type,NA
+8,Modern Family,House,13,4,5,4,Home Type,House Type,NA
+9,Modern Family,House,17,9,3,5,Home Type,House Type,NA
+10,Modern Family,House,12,7,2,3,Home Type,House Type,NA
+11,Modern Family,House,24,8,7,9,Home Type,House Type,NA
+12,Modern Family,House,13,5,4,4,Home Type,House Type,NA
+13,Modern Family,House,14,7,3,4,Home Type,House Type,NA
+14,Modern Family,House,21,12,2,7,Home Type,House Type,NA
+15,Modern Family,House,13,5,3,5,Home Type,House Type,NA
+16,Modern Family,House,16,8,3,5,Home Type,House Type,NA
+17,Modern Family,House,16,7,3,6,Home Type,House Type,NA
+18,Modern Family,House,17,8,3,6,Home Type,House Type,NA
+19,Modern Family,House,15,7,3,5,Home Type,House Type,NA
+20,Modern Family,House,16,9,3,4,Home Type,House Type,NA
+21,Modern Family,House,12,3,4,5,Home Type,House Type,NA
+22,Modern Family,House,11,5,2,4,Home Type,House Type,NA
+23,Modern Family,House,18,8,3,7,Home Type,House Type,NA
+24,Modern Family,House,12,6,3,3,Home Type,House Type,NA
+25,Modern Family,House,20,9,5,6,Home Type,House Type,NA
+26,Friends,Apartment,20,8,6,6,Home Type,Apartment Type,Friends
+27,Friends,Apartment,15,5,7,3,Home Type,Apartment Type,Friends
+28,Friends,Apartment,23,10,7,6,Home Type,Apartment Type,Friends
+29,Friends,Apartment,21,9,7,5,Home Type,Apartment Type,Friends
+30,Friends,Apartment,19,6,7,6,Home Type,Apartment Type,Friends
+31,Friends,Apartment,22,10,7,5,Home Type,Apartment Type,Friends
+32,Friends,Apartment,15,6,7,2,Home Type,Apartment Type,Friends
+33,Friends,Apartment,23,11,6,6,Home Type,Apartment Type,Friends
+34,Friends,Apartment,19,9,7,3,Home Type,Apartment Type,Friends
+35,Friends,Apartment,24,12,7,5,Home Type,Apartment Type,Friends
+36,Friends,Apartment,22,10,7,5,Home Type,Apartment Type,Friends
+37,Friends,Apartment,19,7,7,5,Home Type,Apartment Type,Friends
+38,Friends,Apartment,15,5,7,3,Home Type,Apartment Type,Friends
+39,Friends,Apartment,23,11,7,5,Home Type,Apartment Type,Friends
+40,Friends,Apartment,27,13,8,6,Home Type,Apartment Type,Friends
+41,Friends,Apartment,19,6,8,5,Home Type,Apartment Type,Friends
+42,Friends,Apartment,19,7,7,5,Home Type,Apartment Type,Friends
+43,Friends,Apartment,19,9,7,3,Home Type,Apartment Type,Friends
+44,Friends,Apartment,23,13,7,3,Home Type,Apartment Type,Friends
+45,Friends,Apartment,21,9,7,5,Home Type,Apartment Type,Friends
+46,Friends,Apartment,22,11,6,5,Home Type,Apartment Type,Friends
+47,Friends,Apartment,22,10,8,4,Home Type,Apartment Type,Friends
+48,Friends,Apartment,17,6,7,4,Home Type,Apartment Type,Friends
+49,Friends,Apartment,20,9,8,3,Home Type,Apartment Type,Friends
+50,Friends,Apartment,19,9,7,3,Home Type,Apartment Type,Friends
+51,Seinfeld,Apartment,13,2,6,5,Home Type,Apartment Type,Seinfeld
+52,Seinfeld,Apartment,24,11,7,6,Home Type,Apartment Type,Seinfeld
+53,Seinfeld,Apartment,16,5,5,6,Home Type,Apartment Type,Seinfeld
+54,Seinfeld,Apartment,15,6,5,4,Home Type,Apartment Type,Seinfeld
+55,Seinfeld,Apartment,13,2,6,5,Home Type,Apartment Type,Seinfeld
+56,Seinfeld,Apartment,21,11,6,4,Home Type,Apartment Type,Seinfeld
+57,Seinfeld,Apartment,13,3,4,6,Home Type,Apartment Type,Seinfeld
+58,Seinfeld,Apartment,10,3,2,5,Home Type,Apartment Type,Seinfeld
+59,Seinfeld,Apartment,15,5,4,6,Home Type,Apartment Type,Seinfeld
+60,Seinfeld,Apartment,17,8,5,4,Home Type,Apartment Type,Seinfeld
+61,Seinfeld,Apartment,19,8,5,6,Home Type,Apartment Type,Seinfeld
+62,Seinfeld,Apartment,22,11,5,6,Home Type,Apartment Type,Seinfeld
+63,Seinfeld,Apartment,18,10,4,4,Home Type,Apartment Type,Seinfeld
+64,Seinfeld,Apartment,18,8,6,4,Home Type,Apartment Type,Seinfeld
+65,Seinfeld,Apartment,13,3,5,5,Home Type,Apartment Type,Seinfeld
+66,Seinfeld,Apartment,13,3,5,5,Home Type,Apartment Type,Seinfeld
+67,Seinfeld,Apartment,15,4,5,6,Home Type,Apartment Type,Seinfeld
+68,Seinfeld,Apartment,13,5,4,4,Home Type,Apartment Type,Seinfeld
+69,Seinfeld,Apartment,17,3,8,6,Home Type,Apartment Type,Seinfeld
+70,Seinfeld,Apartment,13,2,5,6,Home Type,Apartment Type,Seinfeld
+71,Seinfeld,Apartment,19,9,3,7,Home Type,Apartment Type,Seinfeld
+72,Seinfeld,Apartment,12,3,5,4,Home Type,Apartment Type,Seinfeld
+73,Seinfeld,Apartment,12,4,4,4,Home Type,Apartment Type,Seinfeld
+74,Seinfeld,Apartment,19,9,5,5,Home Type,Apartment Type,Seinfeld
+75,Seinfeld,Apartment,18,8,5,5,Home Type,Apartment Type,Seinfeld
+76,The Office,Workplace,10,2,5,3,Workplace Type,NA,NA
+77,The Office,Workplace,14,2,7,5,Workplace Type,NA,NA
+78,The Office,Workplace,12,3,4,5,Workplace Type,NA,NA
+79,The Office,Workplace,17,6,7,4,Workplace Type,NA,NA
+80,The Office,Workplace,16,3,6,7,Workplace Type,NA,NA
+81,The Office,Workplace,18,8,4,6,Workplace Type,NA,NA
+82,The Office,Workplace,14,2,7,5,Workplace Type,NA,NA
+83,The Office,Workplace,14,2,5,7,Workplace Type,NA,NA
+84,The Office,Workplace,19,5,9,5,Workplace Type,NA,NA
+85,The Office,Workplace,19,7,6,6,Workplace Type,NA,NA
+86,The Office,Workplace,17,3,7,7,Workplace Type,NA,NA
+87,The Office,Workplace,12,2,6,4,Workplace Type,NA,NA
+88,The Office,Workplace,15,3,8,4,Workplace Type,NA,NA
+89,The Office,Workplace,17,7,6,4,Workplace Type,NA,NA
+90,The Office,Workplace,23,9,7,7,Workplace Type,NA,NA
+91,The Office,Workplace,14,2,7,5,Workplace Type,NA,NA
+92,The Office,Workplace,13,3,6,4,Workplace Type,NA,NA
+93,The Office,Workplace,12,2,5,5,Workplace Type,NA,NA
+94,The Office,Workplace,11,2,6,3,Workplace Type,NA,NA
+95,The Office,Workplace,14,4,5,5,Workplace Type,NA,NA
+96,The Office,Workplace,17,5,7,5,Workplace Type,NA,NA
+97,The Office,Workplace,18,3,7,8,Workplace Type,NA,NA
+98,The Office,Workplace,16,5,8,3,Workplace Type,NA,NA
+99,The Office,Workplace,15,5,5,5,Workplace Type,NA,NA
+100,The Office,Workplace,16,5,6,5,Workplace Type,NA,NA
+101,Brooklyn Nine-Nine,Workplace,20,9,6,5,Workplace Type,NA,NA
+102,Brooklyn Nine-Nine,Workplace,18,7,5,6,Workplace Type,NA,NA
+103,Brooklyn Nine-Nine,Workplace,17,7,6,4,Workplace Type,NA,NA
+104,Brooklyn Nine-Nine,Workplace,19,9,5,5,Workplace Type,NA,NA
+105,Brooklyn Nine-Nine,Workplace,17,8,5,4,Workplace Type,NA,NA
+106,Brooklyn Nine-Nine,Workplace,20,10,5,5,Workplace Type,NA,NA
+107,Brooklyn Nine-Nine,Workplace,22,11,5,6,Workplace Type,NA,NA
+108,Brooklyn Nine-Nine,Workplace,16,8,2,6,Workplace Type,NA,NA
+109,Brooklyn Nine-Nine,Workplace,18,6,5,7,Workplace Type,NA,NA
+110,Brooklyn Nine-Nine,Workplace,20,9,5,6,Workplace Type,NA,NA
+111,Brooklyn Nine-Nine,Workplace,19,9,3,7,Workplace Type,NA,NA
+112,Brooklyn Nine-Nine,Workplace,17,7,5,5,Workplace Type,NA,NA
+113,Brooklyn Nine-Nine,Workplace,18,8,5,5,Workplace Type,NA,NA
+114,Brooklyn Nine-Nine,Workplace,13,2,7,4,Workplace Type,NA,NA
+115,Brooklyn Nine-Nine,Workplace,16,6,5,5,Workplace Type,NA,NA
+116,Brooklyn Nine-Nine,Workplace,19,9,6,4,Workplace Type,NA,NA
+117,Brooklyn Nine-Nine,Workplace,17,8,5,4,Workplace Type,NA,NA
+118,Brooklyn Nine-Nine,Workplace,20,9,5,6,Workplace Type,NA,NA
+119,Brooklyn Nine-Nine,Workplace,16,8,4,4,Workplace Type,NA,NA
+120,Brooklyn Nine-Nine,Workplace,20,11,5,4,Workplace Type,NA,NA
+121,Brooklyn Nine-Nine,Workplace,15,8,5,2,Workplace Type,NA,NA
+122,Brooklyn Nine-Nine,Workplace,15,7,2,6,Workplace Type,NA,NA
+123,Brooklyn Nine-Nine,Workplace,13,4,5,4,Workplace Type,NA,NA
+124,Brooklyn Nine-Nine,Workplace,18,8,5,5,Workplace Type,NA,NA
+125,Brooklyn Nine-Nine,Workplace,20,9,7,4,Workplace Type,NA,NA
