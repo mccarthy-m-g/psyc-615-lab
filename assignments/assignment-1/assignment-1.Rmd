@@ -1,23 +1,14 @@
 ---
 title             : "Assignment 1---Assumptions and T-Tests."
 shorttitle        : "Assignment 1"
-author: 
-  - name          : |
-                    First Last
-                    
-                    Student ID: 
-                    
-                    University of Calgary
-                    
-                    PSYC 615---Lab
-                    
-                    TAs: Kelsey Cnudde & Michael McCarthy
 
 params:
   firstname  : First
   lastname   : Last
+  studentid  : 0123456789
+  TAs        : "Kelsey Cnudde & Michael McCarthy"
   show_output: FALSE
-  assignment: 1
+  assignment : 1
 
 output: papaja::apa6_docx
 knit: ( function(input, ...) { source("../../R/knit.R"); knit_assignment(input, ...) })
@@ -31,7 +22,6 @@ here::i_am("assignments/assignment-1/assignment-1.Rmd")
 library(here)
 library(papaja)
 
-# set default chunk options
 # set default chunk options
 knitr::opts_chunk$set(
   comment = "#>",

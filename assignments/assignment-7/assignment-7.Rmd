@@ -1,21 +1,12 @@
 ---
 title             : "Assignment 7---Trend Analysis."
 shorttitle        : "Assignment 7"
-author: 
-  - name          : |
-                    First Last
-                    
-                    Student ID: 
-                    
-                    University of Calgary
-                    
-                    PSYC 615---Lab
-                    
-                    TAs: Kelsey Cnudde & Michael McCarthy
 
 params:
   firstname  : First
   lastname   : Last
+  studentid  : 0123456789
+  TAs        : "Kelsey Cnudde & Michael McCarthy"
   show_output: FALSE
   assignment: 7
 

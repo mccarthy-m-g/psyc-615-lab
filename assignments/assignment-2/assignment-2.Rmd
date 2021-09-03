@@ -1,21 +1,12 @@
 ---
 title             : "Assignment 2---One-way Analysis of Variance."
 shorttitle        : "Assignment 2"
-author: 
-  - name          : |
-                    First Last
-                    
-                    Student ID: 
-                    
-                    University of Calgary
-                    
-                    PSYC 615---Lab
-                    
-                    TAs: Kelsey Cnudde & Michael McCarthy
 
 params:
   firstname  : First
   lastname   : Last
+  studentid  : 0123456789
+  TAs        : "Kelsey Cnudde & Michael McCarthy"
   show_output: FALSE
   assignment: 2
 
@@ -52,12 +43,12 @@ knitr::opts_chunk$set(
 
 *From D2L, please download and import `assignment-02_q1.csv` into R.*
 
-*Background: Nick Fury has approached you. He wants to put together a band of superheroes who can save the universe from current and future supervillains. He needs to decide whether he should hire superheroes from the Marvel universe (1), DC comics (2), Disney Princesses (3), or Smurfs (4). Because he plans to randomly sneak up on them to invite them (rather than, you know, sending an email) he wants to choose the group with highest agreeableness scores on the HEXACO personality inventory to avoid nasty confrontations when he shows up unannounced. He brings a dataset of agreeableness scores (on a scale from 1 – 34) to you and asks you to tell him if one group has significantly higher agreeableness, and which group that is.*
-
 ```{r Q1-data-import}
-# load and pivot the data
+# You can import the data in this chunk
 
 ```
+
+*Background: Nick Fury has approached you. He wants to put together a band of superheroes who can save the universe from current and future supervillains. He needs to decide whether he should hire superheroes from the Marvel universe (1), DC comics (2), Disney Princesses (3), or Smurfs (4). Because he plans to randomly sneak up on them to invite them (rather than, you know, sending an email) he wants to choose the group with highest agreeableness scores on the HEXACO personality inventory to avoid nasty confrontations when he shows up unannounced. He brings a dataset of agreeableness scores (on a scale from 1 – 34) to you and asks you to tell him if one group has significantly higher agreeableness, and which group that is.*
 
 ## Question 1a
 

@@ -4,6 +4,34 @@ knit_assignment <- function(input, ...) {
   name <- paste0(yaml_params$lastname, "_", yaml_params$firstname)
   number <- as.character(yaml_params$assignment)
 
+  # Add yaml section for title page by appending YAML section to end of the
+  # input Rmd
+  input_lines <- stringi::stri_read_lines(input)
+  input_lines <- c(
+    input_lines[1:3],
+    "author:",
+    "  - name: |",
+    "          `r params$firstname` `r params$lastname`",
+    "",
+    "          Student ID: `r params$studentid`",
+    "",
+    "          University of Calgary",
+    "",
+    "          PSYC 615---Lab",
+    "",
+    "          TAs: `r params$TAs`",
+    input_lines[4:length(input_lines)]
+  )
+  # Overwrite original Rmd. Note: the reason for overwriting the original
+  # rather than copying to a temporary directory is because the here package
+  # does not play nice with a temporary directory in this situation. Is this
+  # method hackish? Yes, but it works and removes clutter from assignments that
+  # might distract students new to R and R Markdown.
+  stringi::stri_write_lines(
+    input_lines,
+    con = input
+  )
+
   # Without code --------------------------------------------------------------
 
   filename <- paste0(name, "_Assignment_", number, ".docx")
@@ -17,7 +45,6 @@ knit_assignment <- function(input, ...) {
 
   # This appends a code chunk to the document that shows all code output
   # at the end
-  input_lines <- stringi::stri_read_lines(input)
   input_echo <- c(
     input_lines,
     "",
@@ -28,11 +55,7 @@ knit_assignment <- function(input, ...) {
     "```"
   )
 
-  # Overwrite original Rmd. Note: the reason for overwriting the original
-  # rather than copying to a temporary directory is because the here package
-  # does not play nice with a temporary directory in this situation. Is this
-  # method hackish? Yes, but it works and removes clutter from assignments that
-  # might distract students new to R and R Markdown.
+  # Overwrite original Rmd
   stringi::stri_write_lines(
     input_echo,
     con = input
@@ -47,8 +70,9 @@ knit_assignment <- function(input, ...) {
     envir = new.env()
   )
 
-  # Restore original Rmd. Again, a hackish but working solution.
-  input_lines <- head(stringi::stri_read_lines(input), -6)
+  # Restore original Rmd. Again, a hackish but working solution. First remove
+  # added code chunk, then added YAML.
+  input_lines <- head(stringi::stri_read_lines(input), -6)[-c(4:14)]
   stringi::stri_write_lines(
     input_lines,
     con = input
