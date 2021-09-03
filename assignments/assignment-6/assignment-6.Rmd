@@ -1,0 +1,141 @@
+---
+title             : "Assignment 6---Within Subjects and Higher Order ANOVA."
+shorttitle        : "Assignment 6"
+author: 
+  - name          : |
+                    First Last
+                    
+                    Student ID: 
+                    
+                    University of Calgary
+                    
+                    PSYC 615---Lab
+                    
+                    TAs: Kelsey Cnudde & Michael McCarthy
+
+params:
+  firstname  : First
+  lastname   : Last
+  show_output: FALSE
+  assignment: 6
+
+output: papaja::apa6_docx
+knit: ( function(input, ...) { source("../../R/knit.R"); knit_assignment(input, ...) })
+---
+
+```{r setup, include=FALSE}
+# set up here
+here::i_am("assignments/assignment-6/assignment-6.Rmd")
+
+# load packages
+library(here)
+library(papaja)
+
+# set default chunk options
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  echo = params$show_output,
+  warning = params$show_output,
+  message = params$show_output,
+  fig.retina = 0.8, # figures are either vectors or 300 dpi diagrams
+  dpi = 300,
+  fig.width = 6,
+  fig.asp = 0.618, # 1 / phi
+  fig.show = "hold",
+  cache.extra = knitr::rand_seed
+)
+```
+
+# Question 1
+
+*Design a 2x3 ANOVA with an n = 20 per cell that could be a within-subjects OR between-subjects ANOVA. State your research question (may differ for between vs within), IVs (with levels defined) and DV. Describe how your study would change depending on whether it was within or between-subjects (e.g., participant selection, assignment to condition, sample size etc.). (3.5 Marks). Note: You do not need to make any data for this question, nor for question 2 below!*
+
+Answers here.
+
+\newpage
+
+# Question 2
+
+*Based on the study you designed in question 1, complete the table below by adding the names of your IVs, and the corresponding degrees of freedom and sources of error for each effect and interaction based on whether it is a within or between-subjects design. See the first cell of between-subjects degrees of freedom for an example of what to fill in. This question assumes no corrections are being applied to the degrees of freedom (5.5 marks). Hint: Lecture notes may come in handy for identifying/naming sources of within-subject error!*
+
+Answers here.
+
+\newpage
+
+# Question 3
+
+*From D2L, please download and import `assignment-06_q3.csv` into R.*
+
+```{r}
+
+```
+
+*Background: We are interested in the effect of drinking beer and smoking marijuana on object recall over the course of three days. We collected data from 12 lucky participants who had nothing to do for two weeks. The participants were given a randomly selected set of objects (from a larger potential pool of objects) to memorize at the beginning of two separate weeks of testing. The day after memorization participants were provided either marijuana (1 brownie) or beer (4 pints) and asked to perform an object recall task. The recall task was administered for three consecutive days after administration of the beer/marijuana. The following week the participants performed the same task (based on a new set of randomly selected objects) for the substance that they were not tested on the week previously (i.e. 6 participants were provided beer the first week, marijuana the second week and vice versa). We hypothesize that there will be a significant effect of substance type and day, with no significant interaction. Furthermore, we hypothesize that object recall will be significantly worse on the last day in both substance conditions, compared to the first and second days (separately). Perform the analyses on your data and answer the questions below.*
+
+## Question 3a
+
+*Why do we need to test for Sphericity? What part of the ANOVA is corrected when we have a violation of sphericity and how does this influence our p value (2 marks)? *
+
+Answers here.
+
+\newpage
+
+## Question 3b
+
+*Why is one of Mauchly’s W statistic and p-value missing from your SPSS/R output (1 mark)? *
+
+Answers here.
+
+\newpage
+
+## Question 3c
+
+*Based on the results of Mauchly’s test, would you proceed with the planned contrasts required to test the hypotheses? Why or why not (2 marks)? Hint: You must provide reasoning for each of the main effects to receive full marks.*
+
+Answers here.
+
+\newpage
+
+## Question 3d
+
+*What is the best option for a follow-up test when sphericity is violated (1 mark)?*
+
+Answers here.
+
+\newpage
+
+## Question 3e
+
+*Write an APA formatted results section (10 marks). This includes:*
+
+- *A quick report on the assumptions of normality and sphericity. Hint: you may want to use tables to report these results – if you do, make sure they are APA formatted and that you refer to them in your results section.*
+- *reporting the omnibus ANOVA main effects and interaction.*
+- *interpreting/reporting appropriate main or simple main effects and follow-up tests.*
+- *An APA formatted figure (referenced in text).*
+- *Include effect sizes where needed (partial eta-squared is okay).*
+
+# Results
+
+Answers here.
+
+\newpage
+
+# Bonus
+
+*Bonus (0.5): Create a small dataset with one IV (3 levels) and 5 participants. Make the data so that sphericity is met in two instances, but not the third. Provide your work in two tables – in the first table, provide your data; in the second table, provide evidence of sphericity (for a hint, look at slide 7 for what should be included in these tables). APA formatting is not required, and you do not need to run Mauchly’s – just make the data so that the requirements for sphericity stated above are obvious (If the ratio from smallest to largest variance is <3, you should be good – but please note that this is not an official criterion for deciding sphericity, just one that you can use for the purposes of this question. In other words, if a question about sphericity were to appear on the final, don’t use this as a criterion or reasoning for determining if sphericity is met).*
+
+Answers here.
+
+<!-- Only display the section below if `params$show_output=TRUE` -->
+`r if (!params$show_output) '<!--'` 
+
+\newpage
+
+# All R Output
+
+```{r all-output}
+mget(ls())
+```
+
+`r if (!params$show_output) '-->'`

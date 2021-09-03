@@ -1,0 +1,119 @@
+---
+title             : "Assignment 2---One-way Analysis of Variance."
+shorttitle        : "Assignment 2"
+author: 
+  - name          : |
+                    First Last
+                    
+                    Student ID: 
+                    
+                    University of Calgary
+                    
+                    PSYC 615---Lab
+                    
+                    TAs: Kelsey Cnudde & Michael McCarthy
+
+params:
+  firstname  : First
+  lastname   : Last
+  show_output: FALSE
+  assignment: 2
+
+output: papaja::apa6_docx
+knit: ( function(input, ...) { source("../../R/knit.R"); knit_assignment(input, ...) })
+---
+
+```{r setup, include=FALSE}
+# set up here
+here::i_am("assignments/assignment-2/assignment-2.Rmd")
+
+# load packages
+library(here)
+library(papaja)
+
+# set default chunk options
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  echo = params$show_output,
+  warning = params$show_output,
+  message = params$show_output,
+  fig.retina = 0.8, # figures are either vectors or 300 dpi diagrams
+  dpi = 300,
+  fig.width = 6,
+  fig.asp = 0.618, # 1 / phi
+  fig.show = "hold",
+  cache.extra = knitr::rand_seed
+)
+```
+
+
+# Question 1
+
+*From D2L, please download and import `assignment-02_q1.csv` into R.*
+
+*Background: Nick Fury has approached you. He wants to put together a band of superheroes who can save the universe from current and future supervillains. He needs to decide whether he should hire superheroes from the Marvel universe (1), DC comics (2), Disney Princesses (3), or Smurfs (4). Because he plans to randomly sneak up on them to invite them (rather than, you know, sending an email) he wants to choose the group with highest agreeableness scores on the HEXACO personality inventory to avoid nasty confrontations when he shows up unannounced. He brings a dataset of agreeableness scores (on a scale from 1 – 34) to you and asks you to tell him if one group has significantly higher agreeableness, and which group that is.*
+
+```{r Q1-data-import}
+# load and pivot the data
+
+```
+
+## Question 1a
+
+*Let’s start with exploring the data. Does your data meet the assumptions for an ANOVA? If not, describe the assumption(s) that are violated, decide how you want to address the violations and explain exactly what you did, then re-check and report on your assumptions. (4 marks) Hint: Remember ANOVA is robust to violations of assumptions only in some circumstances – are those circumstances met?*
+
+Answers here.
+
+\newpage
+
+## Question 1b
+
+*Evaluate if the superhero groups differ on agreeableness and, if so, which groups differ. Write an APA formatted results section. (10 marks) This includes stating the hypothesis that is being evaluated, quickly reporting on assumptions (we assume independence from here on so no need for that, and only report normality and homogeneity after removing any outliers), and reporting the findings, including the omnibus test and all follow-ups (provide and reference an APA formatted figure). Hint: When reporting findings, you need to include practical significance!*
+
+# Results
+
+Answers here.
+
+\newpage
+
+## Question 1c
+
+*When Nick Fury reads your results, he gets very excited---he thinks this research could be written up in the Quarterly Journal of Superheroes and Government Agencies! He notices that one group appears to be significantly different from all the other groups and suggests conducting a complex comparison instead of pairwise comparisons as follow-up tests. State how you would respond to Nick Fury. Is it wise to run a complex comparison as a follow-up in this case? Why or why not? (2 marks)*
+
+Answers here.
+
+\newpage
+
+# Question 2
+
+*For this response, please speak with a co-worker within your lab or preferably your supervisor about their general practices when controlling for multiple comparisons. In less than one-page double spaced, convey their thoughts, interpretations and reasons to (or not to) control for multiple comparisons. Furthermore, if it is important to them, tell us what corrections they apply and why. Based on your previous knowledge/practices, does this align with how you would normally correct for multiple comparisons? Why or why not? (4 marks)*
+
+Answers here.
+
+\newpage
+
+# Bonus
+
+*You left it down to the wire and are rushing to complete your stats assignment with only minutes to go. As you’re quickly writing up your results, you realize you only asked for Bonferroni in your follow-up comparisons, and you don’t have time to go back and get a different test (i.e., one that might give you more understandable p-values). The information for one of the comparisons (out of six total) is presented below. What is the p value of this comparison at an overall alpha of .05, and is it significant?*
+
+```{r}
+knitr::include_graphics(here::here("images", "assignment-2_bonus.png"))
+```
+
+*Hint: There are two calculations you need to do to determine significance – please show your work!*
+
+Answers here.
+
+<!-- Only display the section below if `params$show_output=TRUE` -->
+`r if (!params$show_output) '<!--'` 
+
+\newpage
+
+# All R Output
+
+```{r all-output}
+mget(ls())
+```
+
+`r if (!params$show_output) '-->'`

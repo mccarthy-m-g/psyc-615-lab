@@ -1,0 +1,99 @@
+---
+title             : "Assignment 8---Split Plot Design."
+shorttitle        : "Assignment 8"
+author: 
+  - name          : |
+                    First Last
+                    
+                    Student ID: 
+                    
+                    University of Calgary
+                    
+                    PSYC 615---Lab
+                    
+                    TAs: Kelsey Cnudde & Michael McCarthy
+
+params:
+  firstname  : First
+  lastname   : Last
+  show_output: FALSE
+  assignment: 8
+
+output: papaja::apa6_docx
+knit: ( function(input, ...) { source("../../R/knit.R"); knit_assignment(input, ...) })
+---
+
+```{r setup, include=FALSE}
+# set up here
+here::i_am("assignments/assignment-8/assignment-8.Rmd")
+
+# load packages
+library(here)
+library(papaja)
+
+# set default chunk options
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  echo = params$show_output,
+  warning = params$show_output,
+  message = params$show_output,
+  fig.retina = 0.8, # figures are either vectors or 300 dpi diagrams
+  dpi = 300,
+  fig.width = 6,
+  fig.asp = 0.618, # 1 / phi
+  fig.show = "hold",
+  cache.extra = knitr::rand_seed
+)
+```
+
+# Questions
+
+*Your assignment cannot go beyond 8 pages, this includes any necessary figures or tables. Please refer to the rubric for expectations and grading criteria. There is also a checklist for you to complete to make sure you have addressed everything (you do not need to submit this with your assignment).*
+
+*For this assignment you will be asked to take a situation and research question, devise a hypothesis(es) to address the research question, plan and complete the required analyses, and fully report your analysis in APA format. From D2L, please download and import `assignment-8_q3.csv` into R.*
+
+```{r df}
+
+```
+
+*Recently, a new trend has popped up in high-intensity industries like Silicon Valley: LSD taken daily through “micro-doses”, claiming to make users more focused, and thus more productive (https://www.scientificamerican.com/article/do-microdoses-of-lsd-change-your-mind/). Let’s imagine two new brands of “legal” LSD have entered the market, Drug Alpha and Drug Beta. Both claim to increase one’s ability to concentrate through regular daily use. The makers of Drug Alpha state that their drug will be effective right away, whereas the makers of Drug Beta advise that effects may take up to two weeks of regular use to emerge. You are interested in testing the companies claims that taking micro-doses of their LSD regularly increases peoples’ levels of concentration.*
+
+*You design a study in which participants were randomly assigned to receive daily micro-doses of one of the three drug conditions (Drug Alpha, Drug Beta, Placebo) over the course of a two-week period. Prior to receiving the drug, participants had their baseline concentration measured using the Frankfurt Adaptive Concentration Test, where they must respond to two target images whenever they appear amongst several distractor images (with the test adapting to their level of performance). This results in an accuracy score from 0-100, with higher numbers reflecting higher accuracy and thus better concentration. Concentration was measured again after 7 and 14 days of micro-dose administration.*
+
+## Question 1
+
+*Write out hypothesis(es) in sentence format that will address the research question, taking into account the information provided about efficacy about the drugs (and don’t forget about the placebo). (Do not look at the data first!). Note: Although Tom did talk about trend analysis in lecture, we would advise not using trend to analyze the data since we will not be teaching trend until next week.*
+
+Answers here.
+
+\newpage
+
+## Question 2
+
+*Provide an outline of a plan for how you will conduct the analyses in order to address the hypothesis(es). Hint: Consider and plan for different possible scenarios.*
+
+Answers here.
+
+\newpage
+
+## Question 3
+
+*Complete the analyses as per your plan and report the results in APA format. Treat this as an actual results section in something like your thesis, including all reporting on assumptions, steps taken to clean the data (if any), corrections/adjustments made, effect sizes (eta is okay), and appropriate figures or tables.*
+
+# Results
+
+Answers here.
+
+<!-- Only display the section below if `params$show_output=TRUE` -->
+`r if (!params$show_output) '<!--'` 
+
+\newpage
+
+# All R Output
+
+```{r all-output}
+mget(ls())
+```
+
+`r if (!params$show_output) '-->'`

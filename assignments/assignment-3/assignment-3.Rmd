@@ -1,0 +1,149 @@
+---
+title             : "Assignment 3---Planned Comparisons and Orthogonality."
+shorttitle        : "Assignment 3"
+author: 
+  - name          : |
+                    First Last
+                    
+                    Student ID: 
+                    
+                    University of Calgary
+                    
+                    PSYC 615---Lab
+                    
+                    TAs: Kelsey Cnudde & Michael McCarthy
+
+params:
+  firstname  : First
+  lastname   : Last
+  show_output: FALSE
+  assignment: 3
+
+output: papaja::apa6_docx
+knit: ( function(input, ...) { source("../../R/knit.R"); knit_assignment(input, ...) })
+---
+
+```{r setup, include=FALSE}
+# set up here
+here::i_am("assignments/assignment-3/assignment-3.Rmd")
+
+# load packages
+library(here)
+library(papaja)
+
+# set default chunk options
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  echo = params$show_output,
+  warning = params$show_output,
+  message = params$show_output,
+  fig.retina = 0.8, # figures are either vectors or 300 dpi diagrams
+  dpi = 300,
+  fig.width = 6,
+  fig.asp = 0.618, # 1 / phi
+  fig.show = "hold",
+  cache.extra = knitr::rand_seed
+)
+```
+
+
+# Question 1
+
+## Question 1a
+
+*Briefly describe how planned comparisons differ from post-hoc comparisons in terms of error? (1 mark) *
+
+Answers here.
+
+\newpage
+
+## Question 1b
+
+*What are two different types of planned comparisons (think # of groups involved) a researcher can do and what makes them different? (1 mark)*
+
+Answers here.
+
+\newpage
+
+# Question 2
+
+*From D2L, please download and import `assignment-03_q2.csv` into R.*
+
+```{r}
+
+```
+
+*Background: Did you know that people "research" sitcoms? For example, there are three main 'types" of sitcoms: House (surrounding a family home), Apartment (friends hanging out), and Workplace (co-worker shenanigans; see here!). Who knew, right? Now that you know this is a topic you can research, you are determined to see if different sitcoms are objectively “better” than others. You decide to recruit fellow graduate students, who are just as eager to find reasons to procrastinate, to watch three seasons of a sitcom and report on the following, very objective, measures: average laughs per episode, binge-worthiness of the show, and number of tasty snacks consumed while watching. These three variables will be summed to create one dependent variable "sitcom quality". Trust it is valid & reliable!*
+
+*Students are randomly assigned to watch one of the following sitcoms and note their measure values. The sitcoms used were:*
+
+- *Modern family (House type)*
+- *Friends (Apartment type)*
+- *Seinfeld (Apartment type)*
+- *The Office (Workplace type)*
+- *Brooklyn Nine-Nine (Workplace type)*
+
+*After your extensive background research in the area, which was definitely not just binging shows all weekend, you come up with the following three hypotheses (i.e., planned comparisons):*
+
+1. *Home types (House & Apartment) are better than Workplace types.*
+2. *Apartment types are better than House types.*
+3. *Seinfeld is better than Friends.*
+
+## Question 2a
+
+*Write an APA results section that includes the following: (11 marks total, see below for breakdown):*
+
+1. *Brief report of assumptions (No need to clean the data this time, aside from assumption checking. PLEASE DO NOT REMOVE ANY DATA FOR THIS ASSIGNMENT!) (1 mark)*
+2. *Omnibus results (as is tradition, and including effect size) (1 mark)*
+3. *The planned comparisons (including means and SD that relate to the “groups” being compared and appropriate effect sizes) (6 marks)*
+4. *Appropriate figures visualizing each hypothesis (3 marks).*
+
+# Results
+
+Answers here.
+
+\newpage
+
+## Question 2b
+
+*Are all of your planned comparisons orthogonal to each other? Please justify your answers by showing the formulas/calculations for each pair. (2 marks)*
+
+Answers here.
+
+\newpage
+
+## Question 2c
+
+*Explain why your planned comparisons are not a complete/full orthogonal set? State additional hypothesis(es)---in words and contrast codes---that could be used to complete the set and run the supplementary analyses to investigate. Provide the results (descriptive and inferential statistics) and interpret them briefly. No need for figure(s) or a formal Results section here. (3 marks)*
+
+Answers here.
+
+\newpage
+
+## Question 2d
+
+*A graduate student who participated in your study liked your sitcom research idea and wants to use your same study design but doesn’t like the planned comparisons you chose and wants you to provide suggestions on what they could do (apparently they don’t want to do any work). Without repeating any of the three planned comparisons you originally did for your hypotheses, what are TWO complete/full orthogonal sets (distinct from each other as well), in both words and contrast codes, that this other graduate student could do? (2 marks) Note 1. The actual comparisons themselves need to be different, not just the codes. For example, (1,-1,0) is not different from (2,-2,0) or (-1,1,0). Note 2. You don’t need any kind of home/apartment theory to justify your comparisons here. It is just about orthogonality!*
+
+Answers here.
+
+\newpage
+
+# Bonus
+
+*You have two planned comparisons’ vectors: [-1,-1,2] and [-1,0,1]. What is the angle between these two vectors (in degrees) and what does this mean for their variance? (.5 BONUS mark)*
+
+Answers here.
+
+<!-- Only display the section below if `params$show_output=TRUE` -->
+`r if (!params$show_output) '<!--'` 
+
+\newpage
+
+# All R Output
+
+```{r all-output}
+mget(ls())
+```
+
+`r if (!params$show_output) '-->'`

@@ -1,0 +1,128 @@
+---
+title             : "Assignment 4---Factorial ANOVA."
+shorttitle        : "Assignment 4"
+author: 
+  - name          : |
+                    First Last
+                    
+                    Student ID: 
+                    
+                    University of Calgary
+                    
+                    PSYC 615---Lab
+                    
+                    TAs: Kelsey Cnudde & Michael McCarthy
+
+params:
+  firstname  : First
+  lastname   : Last
+  show_output: FALSE
+  assignment: 4
+
+output: papaja::apa6_docx
+knit: ( function(input, ...) { source("../../R/knit.R"); knit_assignment(input, ...) })
+---
+
+```{r setup, include=FALSE}
+# set up here
+here::i_am("assignments/assignment-4/assignment-4.Rmd")
+
+# load packages
+library(here)
+library(papaja)
+
+# set default chunk options
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  echo = params$show_output,
+  warning = params$show_output,
+  message = params$show_output,
+  fig.retina = 0.8, # figures are either vectors or 300 dpi diagrams
+  dpi = 300,
+  fig.width = 6,
+  fig.asp = 0.618, # 1 / phi
+  fig.show = "hold",
+  cache.extra = knitr::rand_seed
+)
+```
+
+# Question 1
+
+*For this assignment you will be designing, “collecting,” and analyzing a two-way factorial ANOVA.*
+
+## Question 1a
+
+*Using your research area, design an experimental 3x2 between-subjects ANOVA. State your research question, IVs, DV, and hypothesis; please also state what makes your design an experimental design. Your hypothesis must explicitly predict a significant interaction and a significant simple main effect at one level of an IV but not the other level(s) of that IV (5 marks). Hint: Visualizing how you want your results to look (with a graph or table) might help you figure out how to create your data so that it meets the hypothesis.*
+
+Answers here.
+
+\newpage
+
+## Question 1b
+
+*Create a dataset that will successfully confirm your hypothesis. Upload a file with your dataset (saved as a .csv file) when you submit the assignment. Your data set must have 6 unique groups (i.e., cells; 3x2 design) with a total sample size of 150 (3 marks).*
+
+Answers here.
+
+\newpage
+
+## Question 1c
+
+*Create a table (like the tables we have used in lab) that outlines the design of your experiment, including the grand mean, marginal means and cell means. Include means and standard deviations for each (3 marks). No need for APA formatting for this table.*
+
+Answers here.
+
+\newpage
+
+## Question 1d
+
+*Perform the analyses on your data and write an APA formatted results section (10 marks). This includes:*
+
+- *A quick report on your assumptions (you are creating this data, so you can make sure it doesn’t violate assumptions!). Don’t worry about addressing independence. Please report tests of normality and homogeneity of variance (you do not need to include anything on skew, kurtosis, Q-Q plots, etc.) (2 marks)*
+- *Reporting the omnibus ANOVA (2 marks)*
+- *Reporting simple main effects and any follow-ups to simple main effects (2 marks)*
+- *Reporting any corrections for multiple comparisons that you used (1 mark)*
+- *Including and referencing an APA formatted figure depicting your interaction (2 marks)*
+- *Hint: When reporting findings, you need to include practical significance! (1 mark)*
+
+# Results
+
+Answers here.
+
+\newpage
+
+## Question 1e
+
+*State why you chose to investigate the specific simple main effects that you reported in your results section (i.e., why you chose to hold that IV constant as opposed to the other). State one advantage or disadvantage of your analytic decision, compared to if you had alternatively decided to hold the other IV constant. (2 marks)*
+
+Answers here.
+
+\newpage
+
+# Question 2
+
+*State why you would typically want to pool variance for your follow-up tests. Give an example of when you would not want to pool variance (i.e., provide a reason – you do not need to come up with a scenario). (2 marks)*
+
+Answers here.
+
+\newpage
+
+# Bonus
+
+*What is the disadvantage of using EMMEANS through the UNIVARIATE dialog box? (0.5 BONUS marks)*
+
+Answers here. WE SHOULD CHANGE THIS ONE.
+
+<!-- Only display the section below if `params$show_output=TRUE` -->
+`r if (!params$show_output) '<!--'` 
+
+\newpage
+
+# All R Output
+
+```{r all-output}
+mget(ls())
+```
+
+`r if (!params$show_output) '-->'`

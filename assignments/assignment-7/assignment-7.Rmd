@@ -1,0 +1,149 @@
+---
+title             : "Assignment 7---Trend Analysis."
+shorttitle        : "Assignment 7"
+author: 
+  - name          : |
+                    First Last
+                    
+                    Student ID: 
+                    
+                    University of Calgary
+                    
+                    PSYC 615---Lab
+                    
+                    TAs: Kelsey Cnudde & Michael McCarthy
+
+params:
+  firstname  : First
+  lastname   : Last
+  show_output: FALSE
+  assignment: 7
+
+output: papaja::apa6_docx
+knit: ( function(input, ...) { source("../../R/knit.R"); knit_assignment(input, ...) })
+---
+
+```{r setup, include=FALSE}
+# set up here
+here::i_am("assignments/assignment-7/assignment-7.Rmd")
+
+# load packages
+library(here)
+library(papaja)
+
+# set default chunk options
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  echo = params$show_output,
+  warning = params$show_output,
+  message = params$show_output,
+  fig.retina = 0.8, # figures are either vectors or 300 dpi diagrams
+  dpi = 300,
+  fig.width = 6,
+  fig.asp = 0.618, # 1 / phi
+  fig.show = "hold",
+  cache.extra = knitr::rand_seed
+)
+```
+
+# Question 1
+
+*What are two advantages to investigating trends instead of traditional (mean difference) simple main effects? (2 marks)*
+
+Answers here.
+
+\newpage
+
+# Question 2
+
+*Now that you know about trend analysis, what three additional hypotheses (one for each of Drug Alpha, Drug Beta, and Placebo) could you have made in the previous Assignment 7. (1.5 mark)*
+
+Answers here.
+
+\newpage
+
+# Question 3
+
+*Brittany, a mouthy celiac, had concerns that Kelsey’s experiment from Assignment 6 (refresh background if needed; 3 [days] x 2 [substance] within-subjects design) was not inclusive for everyone with dietary restrictions (“Beer is full of gluten you know!!”) and decided to replicate the study with a higher quality of marijuana and gluten free alcoholic cider.*
+
+## Question 3a
+
+*The participants were in this study for a total of six days (3 days of marijuana and 3 days of cider). Would it be appropriate to analyze one trend across all six of these days in total? Why or why not? (1 mark)*
+
+Answers here.
+
+\newpage
+
+## Question 3b
+
+*During the analysis, Brittany found a significant trend interaction between day and substance (alpha level of .05). Referencing Figure 1 and statistics from the SPSS output below, report and describe the appropriate trend for each substance (in APA format) with any necessary corrections. (5 marks)*
+
+# Results
+
+Answers here.
+
+\newpage
+
+# Question 4
+
+*From D2L, please download and import `assignment-07_q4.csv` into R.*
+
+```{r}
+
+```
+
+*Background: A researcher is curious about the effect of playtime on the quantity of food (in grams) consumed by rats. The rats starting playtime level were counterbalanced equally across four conditions (15 minutes, 30 minutes, 45 minutes, & 60 minutes) so that each rat played for each of the playtimes.*
+
+## Question 4a
+
+*What are the possible trends (in both names and contrast codes) that can be predicted in this experiment? (1.5 marks)*
+
+Answers here.
+
+\newpage
+
+## Question 4b
+
+*Conduct the trend analysis on this data and provide an APA results section of the results (e.g., the appropriate results, interpretation/description, figure, etc.). Don’t forget to control family-wise error rate if necessary. (6 marks) NOTE: YOU DO NOT NEED TO CHECK ANY ASSUMPTIONS HERE! JUST DO THE TREND ANALYSIS!*
+
+# Results
+
+Answers here.
+
+\newpage
+
+## Question 4c
+
+*Give a brief theoretical explanation as to why this trend may have emerged for the rats in this experiment. (1 mark)*
+
+Answers here.
+
+\newpage
+
+## Question 4d
+
+*Would it be appropriate to do trend analysis if the playtimes were 15, 30, 60, and 100 minutes instead? If not appropriate, tell me why? If appropriate, what would change? (2 mark)*
+
+Answers here.
+
+\newpage
+
+# Bonus
+
+*For Question 3, could we statistically compare the most appropriate trend found for marijuana and the most appropriate trend found for alcohol? Explain why or why not.*
+
+Answers here.
+
+<!-- Only display the section below if `params$show_output=TRUE` -->
+`r if (!params$show_output) '<!--'` 
+
+\newpage
+
+# All R Output
+
+```{r all-output}
+mget(ls())
+```
+
+`r if (!params$show_output) '-->'`

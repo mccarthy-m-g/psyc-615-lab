@@ -1,0 +1,121 @@
+---
+title             : "Assignment 5---ANCOVA."
+shorttitle        : "Assignment 5"
+author: 
+  - name          : |
+                    First Last
+                    
+                    Student ID: 
+                    
+                    University of Calgary
+                    
+                    PSYC 615---Lab
+                    
+                    TAs: Kelsey Cnudde & Michael McCarthy
+
+params:
+  firstname  : First
+  lastname   : Last
+  show_output: FALSE
+  assignment: 5
+
+output: papaja::apa6_docx
+knit: ( function(input, ...) { source("../../R/knit.R"); knit_assignment(input, ...) })
+---
+
+```{r setup, include=FALSE}
+# set up here
+here::i_am("assignments/assignment-5/assignment-5.Rmd")
+
+# load packages
+library(here)
+library(papaja)
+
+# set default chunk options
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  echo = params$show_output,
+  warning = params$show_output,
+  message = params$show_output,
+  fig.retina = 0.8, # figures are either vectors or 300 dpi diagrams
+  dpi = 300,
+  fig.width = 6,
+  fig.asp = 0.618, # 1 / phi
+  fig.show = "hold",
+  cache.extra = knitr::rand_seed
+)
+```
+
+# Question 1
+
+*From D2L, please download and import `assignment-5_q1.csv` into R.*
+
+```{r Q1-df}
+
+```
+
+*Background: The headmaster, BumbleGate, of a certain School of Wizardry and Witchcraft is interested in whether the houses in his school differ in the number of spells they can cast effectively in a year (measured as a percentage). He has four houses (GriffinGate, PuffleHuff, CrowToe, and HissyHiss); however, he is biased toward HissyHiss and does not want them participating in his little experiment at all – if they win, he would have to admit they were good students, and he certainly wouldn’t want to do that! He thinks that the number of encounters (average per year) with the villain at this school (MoldaVort) could affect how many spells a student learns and whether they take the time to learn how to use them effectively. He does not have any specific predictions a priori.*
+
+## Question 1a
+
+*Conduct the appropriate tests of assumptions, including the necessary assumptions/tests for including a covariate in the study, and state whether the assumptions are met or not. (5 marks). DO NOT DELETE ANYTHING FROM THE DATA SET. For this question, you can just talk about each assumption in bullet form, although the statistics still need to be reported in APA. E.g., Independence: You don’t have to talk about independence, because this assumption is discussed when planning the study, but if you did, and it had statistics, you would include them here! Normality: Include tests here, but no need to talk about outliers. Etc.*
+
+Answers here.
+
+\newpage
+
+## Question 1b
+
+*Looking at these assumptions, would you suggest using this covariate in the analysis of this study? Why or why not? Explain briefly. (2 marks)*
+
+Answers here.
+
+\newpage
+
+## Question 1c
+
+*Perform an ANOVA on your dataset (NOT including the covariate) and report your results in APA form (no assumptions needed here). (5 marks) All the same rules apply from throughout the semester for c) and d) (effect size, figures, any follow-ups, etc.) but using partial eta squared here is good.*
+
+# Results
+
+Answers here.
+
+\newpage
+
+## Question 1d
+
+*Perform an ANCOVA on your dataset (including the covariate) and report the results in APA form (no assumptions needed here). (5 marks)*
+
+# Results
+
+Answers here.
+
+\newpage
+
+## Question 1e
+
+*How do the results (including follow-ups) differ between the ANOVA and ANCOVA? Hint: Don’t forget to compare the omnibus effect sizes (using partial eta squared from ANOVA and ANCOVA here is good) and/or observed power and provide a brief interpretation, including a possible explanation for what you are observing. (4 marks)*
+
+Answers here.
+
+\newpage
+
+# Question 2
+
+*In approximately half a page (one page maximum; double spaced), create and describe your own study that can be analyzed with ANCOVA, which must include one IV with four levels, one continuous DV, and two continuous appropriate covariates. Don’t forget to include the categories/scale for each variable. You DO NOT need to create data or run any analyses here. (4 marks) NOTE: The study must “make sense” theoretically (in terms of relationships between variables), but I’ll give +.5 BONUS for creativity here! Have fun with it!*
+
+Answers here.
+
+<!-- Only display the section below if `params$show_output=TRUE` -->
+`r if (!params$show_output) '<!--'` 
+
+\newpage
+
+# All R Output
+
+```{r all-output}
+mget(ls())
+```
+
+`r if (!params$show_output) '-->'`
