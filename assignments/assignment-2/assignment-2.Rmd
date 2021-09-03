@@ -21,23 +21,10 @@ here::i_am("assignments/assignment-2/assignment-2.Rmd")
 # load packages
 library(here)
 library(papaja)
-
-# set default chunk options
-knitr::opts_chunk$set(
-  comment = "#>",
-  collapse = TRUE,
-  echo = params$show_output,
-  warning = params$show_output,
-  message = params$show_output,
-  fig.retina = 0.8, # figures are either vectors or 300 dpi diagrams
-  dpi = 300,
-  fig.width = 6,
-  fig.asp = 0.618, # 1 / phi
-  fig.show = "hold",
-  cache.extra = knitr::rand_seed
-)
 ```
 
+```{r set-chunk-opts, include=FALSE, code=xfun::read_utf8(here('R', 'chunk-opts.R'))}
+```
 
 # Question 1
 

@@ -15,36 +15,44 @@ knit: ( function(input, ...) { source("../../R/knit.R"); knit_assignment(input, 
 ---
 
 ```{r setup, include=FALSE}
-# set up here
+# Set up the here package
 here::i_am("assignments/assignment-1/assignment-1.Rmd")
 
-# load packages
+# Load packages
 library(here)
 library(papaja)
+library(tidyverse)
+library(ggpubr)
+```
 
-# set default chunk options
-knitr::opts_chunk$set(
-  comment = "#>",
-  collapse = TRUE,
-  echo = params$show_output,
-  warning = params$show_output,
-  message = params$show_output,
-  fig.retina = 0.8, # figures are either vectors or 300 dpi diagrams
-  dpi = 300,
-  fig.width = 6,
-  fig.asp = 0.618, # 1 / phi
-  fig.show = "hold",
-  cache.extra = knitr::rand_seed
-)
+```{r chunk-opts, include=FALSE, code=xfun::read_utf8(here('R', 'chunk-opts.R'))}
 ```
 
 # Question 1
 
-*Because it’s fun (or rather, educational), you will be experimenting with making your own datasets. Please include your final data points under each question; no need for an APA formatted table, listing them is fine!*
+*Because it's fun (or rather, educational), you will be experimenting with making your own datasets. Please include your final data points under each question; no need for an APA formatted table, listing them is fine!*
 
 ## Question 1a
 
-*Make a positively skewed distributed (i.e., NOT normal) set of 18 participants on a fictitious variable (think of a variable that makes sense with the numbers). Report your variable’s mean and SD. Report and interpret the skewness numerical measure and an appropriate statistical test of normality. (3 marks)*
+*Make a positively skewed distributed (i.e., NOT normal) set of 18 participants on a fictitious variable (think of a variable that makes sense with the numbers). Report your variable's mean and SD. Report and interpret the skewness numerical measure and an appropriate statistical test of normality. (3 marks)*
+
+```{r question-1a}
+# You can create your data set in this code chunk. See the Assignment 1 Help
+# Yourself for details on how you can do this.
+
+# After creating your data set you can calculate descriptive statistics and run
+# the appropriate statistical test for here
+
+# Note: You will need to create code chunks yourself for the remaining
+# questions in this assignment. The keyboard shortcut to do this is:
+# Mac: Cmd + Option + I
+# Windows: Ctrl + Alt + I
+# You can find other useful keyboard shortcuts in the RStudio IDE cheat sheet
+# in the `cheatsheets` directory.
+
+# Note 2: You can delete all the comments in this chunk after reading them if
+# you like.
+```
 
 Answers here.
 
@@ -65,8 +73,9 @@ Answers here.
 *Background: Imagine you are a TA for an undergrad statistics course (or maybe you are now!) and your students just finished their first statistics exam of the year. You, a clever statistical student yourself, decided to record the following variables from the students: age, gender (1 = female, 2 = male), how many hours they study per week, their love of statistics (1 to 10 scale), and their heart rate both before the exam and after the exam (normal range is 60-100 for adults). You are now ready to investigate!*
 
 ```{r Q2-dataset}
-# You can read the data in this chunk
-
+# You can read the data in this chunk. For this first assignment we have
+# written the code for you.
+exams <- read_csv(here("data", "assignment-01_q2.csv"))
 ```
 
 ## Question 2a
@@ -79,11 +88,11 @@ Answers here.
 
 ## Question 2b
 
-*First things first: explore your data set as a whole. Do you see any “weirdness” in any of the continuous variables (i.e., age, study, love, heart rates)? Explain what the weirdness is (including participant #s) and justify why you think it is weird for each instance (i.e., with visuals, statistics, etc.). With this information, would you remove any participants/data points from the future analyses? Why or why not? (5 marks)*
+*First things first: explore your data set as a whole. Do you see any "weirdness" in any of the continuous variables (i.e., age, study, love, heart rates)? Explain what the weirdness is (including participant \#s) and justify why you think it is weird for each instance (i.e., with visuals, statistics, etc.). With this information, would you remove any participants/data points from the future analyses? Why or why not? (5 marks)*
 
-*Hint: Read the variable descriptions above.* 
+*Hint: Read the variable descriptions above.*
 
-*Note 1: Please only include the relevant information here (we don’t need a novel). Just point out the glaring issues (you’ll see them we hope). Please don’t transform the data or anything drastic like that if there is skewness or something like that!*
+*Note 1: Please only include the relevant information here (we don't need a novel). Just point out the glaring issues (you'll see them we hope). Please don't transform the data or anything drastic like that if there is skewness or something like that!*
 
 *Note 2. If you say that certain participants/data should be removed from the analyses, please do that for the remainder of the questions!*
 
@@ -93,7 +102,7 @@ Answers here.
 
 ## Question 2c
 
-*You are interested in whether males are significantly lower in the number of hours they study each week compared to females (Hypothesis 1). Write an APA formatted results section exploring Hypothesis 1. (5 marks) This includes stating the appropriate test (no justification needed), quickly reporting on assumptions (we assume independence from here on so no need for that, and only report normality after removing outliers – no need to repeat normality tests from b.) and reporting the findings (provide and reference an APA formatted figure and reference whether the hypothesis was supported or not). Hint: When reporting findings, you need to include practical significance!*
+*You are interested in whether males are significantly lower in the number of hours they study each week compared to females (Hypothesis 1). Write an APA formatted results section exploring Hypothesis 1. (5 marks) This includes stating the appropriate test (no justification needed), quickly reporting on assumptions (we assume independence from here on so no need for that, and only report normality after removing outliers -- no need to repeat normality tests from b.) and reporting the findings (provide and reference an APA formatted figure and reference whether the hypothesis was supported or not). Hint: When reporting findings, you need to include practical significance!*
 
 Answers here.
 
@@ -109,7 +118,7 @@ Answers here.
 
 ## Question 2e
 
-*Another TA brags to you that they collected similar data when they were teaching the class and their students’ love of statistics had a mean of 5.17. They claim that your class’ love was significantly lower (i.e., you aren’t as awesome as them). Does this TA have the right to brag, or should they spend more time studying statistics themselves? Choose an appropriate test and report the findings that justify your response to this TA (no APA results section needed, including no figure, assumptions, or effect sizes needed). (2 marks)*
+*Another TA brags to you that they collected similar data when they were teaching the class and their students' love of statistics had a mean of 5.17. They claim that your class' love was significantly lower (i.e., you aren't as awesome as them). Does this TA have the right to brag, or should they spend more time studying statistics themselves? Choose an appropriate test and report the findings that justify your response to this TA (no APA results section needed, including no figure, assumptions, or effect sizes needed). (2 marks)*
 
 Answers here.
 

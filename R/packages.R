@@ -6,6 +6,7 @@
 # Install packages from CRAN ------------------------------------------------
 cran_prerequisites <- c(
   "remotes",
+  "xfun",
   "distill",
   "here",
   "tidyverse",
