@@ -30,31 +30,31 @@ Cheat sheets you might find helpful this week include the:
 
 ### Week 3 (Sep 24)
 
-Please read and work through this week's Help Yourself R Markdown document for Assignment 2. You can find the R Markdown file at `labs/03_.../help-yourself_assignment-2.Rmd`.
+Please read and work through this week's Help Yourself R Markdown document for Assignment 2. You can find the R Markdown file at `labs/03_anova-followups/help-yourself_assignment-2.Rmd`.
 
 ### Week 4 (Oct 1)
 
-Please read and work through this week's Help Yourself R Markdown document for Assignment 3. You can find the R Markdown file at `labs/04_.../help-yourself_assignment-3.Rmd`.
+Please read and work through this week's Help Yourself R Markdown document for Assignment 3. You can find the R Markdown file at `labs/04_orthogonal-contrasts/help-yourself_assignment-3.Rmd`.
 
 ### Week 5 (Oct 8)
 
-Please read and work through this week's Help Yourself R Markdown document for Assignment 4. You can find the R Markdown file at `labs/05_.../help-yourself_assignment-4.Rmd`.
+Please read and work through this week's Help Yourself R Markdown document for Assignment 4. You can find the R Markdown file at `labs/05_factorial-anova/help-yourself_assignment-4.Rmd`.
 
 ### Week 8 (Oct 29)
 
-Please read and work through this week's Help Yourself R Markdown document for Assignment 5. You can find the R Markdown file at `labs/06_.../help-yourself_assignment-5.Rmd`.
+Please read and work through this week's Help Yourself R Markdown document for Assignment 5. You can find the R Markdown file at `labs/07_ancova/help-yourself_assignment-5.Rmd`.
 
 ### Week 9 (Nov 5)
 
-Please read and work through this week's Help Yourself R Markdown document for Assignment 6. You can find the R Markdown file at `labs/07_.../help-yourself_assignment-6.Rmd`.
+Please read and work through this week's Help Yourself R Markdown document for Assignment 6. You can find the R Markdown file at `labs/08_within-subjects-anova/help-yourself_assignment-6.Rmd`.
 
 ### Week 11 (Nov 19)
 
-Please read and work through this week's Help Yourself R Markdown document for Assignment 7. You can find the R Markdown file at `labs/08_.../help-yourself_assignment-7.Rmd`.
+Please read and work through this week's Help Yourself R Markdown document for Assignment 7. You can find the R Markdown file at `labs/09_trend-analysis/help-yourself_assignment-7.Rmd`.
 
 ### Week 12 (Nov 26)
 
-Please read and work through this week's Help Yourself R Markdown document for Assignment 8. You can find the R Markdown file at `labs/09_.../help-yourself_assignment-8.Rmd`.
+Please read and work through this week's Help Yourself R Markdown document for Assignment 8. You can find the R Markdown file at `labs/10_mixed-anova/help-yourself_assignment-8.Rmd`.
 
 ------------------------------------------------------------------------
 
