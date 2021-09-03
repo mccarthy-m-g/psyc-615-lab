@@ -375,7 +375,7 @@ However, you should note that the `apa_table()` function will not do all the APA
 If you need to include any images in your R Markdown document you can use the `knitr::include_graphics()` function(`?knitr::include_graphics`)  from the **knitr** package. Note that you actually need to use the `knitr::` namespacing for this one. Images can also be given captions using the same method as with plots.
 
 ```{r images}
-knitr::include_graphics(here::here("images", "outlier.png"))
+knitr::include_graphics(here::here("images", "help-yourself-01_outlier.png"))
 ```
 
 ## Descriptive statistics
