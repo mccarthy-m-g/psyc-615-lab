@@ -457,6 +457,17 @@ shapiro_test_anxiety <- shapiro.test(anxiety_values_pull)
 broom::tidy(shapiro_test_anxiety)
 ```
 
+And if you want to run the test by group we made a custom `shapiro_test()` function you can use. This is a custom function included in the PSYC 615 Lab repository, you can make it available by using the `source()` function.
+
+```{r custom-shapiro}
+# The source the `shapiro_test()` function 
+source(here::here("R", "shapiro_test.R"))
+
+# Note: The group argument is optional, so you can also use this function
+# as a replacement for the `shapiro.test()` function
+shapiro_test(csv_data, var = anxiety, group = group)
+```
+
 ### Levene's test
 
 Levene's test of homogeneity of variance can be used to test whether the variance of a variable is equal across groups. You can use the `leveneTest()` function (`?car::leveneTest`) from the **car** package to calculate the Levene's test statistic ($F$) and the p-value for the test. There are two ways to use this function, each giving the same result but with different syntax. Pick whichever you like.
