@@ -417,6 +417,12 @@ You can also use the `describe()` function (`?psych::describe`) from the **psych
 psych::describe(csv_data, type = 2)
 ```
 
+You can use the `describeBy()` function (`?psych::describeBy`) if you want to calculate all descriptive statistics by a grouping variable.
+
+```{r describeBy}
+psych::describeBy(csv_data, group = "group", type = 2)
+```
+
 ## Statistical assumptions
 
 ### Shapiro-Wilk test
