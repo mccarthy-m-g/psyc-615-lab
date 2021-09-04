@@ -97,6 +97,8 @@ simulated_dataset <- tibble::tibble(id = 1:10, value = normal_distribution)
 simulated_dataset
 ```
 
+And a little extra trick, square rooting or squaring all the values of a normal distribution can be a quick and dirty way to skew the distribution.
+
 ## Wrangling data
 
 It is often the case that the data you work with needs wrangling to make it fit for use. This could mean cleaning the data, but it could also mean adding new columns, removing rows, calculating new values, or transforming old values. The **dplyr** package has you covered for all of these actions and more. There are six main functions that will cover the majority of your data wrangling needs:
