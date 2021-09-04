@@ -121,7 +121,7 @@ dplyr::filter(.data = simpsons, simpson != "bart" & simpson != "lisa")
 
 ### Mutating
 
-The `mutate()` function (`?dplyr::mutate`) adds new columns and preserves existing ones
+The `mutate()` function (`?dplyr::mutate`) adds new columns and preserves existing ones. This function might be useful if you need to use the difference between two values for testing any statistical assumptions for a certain type of t-test (yes, this is an assignment question hint).
 
 ```{r mutate}
 dplyr::mutate(.data = simpsons, age_in_2021 = age + 34)
@@ -181,6 +181,35 @@ You can use the the `desc()` function (`?dplyr::desc`) to order the rows in desc
 ```{r arrange-descending}
 dplyr::arrange(.data = simpsons, dplyr::desc(age))
 ```
+
+### Pivoting
+
+The `pivot_longer()` function (`?tidyr::pivot_longer`) from the **tidyr** package 
+
+```{r pivot-longer}
+# This is the same `mutate()` code as above. Here we are saving it as an object
+# so that we have meaningful data to pivot the data frame from. Note: After
+# mutating, you may notice similarities between how the data frame looks here
+# and in your assignment.
+simpsons <- dplyr::mutate(.data = simpsons, age_in_2021 = age + 34)
+
+simpsons_long <- tidyr::pivot_longer(
+  simpsons,
+  cols = c(age, age_in_2021),
+  names_to = "context",
+  values_to = "age"
+)
+
+simpsons_long
+```
+
+The inverse transformation is the `pivot_wider()` function (`?tidyr::pivot_wider`), also from the **tidyr** package,  which "widens" data, increasing the number of columns and decreasing the number of rows. Here we return the long version of our example data back to its previous state.
+
+```{r pivot-wider}
+tidyr::pivot_wider(simpsons_long, names_from = context, values_from = age)
+```
+
+Pivoting data frames can be useful either as a method of tidying up a data frame, or for making certain data transformations easier to do (as you might need to do for the assignment when calculating adjusted means).
 
 ## File paths
 
@@ -281,6 +310,39 @@ An alternative to bar plots are line plots. These can be useful when visualizing
 
 ```{r ggline}
 ggpubr::ggline(data = csv_data, x = "group", y = "anxiety", add = "mean_ci")
+```
+
+You can also plot bar and line plots with adjusted means using subject-centring (which might be useful on the assignment, hint hint). This requires some manual calculations prior to plotting.
+
+```{r manual-adjusted-mean}
+# First pivot the data to long format
+csv_data_long <- tidyr::pivot_longer(
+  csv_data_paired,
+  cols = c("picture", "real_spider"),
+  names_to = "condition",
+  values_to = "anxiety"
+)
+
+# Second calculate the grand mean for both contexts
+anxiety_scores <- dplyr::pull(csv_data_long, anxiety)
+grand_mean <- mean(anxiety_scores)
+
+# Third calculate each participant's mean score between the two contexts of the
+# dependent variable, then an adjustment score by first subtracting the
+# participant mean from the grand mean, then by adding the adjustment to
+# participant scores in each context. You can accomplish this first by grouping
+# by participant, then performing the calculations within the mutuate()
+# function.
+csv_data_long <- dplyr::group_by(csv_data_long, case) 
+csv_data_long <- dplyr::mutate(
+  csv_data_long,
+  mean_anxiety = mean(anxiety),
+  adjustment = grand_mean - mean_anxiety,
+  anxiety_adj = anxiety + adjustment
+)
+
+# Finally you can plot it using ggpubr
+ggpubr::ggline(csv_data_long, x = "condition", y = "anxiety_adj", add = "mean_ci")
 ```
 
 ### Composing plots
