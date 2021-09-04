@@ -116,7 +116,7 @@ dplyr::select(.data = simpsons, age)
 The `filter()` function (`?dplyr::filter`) is used to subset a data frame, retaining all rows that satisfy your conditions.
 
 ```{r filter}
-dplyr::filter(.data = simpsons, simpson != "bart")
+dplyr::filter(.data = simpsons, simpson != "bart" & simpson != "lisa")
 ```
 
 ### Mutating
