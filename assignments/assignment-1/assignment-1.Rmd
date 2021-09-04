@@ -23,6 +23,15 @@ library(here)
 library(papaja)
 library(tidyverse)
 library(ggpubr)
+# Note: We have added the code to load a few packages for you, but you might
+# need to add code to load some more to complete the assignment. See this
+# assignment's Help Yourself for what you will need.
+
+# Load scripts
+source(here("R", "shapiro_test.R"))
+# Note: If you create any plots with legends in this assignment you might need
+# to source the script for the custom APA legend function mentioned in this
+# assignment's Help Yourself.
 ```
 
 ```{r chunk-opts, include=FALSE, code=xfun::read_utf8(here('R', 'chunk-opts.R'))}
@@ -110,7 +119,7 @@ Answers here.
 
 ## Question 2d
 
-*You are also interested in whether there is a statistically significant increase in heart rates from before to after the exam for all students (Hypothesis 2). Write an APA formatted results section for Hypothesis 2. (5 marks)*
+*You are also interested in whether there is a statistically significant increase in heart rates from before to after the exam for all students (Hypothesis 2). Write an APA formatted results section (with the same requirements from the previous question) for Hypothesis 2. (5 marks)*
 
 Answers here.
 
