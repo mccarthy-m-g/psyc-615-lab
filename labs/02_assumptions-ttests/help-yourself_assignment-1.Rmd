@@ -31,6 +31,7 @@ library(psych)
 library(broom)
 library(car)
 library(effectsize)
+library(janitor)
 ```
 
 If you run this code and get the error message "there is no package called 'tidyverse'" (or a different package name), you will need to first install it, then run `library()` once again.
@@ -45,6 +46,16 @@ You only need to install a package once, but you need to reload it every time yo
 If you need to be explicit about where a function (or dataset) comes from, you can use the special form `package::function()`. For example, `ggplot2::ggplot()` tells R explicitly that you are using the `ggplot()` function from the **ggplot2** package.
 
 Telling R explicitly where a function comes from is called *namespacing*. The code below will always be explicit about where functions from loaded packages come from so that it is easier for you to help yourself when you want to learn more about a given function. However, you do not need to namespace functions in your code for assignments so long as you have the prerequisite packages loaded in your session.
+
+## You've got this!
+
+Getting good at programming will take some time, and the learning curve is often steep at first, but we know you can do it! Stick with it---you'll be thankful you did in the future, even if you don't think so now.
+
+```{r aRt-by-allison-horst}
+knitr::include_graphics(here("images", "help-yourself-01_r-first-then.png"))
+```
+
+When you run into errors: try stuff out, search for help online, ask your peers, or find examples of code to copy (such as from these Help Yourselves). And check for typos. Always check for typos... If you're still stuck after that then reach out to the TAs. We want you to succeed!
 
 ## Creating data sets
 
@@ -184,7 +195,7 @@ dplyr::arrange(.data = simpsons, dplyr::desc(age))
 
 ### Pivoting
 
-The `pivot_longer()` function (`?tidyr::pivot_longer`) from the **tidyr** package 
+The `pivot_longer()` function (`?tidyr::pivot_longer`) from the **tidyr** package
 
 ```{r pivot-longer}
 # This is the same `mutate()` code as above. Here we are saving it as an object
@@ -203,7 +214,7 @@ simpsons_long <- tidyr::pivot_longer(
 simpsons_long
 ```
 
-The inverse transformation is the `pivot_wider()` function (`?tidyr::pivot_wider`), also from the **tidyr** package,  which "widens" data, increasing the number of columns and decreasing the number of rows. Here we return the long version of our example data back to its previous state.
+The inverse transformation is the `pivot_wider()` function (`?tidyr::pivot_wider`), also from the **tidyr** package, which "widens" data, increasing the number of columns and decreasing the number of rows. Here we return the long version of our example data back to its previous state.
 
 ```{r pivot-wider}
 tidyr::pivot_wider(simpsons_long, names_from = context, values_from = age)
@@ -222,7 +233,7 @@ string_path <- "data/help-yourself_01.csv"
 string_path
 ```
 
-A better way is to use the `file.path()` function (`?file.path`), which constructs the path to a file from components in a platform-independent way. This avoids file paths breaking between different operating systems, since Windows uses backslashes and OSX and Linux use forward slashes. 
+A better way is to use the `file.path()` function (`?file.path`), which constructs the path to a file from components in a platform-independent way. This avoids file paths breaking between different operating systems, since Windows uses backslashes and OSX and Linux use forward slashes.
 
 ```{r function-path}
 function_path <- file.path("data", "help-yourself_01.csv")
@@ -270,11 +281,11 @@ View(csv_data)
 
 ## Visualizing data
 
-R is a powerhouse for visualizing data, and makes it easy to create publication ready plots and tables. 
+R is a powerhouse for visualizing data, and makes it easy to create publication ready plots and tables.
 
 ### Creating plots
 
-The plots you will make in this course will be simple, but if you enjoy data visualization then diving deeper into R's plotting capabilities is a great investment (check out the *#tidytuesday* tag on Twitter if you want a taste). Data visualization in R is typically done with the **ggplot2** package, which is based on a grammar of graphics that allow you to assemble plots step by step to your exact specifications. A companion to ggplot2 is the **ggpubr** package, which simplifies the creation of plots common to scientific publications in APA style.
+The plots you will make in this course will be simple, but if you enjoy data visualization then diving deeper into R's plotting capabilities is a great investment (check out the *\#tidytuesday* tag on Twitter if you want a taste). Data visualization in R is typically done with the **ggplot2** package, which is based on a grammar of graphics that allow you to assemble plots step by step to your exact specifications. A companion to ggplot2 is the **ggpubr** package, which simplifies the creation of plots common to scientific publications in APA style.
 
 #### Histograms and box plots
 
@@ -315,6 +326,14 @@ ggpubr::ggline(data = csv_data, x = "group", y = "anxiety", add = "mean_ci")
 You can also plot bar and line plots with adjusted means using subject-centring (which might be useful on the assignment, hint hint). This requires some manual calculations prior to plotting.
 
 ```{r manual-adjusted-mean}
+# Here we will modify our example data to reflect a paired design before
+# demonstrating the steps for calculating and plotting adjusted means
+csv_data_paired <- dplyr::mutate(csv_data, case = rep(1:12, times = 2))
+csv_data_paired <- tidyr::pivot_wider(
+  csv_data_paired, names_from = group, values_from = anxiety
+)
+csv_data_paired <- janitor::clean_names(csv_data_paired)
+
 # First pivot the data to long format
 csv_data_long <- tidyr::pivot_longer(
   csv_data_paired,
@@ -412,6 +431,7 @@ ggpubr::ggboxplot(data = csv_data, y = "anxiety")
 The second, and usually better, option is to place a reference to the caption in the code chunk options. You can see how this works below (note: you need to look at the R Markdown file to see this, not the rendered document).
 
 <!-- ---------------------------------------------------------------------- -->
+
 (ref:caption-b) When you have a long caption using the second option is better because it keeps your code chunk options short and clean.
 
 ```{r caption-b, fig.cap="(ref:caption-b)"}
@@ -436,7 +456,7 @@ However, you should note that the `apa_table()` function will not do all the APA
 
 ## Including images
 
-If you need to include any images in your R Markdown document you can use the `knitr::include_graphics()` function(`?knitr::include_graphics`)  from the **knitr** package. Note that you actually need to use the `knitr::` namespacing for this one. Images can also be given captions using the same method as with plots.
+If you need to include any images in your R Markdown document you can use the `knitr::include_graphics()` function(`?knitr::include_graphics`) from the **knitr** package. Note that you actually need to use the `knitr::` namespacing for this one. Images can also be given captions using the same method as with plots.
 
 ```{r images}
 knitr::include_graphics(here::here("images", "help-yourself-01_outlier.png"))
@@ -446,7 +466,7 @@ knitr::include_graphics(here::here("images", "help-yourself-01_outlier.png"))
 
 ### Mean and standard deviation
 
-The `mean()` function (`?mean`) takes a vector of numbers as input and returns the mean as output. 
+The `mean()` function (`?mean`) takes a vector of numbers as input and returns the mean as output.
 
 ```{r mean}
 zero_to_one_hundred <- 0:100
@@ -464,7 +484,7 @@ sd(some_numbers)
 
 ### Skewness and kurtosis
 
-The `skewness()` and `kurtosis()` functions (`?datawizard::skewness`) from the **datawizard** package can be used to calculate skewness and kurtosis. There are different algorithms for calculating skewness and kurtosis, these can be selected using the optional `type` argument (`type = 2` matches SPSS and SAS). 
+The `skewness()` and `kurtosis()` functions (`?datawizard::skewness`) from the **datawizard** package can be used to calculate skewness and kurtosis. There are different algorithms for calculating skewness and kurtosis, these can be selected using the optional `type` argument (`type = 2` matches SPSS and SAS).
 
 ```{r skewness-kurtosis}
 datawizard::skewness(some_numbers)
@@ -630,7 +650,7 @@ t.test(anxiety ~ group, paired = TRUE, data = csv_data)
 
 ### Tidy t-tests
 
-The output of the `t.test()` function can be tidied with the `tidy()` function  from the broom package. See the function help (`?broom::tidy.htest`) for details about what the value in each column means.
+The output of the `t.test()` function can be tidied with the `tidy()` function from the broom package. See the function help (`?broom::tidy.htest`) for details about what the value in each column means.
 
 ```{r ttest-tidy}
 # This example uses the independent t-test code from the chunks above
@@ -666,6 +686,18 @@ The simplest approach is to choose whichever syntax you used with the t.test() f
 
 ## Learning more
 
-add free resources
+### From the R for Data Science book
 
-stats of doom
+-   R basics <https://r4ds.had.co.nz/workflow-basics.html>
+-   An introduction to RStudio projects <https://r4ds.had.co.nz/workflow-projects.html>
+-   An introduction to R Markdown <https://r4ds.had.co.nz/r-markdown.html>
+-   More details on tibbles and data wrangling in R <https://r4ds.had.co.nz/wrangle-intro.html>
+-   Details on pipes (`%>%`) in R (we did not cover pipes in this Help Yourself but you may want to use them for the assignment, and we will use them in future code examples) <https://r4ds.had.co.nz/pipes.html>
+
+### Styling and formatting your R code for readability
+
+-   The tidyverse style guide <https://style.tidyverse.org>
+
+### Statistics
+
+-   Learn statistics and programming with the free Stats of DOOM course, videos, slides, and course materials available at <https://statisticsofdoom.com>
