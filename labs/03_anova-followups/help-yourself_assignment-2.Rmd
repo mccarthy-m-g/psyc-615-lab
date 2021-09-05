@@ -1,0 +1,128 @@
+---
+title: "Help yourself: Assignment 2"
+author:
+  - name: "Michael McCarthy"
+    url: https://github.com/mccarthy-m-g
+    affiliation: "PSYC 615 Lab"
+    affiliation_url: https://github.com/mccarthy-m-g/psyc-615-lab
+repository_url: https://github.com/mccarthy-m-g/psyc-615-lab
+output:
+  distill::distill_article:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = "#>", collapse = TRUE)
+```
+
+## Prerequisites
+
+To access the datasets, help pages, and functions that we will use in this *help yourself*, load the following packages:
+
+```{r prerequisites}
+here::i_am("labs/03_anova-followups/help-yourself_assignment-2.Rmd")
+
+library(here)
+library(papaja)
+library(tidyverse)
+library(ggpubr)
+library(car)
+library(broom)
+library(effectsize)
+library(emmeans)
+```
+
+As well as this Help Yourself's example data:
+
+```{r example-data}
+birthdays <- readr::read_csv(here::here("data", "help-yourself_a2.csv"))
+```
+
+## A reminder
+
+The **Help Yourself** R Markdown documents are cumulative, so you will need to refer to last week's Help Yourself for some of the functions needed to complete the assignment. No new or different syntax is needed for these functions so it's just a matter of finding the right ones. Check the following sections:
+
+-   Reading data
+-   Wrangling data
+-   Visualizing data
+-   Statistical assumptions
+
+You will only need functions from these sections, plus the new ones introduced in this Help Yourself to complete this week's assignment. Not much programming is needed this week either---your TAs answered all the questions using less than 15 function calls (not including setup functions).
+
+## Independent one-way ANOVA
+
+The independent one-way ANOVA is an omnibus test that tests for an overall effect between two or more distinct unrelated groups without specifying what the effect was. The `aov()` function (`?aov`) can be used to fit an independent one-way ANOVA. It uses the same formula syntax as the `t.test()` function did for independent t-tests last week, where the dependent variable goes to the left of the tilde and the independent variable goes to the right.
+
+```{r aov}
+birthdays_model <- aov(awesomeness ~ bdayquarter, data = birthdays)
+```
+
+To view a summary table of the model fit you can use the `tidy()` function (`?tidy.aov`) from the broom package.
+
+```{r aov-tidy}
+broom::tidy(birthdays_model)
+```
+
+The `omega_squared()` function (`?effectsize::omega_squared`) can be used to calculate the effect size for the ANOVA model.
+
+```{r omega-squared}
+effectsize::omega_squared(model = birthdays_model)
+```
+
+## Post-hoc tests
+
+The [**emmeans** (aka Estimated Marginal Means) package](https://cran.r-project.org/web/packages/emmeans/index.html) can be used for a variety of follow-up tests for many linear and generalized linear models, such as the independent one-way ANOVA and other models you will learn about in the coming weeks. We have shared some vignettes on the emmeans package for you to learn more about the package, and estimated marginal means in general. Consider reading them. They're very good and will get you thinking critically about post-hoc testing.
+
+Estimated marginal means are based on a model---not directly on data. The basis for them is what is called a reference grid for a given model. The `emmeans()` function (`?emmeans::emmeans`) can be used to establish the reference grid and estimate the marginal means. It has two required arguments: An `object` argument, which takes a fitted model object (in this case the birthdays ANOVA); and a `specs` argument, which uses formula syntax to specify the names of the predictors over which estimated marginal means are desired (for an independent one-way ANOVA you want them over the independent variable).
+
+```{r emmeans}
+birthdays_emm <- emmeans(object = birthdays_model, specs = ~ bdayquarter)
+birthdays_emm
+```
+
+You will not need the estimated marginal means for this assignment (although you may in future assignments), but the reference grid established by the `emmeans()` function and now stored in the `birthdays_emm` object will be needed. Many functions in the emmeans package make use of this reference grid, such as those we will cover in the next section.
+
+### Pairwise comparisons
+
+The `contrast()` function (`?emmeans::contrast`) can be used to calculate pairwise comparisons from the reference grid created by the `emmeans()` function. The `method` argument determines the type of contrast (in this case we want pairwise comparisons), the `adjust` argument determines the adjustment method for p-values, and the `infer` argument determines whether confidence intervals are computed or not.
+
+```{r pairwise-unadjusted}
+contrast(
+  object = birthdays_emm,
+  method = "pairwise",
+  adjust = "none",
+  infer = TRUE
+)
+```
+
+If you want adjusted p-values you can supply either "tukey" or "bonferroni" to the `adjust` argument.
+
+```{r tukey-hsd}
+contrast(
+  object = birthdays_emm,
+  method = "pairwise",
+  adjust = "tukey",
+  infer = TRUE
+)
+```
+
+The results of the `contrast()` function can also be tidied with the `tidy()` function from the broom package if you need to access them programmatically.
+
+The `eff_size()` function (`?emmeans::eff_size`) to calculate Cohen's d for pairwise comparisons. The required `sigma` argument takes the value of the population standard deviation for your sample, which can be obtained using the `sigma()` function on your model fit object. The required `edf` argument takes the equivalent degrees of freedom (edf) for the population standard deviation for your sample, which can be obtained using the `df.residual()` function on your model fit object.
+
+```{r cohens-d}
+eff_size(
+  object = birthdays_emm,
+  sigma = sigma(birthdays_model),
+  edf = df.residual(birthdays_model),
+  method = "pairwise"
+)
+```
+
+The results of the `eff_size()` function can also be tidied with the `tidy()` function.
+
+## Learning more
+
+<https://cran.r-project.org/web/packages/emmeans/vignettes/FAQs.html>
+<https://cran.r-project.org/web/packages/emmeans/vignettes/basics.html>
+<https://cran.r-project.org/web/packages/emmeans/vignettes/comparisons.html> <https://cran.r-project.org/web/packages/emmeans/vignettes/confidence-intervals.html>
