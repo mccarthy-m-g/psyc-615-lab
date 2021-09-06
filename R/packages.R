@@ -17,7 +17,8 @@ cran_prerequisites <- c(
   "broom",
   "car",
   "effectsize",
-  "emmeans"
+  "emmeans",
+  "faux"
 )
 
 install.packages(cran_prerequisites)
