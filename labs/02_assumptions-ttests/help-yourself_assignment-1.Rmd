@@ -254,14 +254,14 @@ You should read the here package vignettes to learn more about using `here()` in
 There are a number of functions you can use to read different data files in R. For this course there are only two you need to worry about. To read CSV data files you can use the `read_csv()` (`?readr::read_csv`) function from the **readr** package.
 
 ```{r read-csv}
-csv_data <- readr::read_csv(here::here("data", "help-yourself_01.csv"))
+csv_data <- readr::read_csv(here::here("data", "help-yourself_a1.csv"))
 csv_data
 ```
 
 To read SPSS `.sav` files you can use the `read_sav()` function (`?haven::read_sav`) from the **haven** package.
 
 ```{r read-spss}
-sav_data <- haven::read_sav(here::here("data", "help-yourself_01.sav"))
+sav_data <- haven::read_sav(here::here("data", "help-yourself_a1.sav"))
 sav_data
 ```
 
