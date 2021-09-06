@@ -7,6 +7,8 @@
 cran_prerequisites <- c(
   "remotes",
   "xfun",
+  "withr",
+  "fs",
   "distill",
   "here",
   "tidyverse",
