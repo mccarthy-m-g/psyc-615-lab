@@ -28,7 +28,7 @@ library(papaja)
 
 # Question 1
 
-*From D2L, please download and import `assignment-02_q1.csv` into R.*
+*From D2L, please download and import `assignment-2_q1.csv` into R.*
 
 ```{r Q1-data-import}
 # You can import the data in this chunk

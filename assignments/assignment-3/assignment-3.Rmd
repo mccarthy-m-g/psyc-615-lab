@@ -46,7 +46,7 @@ Answers here.
 
 # Question 2
 
-*From D2L, please download and import `assignment-03_q2.csv` into R.*
+*From D2L, please download and import `assignment-3_q2.csv` into R.*
 
 ```{r}
 

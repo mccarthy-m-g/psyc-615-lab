@@ -77,14 +77,14 @@ Answers here.
 
 # Question 2
 
-*From D2L, please download and import `assignment-01_q2.csv` into R.*
+*From D2L, please download and import `assignment-1_q2.csv` into R.*
 
 *Background: Imagine you are a TA for an undergrad statistics course (or maybe you are now!) and your students just finished their first statistics exam of the year. You, a clever statistical student yourself, decided to record the following variables from the students: age, gender (1 = female, 2 = male), how many hours they study per week, their love of statistics (1 to 10 scale), and their heart rate both before the exam and after the exam (normal range is 60-100 for adults). You are now ready to investigate!*
 
 ```{r Q2-dataset}
 # You can read the data in this chunk. For this first assignment we have
 # written the code for you.
-exams <- read_csv(here("data", "assignment-01_q2.csv"))
+exams <- read_csv(here("data", "assignment-1_q2.csv"))
 ```
 
 ## Question 2a
