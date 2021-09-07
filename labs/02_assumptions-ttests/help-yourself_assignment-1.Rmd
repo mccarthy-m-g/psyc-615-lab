@@ -279,6 +279,10 @@ If you want to view the entire data frame you can either click on the object it 
 View(csv_data)
 ```
 
+Important note: By default the output of data sets and statistical tests is rounded when you output it in the R console. When the data is viewed in the RStudio viewer called by the `View()` function the output will not be rounded. In other words, output in the console is good for glancing at your data and test output, but the RStudio viewer contains the version of record. Keep this in mind when completing your assignments.
+
+If you do want to see more digits printed in the console [you can change this](https://pillar.r-lib.org/reference/pillar_options.html) (and other printing methods).
+
 ## Visualizing data
 
 R is a powerhouse for visualizing data, and makes it easy to create publication ready plots and tables.
