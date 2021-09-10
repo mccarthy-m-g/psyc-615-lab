@@ -95,7 +95,7 @@ contrast(
 )
 ```
 
-If you want adjusted p-values you can supply either "tukey" or "bonferroni" to the `adjust` argument.
+If you want adjusted p-values you can supply either "tukey", "bonferroni", or "holm" to the `adjust` argument.
 
 ```{r tukey-hsd}
 contrast(
