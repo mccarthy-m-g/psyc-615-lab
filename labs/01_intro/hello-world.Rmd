@@ -1,6 +1,6 @@
 ---
 title: "Hello World"
-output: html_document
+output: word_document
 ---
 
 ```{r setup, include=FALSE}
@@ -17,12 +17,34 @@ When you click the **Knit** button a document will be generated that includes bo
 summary(cars)
 ```
 
-## Including Plots
-
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
+```{r pressure}
 plot(pressure)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+If you want to save the data created by R code you can store it inside an object with the arrow `<-` operator:
+
+```{r}
+r_is_awesome <- "R is awesome!"
+```
+
+You can then output the data stored inside an output by calling its name:
+
+```{r}
+r_is_awesome
+```
+
+## Weekly assignments
+
+You can write all your assignments for this course in R Markdown. Templates for each assignment can be found in the assignments folder of this repository. Make sure to use them---they're set up to make the assignment writing process simple for you. When you knit the templates they will create a Word document in APA style, one with and one without the code, each with the file naming scheme required for handing in assignments.
+
+R Markdown has a source (plain text) and visual (markup) editor you can use and switch between when completing assignments <https://rstudio.github.io/visual-markdown-editing/>. You will likely find the visual editor helpful, so check it out!
+
+We don't have time to dive into all the details of using R Markdown in this course, but you can find a nice introduction to it in the R for Data Science book <https://r4ds.had.co.nz/r-markdown.html>. If you do run into problems knitting your assignments, or find the output doesn't look how you expect, please let your TAs know.
+
+## Weekly learning
+
+Each week you will learn something new in this lab. All of the learning material in this course is cumulative, so it is important not to skip anything. You can find the learning material we recommend reading and working through each week on the GitHub repository for this lab at <https://github.com/mccarthy-m-g/psyc-615-lab#weekly-learning>.
+
+The first two weeks will teach you how to program with R, giving you everything you need to succeed in this course and understand the learning materials. You can either work through the [Hands-On Programming with R](https://rstudio-education.github.io/hopr/) with the [R project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) for this lab repository, or you can create a new R project and work through the book with that.
