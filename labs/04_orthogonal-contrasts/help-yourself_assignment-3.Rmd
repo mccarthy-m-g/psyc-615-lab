@@ -25,19 +25,113 @@ here::i_am("labs/04_orthogonal-contrasts/help-yourself_assignment-3.Rmd")
 library(here)
 library(tidyverse)
 library(ggpubr)
-
+library(broom)
+library(effectsize)
+library(emmeans)
 ```
 
+As well as this Help Yourself's example data:
 
+```{r example-data}
+birthdays <- readr::read_csv(here::here("data", "help-yourself_a2.csv"))
+```
 
+## Display math
 
-We'll need to discuss factor levels here
+You will need to show your calculations for demonstrating orthogonality in planned comparisons for this week's assignment. You can fill in the math equations below for that.
+
+$$
+\begin{aligned} \\
+[...]\cdot[...] &= x_1*y_1 + x_2*y_2 + x_3*y_3 \\
+&= a + b + c \\
+&= 0 \\
+&= \mathrm{orthogonal}
+\end{aligned}
+$$
+
+## Factors
+
+Factors are a data type in R that indicate the values of a variable are categorical. It is important to encode categorical variables in your data frame as factors, as that will tell the statistical functions in R to treat them as such. If you do not do this you can run into unexpected (and incorrect results). You can use the `as_factor()` function (`?forcats::as_factor`) from the **forcats** package to turn a variable in a data frame into a factor.
+
+```{r as_factor}
+birthdays <- dplyr::mutate(
+  birthdays,
+  bdayquarter = forcats::as_factor(bdayquarter)
+)
+birthdays
+```
+
+When you are creating contrast codes for a variable it's important that these codes align with the factor levels of that variable in your data frame. The `levels()` function (`?levels`) can be used to view factor levels of a variable.
+
+```{r levels}
+levels(birthdays$bdayquarter)
+```
+
+Sometimes the levels of a factor are not in the order you want. The `fct_relevel()` function (`?forcats::fct_relevel`) can be used to relevel factors. Paired with the `mutate()` function (`?dplyr::mutate`) it can be used to relevel factors within a data frame.
 
 ```{r}
-# view factor levels
-levels(sitcoms$sitcom)
-
-# view contrasts after they're set
-contrasts(sitcoms$sitcom)
+birthdays_releveled <- dplyr::mutate(
+  birthdays,
+  bdayquarter = forcats::fct_relevel(
+    bdayquarter,
+    c("four", "three", "two", "one")
+  )
+)
+levels(birthdays_releveled$bdayquarter)
 ```
 
+## Setting contrasts
+
+You can set contrasts by creating a series of vectors with your contrast codes, then the `contrasts()` and `cbind()` functions can be used to apply the contrast codes to the variable in your data frame.
+
+```{r set-contrasts}
+# Create contrast coding for each hypothesis
+contrast_1 <- c(3,-1,-1,-1)
+contrast_2 <- c(0, 2,-1,-1)
+contrast_3 <- c(0, 0, 1,-1)
+
+# Set contrasts in the birthdays tibble
+contrasts(birthdays$bdayquarter) <- cbind(contrast_1, contrast_2, contrast_3)
+
+# View the contrasts after they're set
+contrasts(birthdays$bdayquarter)
+```
+
+Note that you want your contrasts to be orthogonal. If they are not orthogonal then some additional steps need to be taken to get accurate estimates when you run your contrasts. You do not need to worry about this in lab.
+
+## ANOVA
+
+Once contrasts are set you can fit your ANOVA model, same as we did last week.
+
+```{r aov}
+birthdays_model <- aov(awesomeness ~ bdayquarter, data = birthdays)
+broom::tidy(birthdays_model)
+
+effectsize::omega_squared(birthdays_model)
+```
+
+## Getting contrasts
+
+To calculate the contrast results you can use the same `contrast()` function from the **emmeans** package as last week, but rather than using the argument `method = "pairwise"` to get pairwise contrasts, you will tell the `method` argument the specific contrasts you want to calculate using the contrast code objects specified earlier.
+
+```{r contrast}
+birthdays_emm <- emmeans(birthdays_model, specs = "bdayquarter")
+
+emmeans::contrast(
+  birthdays_emm,
+  method = list("H1" = contrast_1, "H2" = contrast_2, "H3" = contrast_3),
+  adjust = "none",
+  infer = TRUE
+)
+```
+
+The `eff_size()` function can be used to calculate the effect size for each function, as you did last week. Although the values are wrong so we need to check the exacts for this.
+
+```{r eff-size}
+eff_size(
+  birthdays_emm,
+  sigma = sigma(birthdays_model),
+  edf = df.residual(birthdays_model),
+  method = list("H1" = contrast_1, "H2" = contrast_2, "H3" = contrast_3),
+)
+```
