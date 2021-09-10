@@ -1,0 +1,29 @@
+---
+title: "Help yourself: Assignment 5"
+author:
+  - name: "Michael McCarthy"
+    url: https://github.com/mccarthy-m-g
+    affiliation: "PSYC 615 Lab"
+    affiliation_url: https://github.com/mccarthy-m-g/psyc-615-lab
+repository_url: https://github.com/mccarthy-m-g/psyc-615-lab
+output:
+  distill::distill_article:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = "#>", collapse = TRUE)
+```
+
+## Prerequisites
+
+To access the datasets, help pages, and functions that we will use in this *help yourself*, load the following packages:
+
+```{r prerequisites}
+here::i_am("labs/07_ancova/help-yourself_assignment-5.Rmd")
+
+library(here)
+library(tidyverse)
+library(ggpubr)
+
+```

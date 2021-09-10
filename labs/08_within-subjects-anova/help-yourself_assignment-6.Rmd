@@ -1,0 +1,37 @@
+---
+title: "Help yourself: Assignment 6"
+author:
+  - name: "Michael McCarthy"
+    url: https://github.com/mccarthy-m-g
+    affiliation: "PSYC 615 Lab"
+    affiliation_url: https://github.com/mccarthy-m-g/psyc-615-lab
+repository_url: https://github.com/mccarthy-m-g/psyc-615-lab
+output:
+  distill::distill_article:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = "#>", collapse = TRUE)
+```
+
+## Prerequisites
+
+To access the datasets, help pages, and functions that we will use in this *help yourself*, load the following packages:
+
+```{r prerequisites}
+here::i_am("labs/08_within-subjects-anova/help-yourself_assignment-6.Rmd")
+
+library(here)
+library(tidyverse)
+library(ggpubr)
+
+```
+
+## Learning more
+
+### Why you should use mixed effects models instead of repeated measures ANOVA
+
+- https://journals.physiology.org/doi/full/10.1152/advan.00042.2003
+- https://www.sciencedirect.com/science/article/pii/S0749596X07001337
+- https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1469-8986.1987.tb00324.x
