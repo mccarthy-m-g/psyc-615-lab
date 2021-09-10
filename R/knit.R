@@ -13,11 +13,12 @@ knit_assignment <- function(input, ...) {
 
   # Get paths to input project root and input file
   input_proj_root <- here::here()
+  input_proj_root_name <- basename(input_proj_root)
 
   # Copy the entire project to a temporary directory
   temp_proj_root <- withr::local_tempdir()
   fs::dir_copy(input_proj_root, temp_proj_root)
-  temp_proj_root <- fs::path(fs::as_fs_path(temp_proj_root), "psyc-615-lab")
+  temp_proj_root <- fs::path(fs::as_fs_path(temp_proj_root), input_proj_root_name)
 
   # Get path to input file copy in the temporary directory
   input_rel_path  <- stringr::str_remove(input, input_proj_root)
