@@ -35,6 +35,18 @@ You can then output the data stored inside an output by calling its name:
 r_is_awesome
 ```
 
+You can write math using a single pair of dollar signs `$` for inline math (great for writing statistical results!):
+
+> "There was a statistical difference between the two groups, $t(55) = 1.64$, $p = .106$, $d = 0.44$."
+
+Or with a double pair of dollar signs `$$` for display math:
+
+$$
+\bar{X} = \frac{\sum_{i=1}^{n} x_{i}}{n}
+$$
+
+This post on Stack Exchange covers everything you need to know to write math in R Markdown <https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference>.
+
 ## Weekly assignments
 
 You can write all your assignments for this course in R Markdown. Templates for each assignment can be found in the assignments folder of this repository. Make sure to use them---they're set up to make the assignment writing process simple for you. When you knit the templates they will create a Word document in APA style, one with and one without the code, each with the file naming scheme required for handing in assignments.
