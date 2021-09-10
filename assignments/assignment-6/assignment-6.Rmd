@@ -28,7 +28,9 @@ library(papaja)
 
 # Question 1
 
-*Design a 2x3 ANOVA with an n = 20 per cell that could be a within-subjects OR between-subjects ANOVA. State your research question (may differ for between vs within), IVs (with levels defined) and DV. Describe how your study would change depending on whether it was within or between-subjects (e.g., participant selection, assignment to condition, sample size etc.). (3.5 Marks). Note: You do not need to make any data for this question, nor for question 2 below!*
+*Design a 2x3 ANOVA with an n = 20 per cell that could be a within-subjects OR between-subjects ANOVA. State your research question (may differ for between vs within), IVs (with levels defined) and DV. Describe how your study would change depending on whether it was within or between-subjects (e.g., participant selection, assignment to condition, sample size etc.). (3.5 Marks).*
+
+*Note: You do not need to make any data for this question, nor for question 2 below!*
 
 Answers here.
 
@@ -62,7 +64,7 @@ Answers here.
 
 ## Question 3b
 
-*Why is one of Mauchly’s W statistic and p-value missing from your SPSS/R output (1 mark)? *
+*Why is one of Mauchly’s W statistic and p-value missing from your R output (1 mark)? *
 
 Answers here.
 
@@ -70,7 +72,7 @@ Answers here.
 
 ## Question 3c
 
-*Based on the results of Mauchly’s test, would you proceed with the planned contrasts required to test the hypotheses? Why or why not (2 marks)? Hint: You must provide reasoning for each of the main effects to receive full marks.*
+*Based on the results of Mauchly’s test, would you proceed with the planned contrasts required to test the hypotheses? Why or why not? (2 marks). Hint: You must provide reasoning for each of the main effects to receive full marks.*
 
 Answers here.
 

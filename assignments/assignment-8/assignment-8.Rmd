@@ -42,7 +42,7 @@ library(papaja)
 
 ## Question 1
 
-*Write out hypothesis(es) in sentence format that will address the research question, taking into account the information provided about efficacy about the drugs (and don’t forget about the placebo). (Do not look at the data first!). Note: Although Tom did talk about trend analysis in lecture, we would advise not using trend to analyze the data since we will not be teaching trend until next week.*
+*Write out hypothesis(es) in sentence format that will address the research question, taking into account the information provided about efficacy about the drugs (and don’t forget about the placebo). (Do not look at the data first!).*
 
 Answers here.
 
