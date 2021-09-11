@@ -73,14 +73,14 @@ effectsize::omega_squared(model = birthdays_model)
 
 The [**emmeans** (aka Estimated Marginal Means) package](https://cran.r-project.org/web/packages/emmeans/index.html) can be used for a variety of follow-up tests for many linear and generalized linear models, such as the independent one-way ANOVA and other models you will learn about in the coming weeks. We have shared some vignettes on the emmeans package for you to learn more about the package, and estimated marginal means in general. Consider reading them. They're very good and will get you thinking critically about post-hoc testing.
 
-Estimated marginal means are based on a model---not directly on data. The basis for them is what is called a reference grid for a given model. The `emmeans()` function (`?emmeans::emmeans`) can be used to establish the reference grid and estimate the marginal means. It has two required arguments: An `object` argument, which takes a fitted model object (in this case the birthdays ANOVA); and a `specs` argument, which uses formula syntax to specify the names of the predictors over which estimated marginal means are desired (for an independent one-way ANOVA you want them over the independent variable).
+Estimated marginal means are based on a model---not directly on data. The basis for them is what is called a reference grid for a given model. The `emmeans()` function (`?emmeans::emmeans`) can be used to establish the reference grid and estimate the marginal means. It has two required arguments: An `object` argument, which takes a fitted model object (in this case the birthdays ANOVA); and a `specs` argument, which takes the names of the predictor over which estimated marginal means are desired. Although note: for an independent one-way ANOVA the `emmeans()` function establishes the reference grid from the means of each level of the predictor since there aren't actually any marginal means to calculate.
 
 ```{r emmeans}
-birthdays_emm <- emmeans(object = birthdays_model, specs = ~ bdayquarter)
+birthdays_emm <- emmeans(object = birthdays_model, specs = "bdayquarter")
 birthdays_emm
 ```
 
-You will not need the estimated marginal means for this assignment (although you may in future assignments), but the reference grid established by the `emmeans()` function and now stored in the `birthdays_emm` object will be needed. Many functions in the emmeans package make use of this reference grid, such as those we will cover in the next section.
+You will not need the estimated marginal means for this assignment so don't worry about what they are (although you will in future assignments). But the reference grid established by the `emmeans()` function and now stored in the `birthdays_emm` object will be needed, which is why we gave the short explainer. Many functions in the emmeans package make use of this reference grid, such as those we will cover in the next section.
 
 ### Pairwise comparisons
 
@@ -123,6 +123,9 @@ The results of the `eff_size()` function can also be tidied with the `tidy()` fu
 
 ## Learning more
 
-<https://cran.r-project.org/web/packages/emmeans/vignettes/FAQs.html>
-<https://cran.r-project.org/web/packages/emmeans/vignettes/basics.html>
-<https://cran.r-project.org/web/packages/emmeans/vignettes/comparisons.html> <https://cran.r-project.org/web/packages/emmeans/vignettes/confidence-intervals.html>
+### emmeans vignettes
+
+- FAQ <https://cran.r-project.org/web/packages/emmeans/vignettes/FAQs.html>
+- Basics <https://cran.r-project.org/web/packages/emmeans/vignettes/basics.html>
+- Comparisons <https://cran.r-project.org/web/packages/emmeans/vignettes/comparisons.html>
+- Confidence intervals <https://cran.r-project.org/web/packages/emmeans/vignettes/confidence-intervals.html>

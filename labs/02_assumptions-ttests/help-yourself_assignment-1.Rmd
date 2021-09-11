@@ -254,15 +254,15 @@ You should read the here package vignettes to learn more about using `here()` in
 There are a number of functions you can use to read different data files in R. For this course there are only two you need to worry about. To read CSV data files you can use the `read_csv()` (`?readr::read_csv`) function from the **readr** package.
 
 ```{r read-csv}
-csv_data <- readr::read_csv(here::here("data", "help-yourself_a1.csv"))
-csv_data
+spiders <- readr::read_csv(here::here("data", "help-yourself_a1.csv"))
+spiders
 ```
 
 To read SPSS `.sav` files you can use the `read_sav()` function (`?haven::read_sav`) from the **haven** package.
 
 ```{r read-spss}
-sav_data <- haven::read_sav(here::here("data", "help-yourself_a1.sav"))
-sav_data
+spiders_sav <- haven::read_sav(here::here("data", "help-yourself_a1.sav"))
+spiders_sav
 ```
 
 ### Viewing data sets
@@ -270,13 +270,13 @@ sav_data
 There are a few ways to view data in R after you have imported it. If you just want to get a quick glimpse of the data you can use the `head()` or `tail()` functions (`?head`) to see the first or last 6 observations.
 
 ```{r head}
-tail(csv_data)
+tail(spiders)
 ```
 
 If you want to view the entire data frame you can either click on the object it belongs to in the Environment pane in RStudio, or you can use the `View()` function (`?View`).
 
 ```{r view, eval=FALSE}
-View(csv_data)
+View(spiders)
 ```
 
 Important note: By default the output of data sets and statistical tests is rounded when you output it in the R console. When the data is viewed in the RStudio viewer called by the `View()` function the output will not be rounded. In other words, output in the console is good for glancing at your data and test output, but the RStudio viewer contains the version of record. Keep this in mind when completing your assignments.
@@ -289,20 +289,20 @@ R is a powerhouse for visualizing data, and makes it easy to create publication 
 
 ### Creating plots
 
-The plots you will make in this course will be simple, but if you enjoy data visualization then diving deeper into R's plotting capabilities is a great investment (check out the *\#tidytuesday* tag on Twitter if you want a taste). Data visualization in R is typically done with the **ggplot2** package, which is based on a grammar of graphics that allow you to assemble plots step by step to your exact specifications. A companion to ggplot2 is the **ggpubr** package, which simplifies the creation of plots common to scientific publications in APA style.
+The plots you will make in this course will be simple, but if you enjoy data visualization then diving deeper into R's plotting capabilities is a great investment (check out the *\#tidytuesday* tag on Twitter if you want a taste). Data visualization in R is typically done with the **ggplot2** package, which is based on a grammar of graphics that allows you to assemble plots step by step to your exact specifications. A companion to ggplot2 is the **ggpubr** package, which simplifies the creation of plots common to scientific publications in APA style.
 
 #### Histograms and box plots
 
 Histograms are useful for visualizing the distribution of observations for a given variable. The `gghistogram()` function (`?ggpubr::gghistogram`) can be used to create a histogram. You can change the number and width of bins with the optional `bins` and `binwidth` arguments.
 
 ```{r gghistogram}
-ggpubr::gghistogram(data = csv_data, x = "anxiety")
+ggpubr::gghistogram(data = spiders, x = "anxiety")
 ```
 
 An alternative way to visualize the distribution of observations for a given variable is with boxplots. This can be useful if you want to emphasize different percentiles of the data. The `ggboxplot()` function (`?ggpubr::ggboxplot`) can be used to create a box plot.
 
 ```{r ggboxplot}
-ggpubr::ggboxplot(data = csv_data, y = "anxiety")
+ggpubr::ggboxplot(data = spiders, y = "anxiety")
 ```
 
 #### Q-Q plots
@@ -310,7 +310,7 @@ ggpubr::ggboxplot(data = csv_data, y = "anxiety")
 Quantile-Quantile plots are a useful visual aid for assessing whether the distribution of observations for a given variable approximate a theoretical distribution, such as a the normal distribution. The `ggqqplot()` function (`?ggpubr::ggqqplot`) can be used to create a Q-Q plot.
 
 ```{r ggqqplot}
-ggpubr::ggqqplot(data = csv_data, x = "anxiety")
+ggpubr::ggqqplot(data = spiders, x = "anxiety")
 ```
 
 #### Bar plots and line plots
@@ -318,13 +318,13 @@ ggpubr::ggqqplot(data = csv_data, x = "anxiety")
 Bar plots can be used to visualize group differences. The `ggbarplot()` function (`?ggpubr::ggbarplot`) can be used to create a bar plot. The optional `add` argument can be used to add descriptive statistics to the bars, such as means and confidence intervals.
 
 ```{r ggbarplot}
-ggpubr::ggbarplot(data = csv_data, x = "group", y = "anxiety", add = "mean_ci")
+ggpubr::ggbarplot(data = spiders, x = "group", y = "anxiety", add = "mean_ci")
 ```
 
 An alternative to bar plots are line plots. These can be useful when visualizing changes in repeated measures data.
 
 ```{r ggline}
-ggpubr::ggline(data = csv_data, x = "group", y = "anxiety", add = "mean_ci")
+ggpubr::ggline(data = spiders, x = "group", y = "anxiety", add = "mean_ci")
 ```
 
 You can also plot bar and line plots with adjusted means using subject-centring (which might be useful on the assignment, hint hint). This requires some manual calculations prior to plotting.
@@ -332,22 +332,22 @@ You can also plot bar and line plots with adjusted means using subject-centring 
 ```{r manual-adjusted-mean}
 # Here we will modify our example data to reflect a paired design before
 # demonstrating the steps for calculating and plotting adjusted means
-csv_data_paired <- dplyr::mutate(csv_data, case = rep(1:12, times = 2))
-csv_data_paired <- tidyr::pivot_wider(
-  csv_data_paired, names_from = group, values_from = anxiety
+spiders_paired <- dplyr::mutate(spiders, case = rep(1:12, times = 2))
+spiders_paired <- tidyr::pivot_wider(
+  spiders_paired, names_from = group, values_from = anxiety
 )
-csv_data_paired <- janitor::clean_names(csv_data_paired)
+spiders_paired <- janitor::clean_names(spiders_paired)
 
 # First pivot the data to long format
-csv_data_long <- tidyr::pivot_longer(
-  csv_data_paired,
+spiders_long <- tidyr::pivot_longer(
+  spiders_paired,
   cols = c("picture", "real_spider"),
   names_to = "condition",
   values_to = "anxiety"
 )
 
 # Second calculate the grand mean for both contexts
-anxiety_scores <- dplyr::pull(csv_data_long, anxiety)
+anxiety_scores <- dplyr::pull(spiders_long, anxiety)
 grand_mean <- mean(anxiety_scores)
 
 # Third calculate each participant's mean score between the two contexts of the
@@ -356,16 +356,16 @@ grand_mean <- mean(anxiety_scores)
 # participant scores in each context. You can accomplish this first by grouping
 # by participant, then performing the calculations within the mutuate()
 # function.
-csv_data_long <- dplyr::group_by(csv_data_long, case) 
-csv_data_long <- dplyr::mutate(
-  csv_data_long,
+spiders_long <- dplyr::group_by(spiders_long, case) 
+spiders_long <- dplyr::mutate(
+  spiders_long,
   mean_anxiety = mean(anxiety),
   adjustment = grand_mean - mean_anxiety,
   anxiety_adj = anxiety + adjustment
 )
 
 # Finally you can plot it using ggpubr
-ggpubr::ggline(csv_data_long, x = "condition", y = "anxiety_adj", add = "mean_ci")
+ggpubr::ggline(spiders_long, x = "condition", y = "anxiety_adj", add = "mean_ci")
 ```
 
 ### Composing plots
@@ -378,7 +378,7 @@ You may have noticed the axis labels in the plots above were all in lower case. 
 
 ```{r labels}
 ggpubr::ggbarplot(
-  data = csv_data,
+  data = spiders,
   x = "group",
   y = "anxiety",
   add = "mean_ci",
@@ -399,7 +399,7 @@ source(here::here("R", "apa_legend.R"))
 # The fill argument groups the data, resulting in a legend. The palette
 # argument is used to change the fill colour of the boxplots.
 grouped_boxplot <- ggpubr::ggboxplot(
-  data = csv_data,
+  data = spiders,
   y = "anxiety",
   fill = "group",
   palette = "grey"
@@ -416,8 +416,8 @@ The **patchwork** package makes it very easy to combine multiple plots into a si
 
 ```{r patchwork}
 # First create some plots
-plot_a <- ggpubr::gghistogram(data = csv_data, x = "anxiety")
-plot_b <- ggpubr::ggqqplot(data = csv_data, x = "anxiety")
+plot_a <- ggpubr::gghistogram(data = spiders, x = "anxiety")
+plot_b <- ggpubr::ggqqplot(data = spiders, x = "anxiety")
 
 # Then compose them together and add an annotation to distinguish them
 plot_a + plot_b +
@@ -429,7 +429,7 @@ plot_a + plot_b +
 APA style also requires figures to have captions. There are two ways to go about this in an R Markdown document. The first is to type the caption directly into the code chunk options of the chunk where your plot is output from, using the `fig.cap` chunk option (note: you need to look at the R Markdown file to see this, not the rendered document).
 
 ```{r caption-a, fig.cap="A short figure caption."}
-ggpubr::ggboxplot(data = csv_data, y = "anxiety")
+ggpubr::ggboxplot(data = spiders, y = "anxiety")
 ```
 
 The second, and usually better, option is to place a reference to the caption in the code chunk options. You can see how this works below (note: you need to look at the R Markdown file to see this, not the rendered document).
@@ -439,7 +439,7 @@ The second, and usually better, option is to place a reference to the caption in
 (ref:caption-b) When you have a long caption using the second option is better because it keeps your code chunk options short and clean.
 
 ```{r caption-b, fig.cap="(ref:caption-b)"}
-ggpubr::ggboxplot(data = csv_data, y = "anxiety")
+ggpubr::ggboxplot(data = spiders, y = "anxiety")
 ```
 
 ### Tables
@@ -500,13 +500,13 @@ datawizard::kurtosis(some_numbers)
 You can also use the `describe()` function (`?psych::describe`) from the **psych** package to calculate all your descriptive statistics at once. The optional `type` argument selects which algorithm to calculate skewness and kurtosis with (`type = 2` matches SPSS and SAS). Note that the `describe()` function will calculate descriptive statistics for all columns in a data frame, even if that would not make sense for all columns. You can wrangle your data frame beforehand with the `select()` function from the dplyr package if you only want to see output for the relevant columns.
 
 ```{r describe}
-psych::describe(csv_data, type = 2)
+psych::describe(spiders, type = 2)
 ```
 
 You can use the `describeBy()` function (`?psych::describeBy`) if you want to calculate all descriptive statistics by a grouping variable.
 
 ```{r describeBy}
-psych::describeBy(csv_data, group = "group", type = 2)
+psych::describeBy(spiders, group = "group", type = 2)
 ```
 
 ## Statistical assumptions
@@ -523,12 +523,12 @@ The `shapiro.test()` function takes a numeric vector of values as its input, so 
 
 ```{r shapiro-wilk-df}
 # The pull function lets you use a familiar syntax to other functions
-anxiety_values_pull <- dplyr::pull(.data = csv_data, var = anxiety)
+anxiety_values_pull <- dplyr::pull(.data = spiders, var = anxiety)
 
 # R's extract operators have a unique syntax that is more concise. These are
 # all interchangeable so you may see different ones used by different people.
-anxiety_values_dollar <- csv_data$anxiety
-anxiety_values_sqbr   <- csv_data[["anxiety"]]
+anxiety_values_dollar <- spiders$anxiety
+anxiety_values_sqbr   <- spiders[["anxiety"]]
 
 # If you put any of the anxiety_values_ vectors in the shapiro.test() function
 # below you will see that you get the same result for each
@@ -551,7 +551,7 @@ source(here::here("R", "shapiro_test.R"))
 
 # Note: The group argument is optional, so you can also use this function
 # as a replacement for the `shapiro.test()` function
-shapiro_test(csv_data, var = anxiety, group = group)
+shapiro_test(spiders, var = anxiety, group = group)
 ```
 
 ### Levene's test
@@ -562,15 +562,15 @@ The first option requires you to extract the variable and group columns you want
 
 ```{r levene-extract}
 # Here we extract the numeric vector for anxiety and the character vector for
-# group from the `csv_data` data frame using the `$` extractor mentioned in the
+# group from the `spiders` data frame using the `$` extractor mentioned in the
 # previous section.
-car::leveneTest(y = csv_data$anxiety, group = csv_data$anxiety, center = mean)
+car::leveneTest(y = spiders$anxiety, group = spiders$anxiety, center = mean)
 ```
 
 The second option uses R's formula syntax (`?formula`), placing the variable column to the left of the tilde and the group column to the right, then specifying the data frame those columns belong to using the `data` argument.
 
 ```{r levenes-formula}
-car::leveneTest(anxiety ~ group, center = mean, data = csv_data)
+car::leveneTest(anxiety ~ group, center = mean, data = spiders)
 ```
 
 If you want easy programmatic access to the output of the `leveneTest()` function you can use the `tidy()` function (`?broom::tidy.leveneTest`) from the **broom** package here too (the `tidy()` function works with most statistical models in R). See the function help (`?broom::tidy.htest`) for details about what the value in each column means.
@@ -582,7 +582,7 @@ If you want easy programmatic access to the output of the `leveneTest()` functio
 levenes_test_anxiety <- car::leveneTest(
   anxiety ~ group,
   center = mean,
-  data = csv_data
+  data = spiders
 )
 
 broom::tidy(levenes_test_anxiety)
@@ -597,13 +597,13 @@ All the different types of t-tests in R use the same `t.test()` function (`?t.te
 The single sample t-test tests whether a group of values significantly differ from a specified value. It uses the optional `mu` argument to indicate the true value of the mean. You can either use this function with extracted values:
 
 ```{r single-sample-ttest-extract}
-t.test(csv_data$anxiety, mu = 20)
+t.test(spiders$anxiety, mu = 20)
 ```
 
 Or with the formula syntax:
 
 ```{r single-sample-ttest-formula}
-t.test(anxiety ~ 1, mu = 20, data = csv_data)
+t.test(anxiety ~ 1, mu = 20, data = spiders)
 ```
 
 ### Independent t-test
@@ -615,8 +615,8 @@ You can either use this function with extracted values from each group:
 ```{r independent-ttest-extract}
 # First you have to create separate data frames for each group. The filter
 # function is the easiest way to do this.
-spider_pic_group <- dplyr::filter(.data = csv_data, group == "Picture")
-spider_real_group <- dplyr::filter(.data = csv_data, group == "Real Spider")
+spider_pic_group <- dplyr::filter(.data = spiders, group == "Picture")
+spider_real_group <- dplyr::filter(.data = spiders, group == "Real Spider")
 
 # Afterwords you can extract the same variable from each data frame to compare
 # the two groups.
@@ -626,7 +626,7 @@ t.test(x = spider_pic_group$anxiety, y = spider_real_group$anxiety)
 Or with the formula syntax, where the dependent variable goes to the left of the tilde and the independent variable goes to the right. (As you may have noticed by now R's formula syntax tends to result in cleaner, shorter code).
 
 ```{r independent-ttest-formula}
-t.test(anxiety ~ group, data = csv_data)
+t.test(anxiety ~ group, data = spiders)
 ```
 
 ### Dependent t-test
@@ -649,7 +649,7 @@ t.test(
 Or with the formula syntax, where the dependent variable goes to the left of the tilde and the independent variable goes to the right.
 
 ```{r dependent-ttest-formula}
-t.test(anxiety ~ group, paired = TRUE, data = csv_data)
+t.test(anxiety ~ group, paired = TRUE, data = spiders)
 ```
 
 ### Tidy t-tests
@@ -658,7 +658,7 @@ The output of the `t.test()` function can be tidied with the `tidy()` function f
 
 ```{r ttest-tidy}
 # This example uses the independent t-test code from the chunks above
-ttest_fit_anxiety <- t.test(anxiety ~ group, data = csv_data)
+ttest_fit_anxiety <- t.test(anxiety ~ group, data = spiders)
 
 broom::tidy(ttest_fit_anxiety)
 ```
@@ -683,7 +683,7 @@ Or with the formula syntax, where the dependent variable goes to the left of the
 ```{r cohens-d-formula}
 # This example calculates Cohen's d for the independent t-test in the code
 # chunks above
-effectsize::cohens_d(anxiety ~ group, data = csv_data)
+effectsize::cohens_d(anxiety ~ group, data = spiders)
 ```
 
 The simplest approach is to choose whichever syntax you used with the t.test() function, since you can then drop the arguments you used there directly into `cohens_d()` without any changes.
