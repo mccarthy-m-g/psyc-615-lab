@@ -25,7 +25,7 @@ here::i_am("labs/05_factorial-anova/help-yourself_assignment-4.Rmd")
 library(here)
 library(tidyverse)
 library(faux)
-library(ggpubr)
+library(car)
 ```
 
 ## Simulating data sets part 2
@@ -89,7 +89,7 @@ homunculi
 There aren't any new assumptions this week, but Levene's test requires a new formula input when you are testing the homogeneity of variance assumption for factorial ANOVA. The syntax `dv ~ iv1 * iv2` specifies that your model involves the main effects and interaction between the two independent variables.
 
 ```{r levene-test}
-leveneTest(
+car::leveneTest(
   cognitive_ability ~ brain_type * body_type,
   center = mean,
   data = homunculi
@@ -113,36 +113,31 @@ broom::tidy(homunculi_model)
 The `joint_tests()` function (`?emmeans::joint_tests`) can be used to test the simple main effects of your model.
 
 ```{r joint-tests}
-# First set the reference grid with emmeans, as always
-homunculi_emm <- emmeans::emmeans(homunculi_model, specs = "body_type")
-
-# Then run the joint tests
 emmeans::joint_tests(homunculi_model, by = "body_type")
-
-# And get the effect size for each test
-emmeans::eff_size(
-  homunculi_emm,
-  sigma = sigma(homunculi_model),
-  edf = df.residual(homunculi_model)
-)
 ```
 
 ### Following up simple main effects
 
 You can follow up simple main effects using the familiar emmeans functions you have been using up until now. There is just one addition you need to make when setting the reference grid with the `emmeans()` function: you need to use the optional `by` argument to specify the name of the predictor to condition on.
 
-```{r}
-homunculi_emm_2 <- emmeans::emmeans(
+```{r emmeans}
+homunculi_emm <- emmeans::emmeans(
   homunculi_model,
   specs = "body_type",
   by = "brain_type"
 )
 
 emmeans::contrast(
-  homunculi_emm_2,
+  homunculi_emm,
   method = "pairwise",
   adjust = "none",
   infer = TRUE
+)
+
+emmeans::eff_size(
+  homunculi_emm,
+  sigma = sigma(homunculi_model),
+  edf = df.residual(homunculi_model)
 )
 ```
 
@@ -154,4 +149,10 @@ You will have to figure the code and appropriate plot for this one yourself.
 
 ## Learning more
 
-Interaction analysis in emmeans <https://cran.r-project.org/web/packages/emmeans/vignettes/interactions.html>
+### faux
+
+- Package documentation, articles, and vignettes <https://debruine.github.io/faux/index.html>
+
+### emmeans
+
+- Interaction analysis in emmeans <https://cran.r-project.org/web/packages/emmeans/vignettes/interactions.html>

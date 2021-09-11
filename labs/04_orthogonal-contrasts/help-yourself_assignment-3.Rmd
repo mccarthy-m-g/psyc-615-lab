@@ -99,7 +99,7 @@ contrasts(birthdays$bdayquarter)
 
 Note that you want your contrasts to be orthogonal. If they are not orthogonal then some additional steps need to be taken to get accurate estimates when you run your contrasts. You do not need to worry about this in lab.
 
-Also note that because the contrast codes are applied to the variable in your data frame, any model you run with that variable will use those contrast codes. This will not be an issue in this course, but it's good to know about. The deep dive into setting contrasts in R in Learning More shows alternative ways of setting contrasts if you are ever in a situation where this behaviour would be an annoyance.
+Also note that because the contrast codes are applied to the variable in your data frame, any model you run with that variable will use those contrast codes. This will not be an issue in this course, but it's good to know about. See the links in Learning More for alternative ways of setting contrasts if you are ever in a situation where this behaviour would be an annoyance.
 
 ## ANOVA
 
@@ -129,10 +129,10 @@ birthdays_emm_contrast <- emmeans::contrast(
 birthdays_emm_contrast
 ```
 
-The formula to calculate the effect size for contrast results is (note this is equivalent to the complex formula in your lab slides):
+The formula to calculate the effect size for contrast results is:
 
 $$
-d = \frac{2 * \mathrm{estimate}}{\mathit{SD}_R * \sum_{k = 1}^k{| c_k |}}
+d = \frac{2 * \mathrm{estimate}}{\sigma_R * \sum_{k = 1}^k{| c_k |}}
 $$
 
 It looks like a lot is going on here, but the equation becomes simpler once you turn it into R code. First you can calculate the sums of the absolute values of the contrast codes for each contrast.
@@ -146,6 +146,7 @@ Then you can tidy the emmeans contrast object.
 
 ```{r}
 birthdays_emm_contrast <- broom::tidy(birthdays_emm)
+birthdays_emm_contrast
 ```
 
 Finally you can plug the formula into the `mutate()` function to compute the correct effect size for each contrast. The `sigma()` function is used to get the residual standard deviation from the fitted ANOVA model.
@@ -155,8 +156,11 @@ birthdays_emm_contrast <- dplyr::mutate(
   birthdays_emm_contrast,
   effect.size = (2 * estimate) / (sigma(birthdays_model) * contrast_sums)
 )
+birthdays_emm_contrast
 ```
 
 ## Learning more
 
-Deep dive into setting contrasts in R <https://rstudio-pubs-static.s3.amazonaws.com/65059_586f394d8eb84f84b1baaf56ffb6b47f.html>
+### Contrasts and ANOVA in R
+
+- Deep dive into setting contrasts in R <https://rstudio-pubs-static.s3.amazonaws.com/65059_586f394d8eb84f84b1baaf56ffb6b47f.html>
