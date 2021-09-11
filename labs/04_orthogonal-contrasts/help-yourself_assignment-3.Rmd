@@ -115,23 +115,42 @@ effectsize::omega_squared(birthdays_model)
 To calculate the contrast results you can use the same `contrast()` function from the **emmeans** package as last week, but rather than using the argument `method = "pairwise"` to get pairwise contrasts, you will tell the `method` argument the specific contrasts you want to calculate using the contrast code objects specified earlier.
 
 ```{r contrast}
-birthdays_emm <- emmeans(birthdays_model, specs = "bdayquarter")
+birthdays_emm <- emmeans::emmeans(birthdays_model, specs = "bdayquarter")
 
-emmeans::contrast(
+birthdays_emm_contrast <- emmeans::contrast(
   birthdays_emm,
   method = list("H1" = contrast_1, "H2" = contrast_2, "H3" = contrast_3),
   adjust = "none",
   infer = TRUE
 )
+
+birthdays_emm_contrast
 ```
 
-The `eff_size()` function can be used to calculate the effect size for each function, as you did last week. Although the values are wrong so we need to check the exacts for this.
+The formula to calculate the effect size for contrast results is (note this is equivalent to the complex formula in your lab slides):
+
+$$
+d = \frac{2 * \mathrm{estimate}}{\mathit{SD}_R * \sum_{k = 1}^k{| c_k |}}
+$$
+
+It looks like a lot is going on here, but the equation becomes simpler once you turn it into R code. First you can calculate the sums of the absolute values of the contrast codes for each contrast.
+
+```{r}
+contrast_sums <- colSums(abs(contrasts(birthdays$bdayquarter)))
+contrast_sums
+```
+
+Then you can tidy the emmeans contrast object.
+
+```{r}
+birthdays_emm_contrast <- broom::tidy(birthdays_emm)
+```
+
+Finally you can plug the formula into the `mutate()` function to compute the correct effect size for each contrast. The `sigma()` function is used to get the residual standard deviation from the fitted ANOVA model.
 
 ```{r eff-size}
-eff_size(
-  birthdays_emm,
-  sigma = sigma(birthdays_model),
-  edf = df.residual(birthdays_model),
-  method = list("H1" = contrast_1, "H2" = contrast_2, "H3" = contrast_3),
+birthdays_emm_contrast <- dplyr::mutate(
+  birthdays_emm_contrast,
+  effect.size = (2 * estimate) / (sigma(birthdays_model) * contrast_sums)
 )
 ```
