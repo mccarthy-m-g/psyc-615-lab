@@ -99,6 +99,8 @@ contrasts(birthdays$bdayquarter)
 
 Note that you want your contrasts to be orthogonal. If they are not orthogonal then some additional steps need to be taken to get accurate estimates when you run your contrasts. You do not need to worry about this in lab.
 
+Also note that because the contrast codes are applied to the variable in your data frame, any model you run with that variable will use those contrast codes. This will not be an issue in this course, but it's good to know about. The deep dive into setting contrasts in R in Learning More shows alternative ways of setting contrasts if you are ever in a situation where this behaviour would be an annoyance.
+
 ## ANOVA
 
 Once contrasts are set you can fit your ANOVA model, same as we did last week.
@@ -154,3 +156,7 @@ birthdays_emm_contrast <- dplyr::mutate(
   effect.size = (2 * estimate) / (sigma(birthdays_model) * contrast_sums)
 )
 ```
+
+## Learning more
+
+Deep dive into setting contrasts in R <https://rstudio-pubs-static.s3.amazonaws.com/65059_586f394d8eb84f84b1baaf56ffb6b47f.html>

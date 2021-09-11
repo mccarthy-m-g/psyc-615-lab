@@ -567,7 +567,7 @@ The first option requires you to extract the variable and group columns you want
 car::leveneTest(y = csv_data$anxiety, group = csv_data$anxiety, center = mean)
 ```
 
-The second option uses R's formula syntax, placing the variable column to the left of the tilde and the group column to the right, then specifying the data frame those columns belong to using the `data` argument.
+The second option uses R's formula syntax (`?formula`), placing the variable column to the left of the tilde and the group column to the right, then specifying the data frame those columns belong to using the `data` argument.
 
 ```{r levenes-formula}
 car::leveneTest(anxiety ~ group, center = mean, data = csv_data)
