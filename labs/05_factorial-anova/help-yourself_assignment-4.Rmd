@@ -24,20 +24,133 @@ here::i_am("labs/05_factorial-anova/help-yourself_assignment-4.Rmd")
 
 library(here)
 library(tidyverse)
+library(faux)
 library(ggpubr)
-
-```
-
-As well as this Help Yourself's example data:
-
-```{r example-data}
-pain <- readr::read_csv(here::here("data", "help-yourself_a4.csv"))
 ```
 
 ## Simulating data sets part 2
 
-show them faux package
-https://debruine.github.io/faux/index.html
+The [**faux** package](https://debruine.github.io/faux/index.html) makes it easy to simulate data for factorial designs. For your assignment you will need to simulate data for an experimental 3x2 between-subjects ANOVA. This can be accomplished in a few steps.
+
+First, decide on the the between subjects variables and their levels, storing it in a named list.
+
+```{r faux-between}
+between <- list(
+  brain_type = c("human", "dolphin", "chimp"),
+  body_type  = c("biological", "robotic")
+)
+```
+
+Second, decide on the group mean for each cell of the experiment, storing it in a named list where the names correspond to the level names, separated with an underscore.
+
+```{r faux-mu}
+mu <- list(
+  human_biological   = 108,
+  human_robotic      =  96,
+  dolphin_biological =  82,
+  dolphin_robotic    =  87,
+  chimp_biological   =  94,
+  chimp_robotic      =  93
+)
+```
+
+Third, decide on the standard deviation for each cell of the experiment. Here we've decided the standard deviation will be constant between cells, but if you want to have unique standard deviations per cell you can use the same named list syntax as you did for the cell means above.
+
+```{r faux-sd}
+standard_deviation <- 10
+```
+
+Fourth, the `sim_design()` function (`?faux::sim_design`) can be used to simulate the data based on the design specifications you provide it. The `n` argument specifies the number of observations per cell; the `empirical` argument specifies whether the mean and standard deviation should reflect the empirical mean and standard deviation you provided or the population mean and standard deviation; the `dv` argument specifies the name of your dependent variable; and the `plot` function specifies whether or not to return a plot of the simulated data (which in this case, and for the assignment, you don't want).
+
+The `sim_design()` function simulates data randomly, so if you were to run it repeatedly with the same inputs, the actual values it returns would differ slightly each time. The `set.seed()` function (`??set.seed`) can be used before the `sim_design()` function so that it uses the same seed each time you run all the code in its code chunk. This is especially important for when you do your assignment, since when you knit an R Markdown document it is done in a new R session, not the same one you've been working in. So if you do not set a seed you can end up with different values in your RStudio session and your knitted document.
+
+```{r sim-design}
+set.seed(666)
+homunculi <- faux::sim_design(
+  between = between,
+  n = 25,
+  mu = mu,
+  sd = standard_deviation,
+  empirical = TRUE,
+  dv = "cognitive_ability",
+  plot = FALSE
+)
+```
+
+Finally, you can coerce the data frame returned by the `sim_design()` function into a tibble with the `as_tibble()` function (`?tibble::as_tibble`).
+
+```{r as-tibble}
+homunculi <- tibble::as_tibble(homunculi)
+homunculi
+```
+
+## Assumptions
+
+There aren't any new assumptions this week, but Levene's test requires a new formula input when you are testing the homogeneity of variance assumption for factorial ANOVA. The syntax `dv ~ iv1 * iv2` specifies that your model involves the main effects and interaction between the two independent variables.
+
+```{r levene-test}
+leveneTest(
+  cognitive_ability ~ brain_type * body_type,
+  center = mean,
+  data = homunculi
+)
+```
+
+## Factorial ANOVA
+
+Factorial ANOVA uses this same new formula syntax, but the rest should be familiar from last week.
+
+```{r aov}
+homunculi_model <- aov(
+  cognitive_ability ~ brain_type * body_type,
+  data = homunculi
+)
+broom::tidy(homunculi_model)
+```
+
+## Simple main effects
+
+The `joint_tests()` function (`?emmeans::joint_tests`) can be used to test the simple main effects of your model.
+
+```{r joint-tests}
+# First set the reference grid with emmeans, as always
+homunculi_emm <- emmeans::emmeans(homunculi_model, specs = "body_type")
+
+# Then run the joint tests
+emmeans::joint_tests(homunculi_model, by = "body_type")
+
+# And get the effect size for each test
+emmeans::eff_size(
+  homunculi_emm,
+  sigma = sigma(homunculi_model),
+  edf = df.residual(homunculi_model)
+)
+```
+
+### Following up simple main effects
+
+You can follow up simple main effects using the familiar emmeans functions you have been using up until now. There is just one addition you need to make when setting the reference grid with the `emmeans()` function: you need to use the optional `by` argument to specify the name of the predictor to condition on.
+
+```{r}
+homunculi_emm_2 <- emmeans::emmeans(
+  homunculi_model,
+  specs = "body_type",
+  by = "brain_type"
+)
+
+emmeans::contrast(
+  homunculi_emm_2,
+  method = "pairwise",
+  adjust = "none",
+  infer = TRUE
+)
+```
+
+## Plotting factorial ANOVA
+
+In order to plot each cell of the experiment with the ggpubr functions you have been using each week, you will need a few additional arguments. The `fill` argument can be used to specify the variable to apply a fill colour to (which will then split your plot into the appropriate cells), the `palette` function specifies the colour palette for the fill (set it to "grey" for APA), and the position argument specifies where to position the geoms for the cells on the plot (set it to `position_dodge()` to have the geoms go side by side).
+
+You will have to figure the code and appropriate plot for this one yourself.
 
 ## Learning more
 
