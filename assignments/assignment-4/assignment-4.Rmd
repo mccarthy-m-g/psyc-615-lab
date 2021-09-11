@@ -89,6 +89,6 @@ Answers here.
 
 # Bonus
 
-*What is the disadvantage of using EMMEANS through the UNIVARIATE dialog box? (0.5 BONUS marks)*
+*When would you not want to use pooled variance in your post-hoc analyses? (0.5 BONUS marks)*
 
-Answers here. WE SHOULD CHANGE THIS ONE.
+Answers here.
