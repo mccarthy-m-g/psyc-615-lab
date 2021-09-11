@@ -24,6 +24,99 @@ here::i_am("labs/07_ancova/help-yourself_assignment-5.Rmd")
 
 library(here)
 library(tidyverse)
+library(broom)
+library(car)
+library(emmeans)
 library(ggpubr)
-
 ```
+
+As well as this Help Yourself's example data:
+
+```{r example-data}
+grades <- readr::read_csv(here::here("data", "help-yourself_a5.csv"))
+```
+
+## Assumptions
+
+You will need a bit of new code for the new assumptions this week, although most use familiar functions.
+
+### Covariate-dependent variable correlation
+
+The `cor.test()` function can be used to test the correlation between the covariate and the dependent variable using the `~ cv + dv` formula syntax.
+
+```{r cor-test}
+cor.test(
+  ~ minutes_listening + final_exam_grade,
+  method = "pearson",
+  data = grades
+)
+```
+
+### Other assumptions
+
+Normality, homogeneity of variance, the one-way ANOVA between the independent variable and covariate, and homogeneity of regression slopes assumptions all use functions and syntax you have used previously for other assignments. So check back if you need a reminder!
+
+## ANCOVA
+
+ANCOVA uses the familiar `aov()` function you have used throughout this course, adding the covariate into the formula is all that's needed.
+
+```{r ancova}
+grades_model <- aov(final_exam_grade ~ group + minutes_listening, data = grades)
+broom::tidy(grades_model)
+```
+
+However, the `aov()` function uses Type 1 sums of squares, which you do not want for ANCOVA. To caclulate ANCOVA with Type 3 sums of squares you can use the `Anova()` function from the **car** package, which takes the model above as its input.
+
+```{r car-anova}
+grades_model_t3 <- car::Anova(grades_model, type = 3)
+```
+
+If you want to do this in one step we made a custom `aov_psyc()` function for you to use. It returns a list with both the output from the `aov()` function and the `Anova()` function. You can extract either output from the list with the `$` extractor.
+
+```{r aov-psyc}
+source(here::here("R", "aov_psyc.R"))
+
+aov_psyc(
+  final_exam_grade ~ group + minutes_listening, 
+  type = 3,
+  data = grades
+)
+```
+
+When you calculate effect size you should do it on the object created by the `Anova()` function.
+
+```{r omega-squared}
+effectsize::omega_squared(grades_model_t3)
+```
+
+## Follow-ups
+
+Nothing new! The `emmeans()`, `contrasts()`, and `eff_size()` functions with their familiar syntax and arguments is all you need.
+
+### Plotting emmeans
+
+However, you will use the output of emmeans in a new way. In order to plot the estimated marginal means with the correct error bars you can tidy the emmeans object then use that data for plotting.
+
+```{r tidy-emmeans}
+# First get the emmeans since we didn't do any follow-up code above
+grades_emm <- emmeans::emmeans(grades_model, specs = "group")
+
+# Then tidy it so the results are in a data frame that can be sent to ggpubr
+grades_emmeans <- tidy(grades_emm, conf.int = TRUE)
+grades_emmeans
+```
+
+Once you have the data it can be plotted. Since the exact values that are needed for plotting are stored in the data frame rather than raw data, this will look a bit different than usual. There are two steps here: First is the `ggbarplot()` call. Notice that we aren't using the optional `add` argument to add error bars. We can't since there's only one value per group in our data frame, and the lower and upper for the error bars are actually stored in their own columns. To plot them we need to add a new geom to the plot using ggplot2 `+` syntax.
+
+After doing this, the second step is to use the `geom_errorbar()` function (`?ggplot2::geom_errorbar`) from the ggplot2 package to add the confidence intervals to the plot. You can just copy the syntax below for now. If you want to learn more about how ggplot2 works there are some readings in Learning more.
+
+```{r ggpubr}
+ggpubr::ggbarplot(grades_emmeans, x = "group", y = "estimate") +
+  ggplot2::geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.4)
+```
+
+## Learning more
+
+### ggplot2
+
+- Introduction to ggplot2 <https://r4ds.had.co.nz/data-visualisation.html>
