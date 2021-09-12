@@ -38,9 +38,15 @@ Answers here.
 
 # Question 2
 
-*Based on the study you designed in question 1, complete the table below by adding the names of your IVs, and the corresponding degrees of freedom and sources of error for each effect and interaction based on whether it is a within or between-subjects design. See the first cell of between-subjects degrees of freedom for an example of what to fill in. This question assumes no corrections are being applied to the degrees of freedom (5.5 marks). Hint: Lecture notes may come in handy for identifying/naming sources of within-subject error!*
+*Based on the study you designed in question 1, complete the table below by adding the names of your IVs, and the corresponding degrees of freedom and sources of error for each effect and interaction based on whether it is a within (WS) or between-subjects (BS) design. See the first cell of between-subjects degrees of freedom for an example of what to fill in. This question assumes no corrections are being applied to the degrees of freedom (5.5 marks).*
 
-Answers here.
+*Hint: Lecture notes may come in handy for identifying/naming sources of within-subject error!*
+
+| Effects       | BS df  | BS source of error | WS df | WS source of error         |
+|---------------|--------|--------------------|-------|----------------------------|
+| Exposure Type | 1, 114 |                    |       |                            |
+| Compound      |        |                    |       |                            |
+| Interaction   |        |                    |       |                            |
 
 \newpage
 
