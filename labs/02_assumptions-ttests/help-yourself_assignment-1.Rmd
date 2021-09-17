@@ -705,3 +705,7 @@ The simplest approach is to choose whichever syntax you used with the t.test() f
 ### Statistics
 
 -   Learn statistics and programming with the free Stats of DOOM course, videos, slides, and course materials available at <https://statisticsofdoom.com>
+
+### Assumptions
+
+-   Dealing with outliers <https://www.rips-irsp.com/articles/10.5334/irsp.289/>
