@@ -30,6 +30,7 @@ library(papaja)
 library(psych)
 library(broom)
 library(car)
+library(datawizard)
 library(effectsize)
 library(janitor)
 ```
@@ -338,7 +339,7 @@ spiders_paired <- tidyr::pivot_wider(
 )
 spiders_paired <- janitor::clean_names(spiders_paired)
 
-# First pivot the data to long format
+# First pivot the data to long format if it isn't already
 spiders_long <- tidyr::pivot_longer(
   spiders_paired,
   cols = c("picture", "real_spider"),
