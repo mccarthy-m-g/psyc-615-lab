@@ -27,7 +27,8 @@ cran_prerequisites <- c(
   "effectsize",
   "emmeans",
   "faux",
-  "afex"
+  "afex",
+  "tinytex"
 )
 
 # Packages to be installed from GitHub ----------------------------------------
