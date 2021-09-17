@@ -30,7 +30,9 @@ library(papaja)
 
 *Your assignment cannot go beyond 8 pages, this includes any necessary figures or tables. Please refer to the rubric for expectations and grading criteria. There is also a checklist for you to complete to make sure you have addressed everything (you do not need to submit this with your assignment).*
 
-*For this assignment you will be asked to take a situation and research question, devise a hypothesis(es) to address the research question, plan and complete the required analyses, and fully report your analysis in APA format. From D2L, please download and import `assignment-8_q3.csv` into R.*
+*For this assignment you will be asked to take a situation and research question, devise a hypothesis(es) to address the research question, plan and complete the required analyses, and fully report your analysis in APA format.*
+
+*From the `data` directory, please import `assignment-8_q3.csv` into R.*
 
 ```{r df}
 

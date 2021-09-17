@@ -52,7 +52,7 @@ Answers here.
 
 # Question 3
 
-*From D2L, please download and import `assignment-6_q3.csv` into R.*
+*From the `data` directory, please import `assignment-6_q3.csv` into R.*
 
 ```{r}
 
