@@ -3,7 +3,11 @@
 # was not implemented yet only because materials are being made weekly so there
 # was not yet a predefined list of packages students need for the course.
 
-# Install packages from CRAN ------------------------------------------------
+# Install pak for fast downloading of packages --------------------------------
+install.packages("pak")
+pak::pak_setup()
+
+# Packages to be installed from CRAN ------------------------------------------
 cran_prerequisites <- c(
   "remotes",
   "xfun",
@@ -13,19 +17,20 @@ cran_prerequisites <- c(
   "here",
   "tidyverse",
   "stringi",
+  "janitor",
   "ggpubr",
   "patchwork",
   "psych",
   "broom",
+  "datawizard",
   "car",
   "effectsize",
   "emmeans",
-  "faux"
+  "faux",
+  "afex"
 )
 
-install.packages(cran_prerequisites)
-
-# Install packages from GitHub ------------------------------------------------
+# Packages to be installed from GitHub ----------------------------------------
 
 # These packages are only available on GitHub. Future TAs, please check if the
 # packages here have been released on CRAN, and if so have students install the
@@ -34,4 +39,5 @@ github_prerequisites <- c(
   "crsh/papaja",
 )
 
-purrr::map(github_prerequisites, remotes::install_github)
+# Install all packages with pak -----------------------------------------------
+pak::pkg_install(c( cran_prerequisites, github_prerequisites))
