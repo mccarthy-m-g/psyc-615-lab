@@ -3,10 +3,6 @@
 # was not implemented yet only because materials are being made weekly so there
 # was not yet a predefined list of packages students need for the course.
 
-# Install pak for fast downloading of packages --------------------------------
-install.packages("pak")
-pak::pak_setup()
-
 # Packages to be installed from CRAN ------------------------------------------
 cran_prerequisites <- c(
   "remotes",
@@ -37,8 +33,9 @@ cran_prerequisites <- c(
 # packages here have been released on CRAN, and if so have students install the
 # CRAN version instead.
 github_prerequisites <- c(
-  "crsh/papaja",
+  "crsh/papaja"
 )
 
-# Install all packages with pak -----------------------------------------------
-pak::pkg_install(c( cran_prerequisites, github_prerequisites))
+# Install all packages --------------------------------------------------------
+install.packages(cran_prerequisites)
+remotes::install_github(github_prerequisites)
