@@ -53,7 +53,8 @@ source(here("R", "shapiro_test.R"))
 # the appropriate statistical test for here
 
 # Note: You will need to create code chunks yourself for the remaining
-# questions in this assignment. The keyboard shortcut to do this is:
+# questions in this assignment. You may even want to make more code chunks for
+# this question. The keyboard shortcut to do this is:
 # Mac: Cmd + Option + I
 # Windows: Ctrl + Alt + I
 # You can find other useful keyboard shortcuts in the RStudio IDE cheat sheet
