@@ -28,6 +28,15 @@ library(ggpubr)
 
 ```
 
+As well as this Help Yourself's example data:
+
+```{r example-data}
+scores <- readr::read_csv(
+  here::here("data", "help-yourself_a6.csv"),
+  col_types = "fffd"
+)
+```
+
 ## Learning more
 
 ### Why you should use mixed effects models instead of repeated measures ANOVA
