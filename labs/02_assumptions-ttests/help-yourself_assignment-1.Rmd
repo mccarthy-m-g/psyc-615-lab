@@ -93,6 +93,7 @@ simpsons
 Creating data sets using the `tibble()` function is useful when you want to simulate data instead of entering it manually. R comes built in with a number of functions to simulate data with different distributions. You can see them all by running `?distributions` in the console. The most useful distribution to simulate in this course will be the normal distribution, which can be simulated with the `rnorm()` function. To get help using this function you can run `?rnorm` in the R console.
 
 ```{r simulate}
+set.seed(42)
 normal_distribution <- rnorm(n = 10, mean = 30, sd = 5)
 
 normal_distribution
@@ -565,7 +566,7 @@ The first option requires you to extract the variable and group columns you want
 # Here we extract the numeric vector for anxiety and the character vector for
 # group from the `spiders` data frame using the `$` extractor mentioned in the
 # previous section.
-car::leveneTest(y = spiders$anxiety, group = spiders$anxiety, center = mean)
+car::leveneTest(y = spiders$anxiety, group = spiders$group, center = mean)
 ```
 
 The second option uses R's formula syntax (`?formula`), placing the variable column to the left of the tilde and the group column to the right, then specifying the data frame those columns belong to using the `data` argument.
