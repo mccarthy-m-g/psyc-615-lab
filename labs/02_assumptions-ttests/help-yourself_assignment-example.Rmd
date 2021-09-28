@@ -1,0 +1,202 @@
+---
+title             : "Assignment Example"
+shorttitle        : "Example"
+
+params:
+  firstname  : Help
+  lastname   : Yourself
+  studentid  : 123456789
+  TAs        : "Kelsey Cnudde & Michael McCarthy"
+  show_output: FALSE
+  assignment : 1
+
+output: papaja::apa6_docx
+knit: ( function(input, ...) { source("../../R/knit.R"); knit_assignment(input, ...) })
+---
+
+```{r setup, include=FALSE}
+# Set up the here package
+here::i_am("labs/02_assumptions-ttests/help-yourself_assignment-example.Rmd")
+
+# Load packages
+library(here)
+library(papaja)
+library(tidyverse)
+library(ggpubr)
+library(psych)
+library(effectsize)
+library(car)
+
+# Load scripts
+source(here("R", "shapiro_test.R"))
+```
+
+```{r chunk-opts, include=FALSE, code=xfun::read_utf8(here('R', 'chunk-opts.R'))}
+```
+
+# Question 1
+
+*From the `data` directory, please import `help-yourself_a1.csv` into R.*
+
+```{r question-1-dataset}
+spiders_between <- readr::read_csv(here::here("data", "help-yourself_a1.csv"))
+spiders_within  <- dplyr::mutate(
+  spiders_between,
+  case = rep(1:12, times = 2),
+  anxiety = anxiety^1.05 # Transforming just so the scores are a bit different
+)
+```
+
+*Background: Imagine you are a therapist studying treatments for arachnophobia. You, a clever statistician yourself, decided to record the following variables from your clients: The type of therapy they were exposed to (Picture or Real spiders), and their level of anxiety after exposure. You conduct both a between- and within-clients study. You are now ready to investigate!*
+
+## Question 1a
+
+*You are interested in whether clients exposed to pictures are significantly lower in anxiety compared to clients exposed to real spiders (Hypothesis 1). Write an APA formatted results section exploring Hypothesis 1.*
+
+```{r question-1a-statistics}
+# Get descriptive statistics for each group
+spiders_descriptives <- spiders_between %>% 
+  dplyr::group_by(group) %>% 
+  summarise(
+    n = dplyr::n(),
+    mean = mean(anxiety),
+    sd = sd(anxiety)
+  )
+
+# Check test assumptions
+spiders_homogeneity <- leveneTest(
+  anxiety ~ group,
+  center = mean,
+  data = spiders_between
+)
+spiders_normality   <- shapiro_test(
+  spiders_between,
+  var = anxiety,
+  group = group
+)
+
+# Run an independent t-test and get its effect size. The `var.equal` argument
+# can be used here to run a student's t-test instead of a Welch's t-test, since
+# the sample size and variance between the two groups is equal.
+spiders_between_model   <- t.test(
+  anxiety ~ group,
+  data = spiders_between,
+  var.equal = TRUE
+)
+spiders_between_effsize <- cohens_d(
+  anxiety ~ group,
+  data = spiders_between
+)
+
+# Note that in this chunk we only saved our calculations to objects, but did
+# not print them. Doing this prevents their results from being output in the
+# knitted document.
+```
+
+# Results
+
+An independent t-test was conducted to investigate the differences in anxiety between clients exposed to pictures or real spiders. Normality was achieved for clients exposed to pictures of spiders ($W(12) = 0.965$, $p = .852$) and for clients exposed to real spiders ($W(12) = 0.965$, $p = .852$). Homogeneity of variance was achieved according to the Levene’s Test for Equality of Variances, $F(1, 22) = 0.782$, $p = .386$. Contrary to Hypothesis 1, there was not a significant difference between clients exposed to pictures ($\mathit{M} = 40.00$, $\mathit{SD} = 9.29$, $n = 12$) and clients exposed to real spiders ($\mathit{M} = 47.00$, $\mathit{SD} = 11.03$, $n = 12$), which can be seen in Figure 1, $t(22) = 1.68$, $p = .107$, $d = 0.69$. 
+
+(ref:apa-figure-1) Mean differences in anxiety between clients exposed to pictures or real spiders. Error bars represent the 95% confidence intervals.
+
+```{r question-1a-figure, fig.cap="(ref:apa-figure-1)"}
+# Note that in this chunk we do print the object we saved our plot to. This
+# will make it so the plot is output in the knitted document right where we
+# printed it. In general, for assignments, we want to print plots and tables,
+# but not any other code.
+
+spiders_between_plot <- ggbarplot(
+  data = spiders_between,
+  x = "group",
+  y = "anxiety",
+  add = "mean_ci",
+  xlab = "Group",
+  ylab = "Anxiety"
+)
+spiders_between_plot
+```
+
+\newpage
+
+## Question 1b
+
+*You are also interested in whether there is a statistically significant increase in anxiety when clients first view a picture and then a real spider (Hypothesis 2). Write an APA formatted results section exploring Hypothesis 2.*
+
+```{r question-1b-statistics}
+# A paired t-test requires checking the difference of the contexts for outliers
+# and assumptions. If the data is in long format we can first pivot it to wide
+# format.
+spiders_within_wide <- spiders_within %>% 
+  tidyr::pivot_wider(names_from = group, values_from = anxiety) %>% 
+  janitor::clean_names() # This cleans the column names so there aren't spaces
+
+# And then calculate the difference scores
+spiders_within_wide <- mutate(
+  spiders_within_wide,
+  anxiety_difference = picture - real_spider
+)
+
+# Create box plot to check for outliers. No outliers were identified.
+spiders_within_outliers <- ggboxplot(
+  spiders_within_wide,
+  y = "anxiety_difference"
+)
+
+# Get descriptive statistics for each context
+spiders_within_descriptives <- spiders_within %>% 
+  dplyr::group_by(group) %>% 
+  summarise(
+    n = dplyr::n(),
+    mean = mean(anxiety),
+    sd = sd(anxiety)
+  )
+
+# Check test assumptions
+spiders_within_normality <- shapiro_test(
+  spiders_within_wide,
+  var = anxiety_difference
+)
+
+# Run a paired t-test and get its effect size
+spiders_within_model <- t.test(
+  anxiety ~ group,
+  paired = TRUE,
+  data = spiders_within
+)
+spiders_within_effsize <- cohens_d(
+  anxiety ~ group,
+  paired = TRUE,
+  data = spiders_within
+)
+```
+
+# Results
+
+A paired t-test ($n = 24$) was conducted to investigate the difference in anxiety when clients first view a picture and then a real spider. Normality was achieved ($W(24) = 0.957$, $p = .741$). Contrary to Hypothesis 2, there was no significant difference from viewing a picture ($\mathit{M} = 48.17$, $\mathit{SD} = 11.73$) or real spider ($\mathit{M} = 57.05$, $\mathit{SD} = 14.03$), which can be seen in Figure \@ref(fig:question-1b-figure), $t(11) = 2.47$, $p = .031$, $d = 0.71$. 
+
+(ref:apa-figure-2) Difference in anxiety when clients first view a picture and then a real spider. Error bars represent the adjusted 95% confidence intervals.
+
+```{r question-1b-figure, fig.cap="(ref:apa-figure-2)"}
+# Plot adjusted means using manual calculation
+
+# Calculate the grand mean for both contexts
+anxiety_scores <- pull(spiders_within, anxiety)
+grand_mean <- mean(anxiety_scores)
+
+# Calculate each participant's mean score between the two contexts of the
+# dependent variable, then an adjustment score, then plot it.
+spiders_within %>% 
+  group_by(case) %>% 
+  mutate(
+    mean_anxiety = mean(anxiety),
+    adjustment = grand_mean - mean_anxiety,
+    anxiety_adj = anxiety + adjustment
+  ) %>%
+  ggline(
+    x = "group",
+    y = "anxiety_adj",
+    add = "mean_ci",
+  xlab = "Group",
+  ylab = "Anxiety (Adjust)"
+  )
+```
