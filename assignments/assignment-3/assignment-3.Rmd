@@ -70,14 +70,7 @@ Answers here.
 
 ## Question 2a
 
-*Write an APA results section that includes the following: (11 marks total, see below for breakdown):*
-
-1. *Brief report of assumptions (No need to clean the data this time, aside from assumption checking. PLEASE DO NOT REMOVE ANY DATA FOR THIS ASSIGNMENT!) (1 mark)*
-2. *Omnibus results (as is tradition, and including effect size) (1 mark)*
-3. *The planned comparisons (including means and SD that relate to the “groups” being compared and appropriate effect sizes) (6 marks)*
-4. *Appropriate figures visualizing each hypothesis (3 marks).*
-
-# Results
+*Are all of your planned comparisons orthogonal to each other? Please justify your answers by showing the formulas/calculations for each pair. (2 marks)*
 
 Answers here.
 
@@ -85,7 +78,7 @@ Answers here.
 
 ## Question 2b
 
-*Are all of your planned comparisons orthogonal to each other? Please justify your answers by showing the formulas/calculations for each pair. (2 marks)*
+*Explain why your planned comparisons are not a complete/full orthogonal set? State additional hypothesis(es)---in words and contrast codes---that could be used to complete the set. No need to show formulas/calculations for the new hypothesis. (1 mark)*
 
 Answers here.
 
@@ -93,7 +86,12 @@ Answers here.
 
 ## Question 2c
 
-*Explain why your planned comparisons are not a complete/full orthogonal set? State additional hypothesis(es)---in words and contrast codes---that could be used to complete the set and run the supplementary analyses to investigate. Provide the results (descriptive and inferential statistics) and interpret them briefly. No need for figure(s) or a formal Results section here. (3 marks)*
+*Write an APA results section that includes the following: (11 marks total, see below for breakdown):*
+
+1. *Brief report of assumptions (No need to clean the data this time, aside from assumption checking. PLEASE DO NOT REMOVE ANY DATA FOR THIS ASSIGNMENT!) (1 mark)*
+2. *Omnibus results (as is tradition, and including effect size) (1 mark)*
+3. *The planned comparisons from Questions 2a and 2b (including means and SD that relate to the “groups” being compared and appropriate effect sizes) (8 marks)*
+4. *Appropriate figures visualizing each hypothesis (3 marks).*
 
 Answers here.
 
@@ -101,7 +99,11 @@ Answers here.
 
 ## Question 2d
 
-*A graduate student who participated in your study liked your sitcom research idea and wants to use your same study design but doesn’t like the planned comparisons you chose and wants you to provide suggestions on what they could do (apparently they don’t want to do any work). Without repeating any of the three planned comparisons you originally did for your hypotheses, what are TWO complete/full orthogonal sets (distinct from each other as well), in both words and contrast codes, that this other graduate student could do? (2 marks) Note 1. The actual comparisons themselves need to be different, not just the codes. For example, (1,-1,0) is not different from (2,-2,0) or (-1,1,0). Note 2. You don’t need any kind of home/apartment theory to justify your comparisons here. It is just about orthogonality!*
+*A graduate student who participated in your study liked your sitcom research idea and wants to use your same study design but doesn’t like the planned comparisons you chose and wants you to provide suggestions on what they could do (apparently they don’t want to do any work). Without repeating any of the three planned comparisons you originally did for your hypotheses, what are TWO complete/full orthogonal sets (distinct from each other as well), in both words and contrast codes, that this other graduate student could do? (2 marks)*
+
+*Note 1. The actual comparisons themselves need to be different, not just the codes. For example, (1,-1,0) is not different from (2,-2,0) or (-1,1,0).*
+
+*Note 2. You don’t need any kind of home/apartment theory to justify your comparisons here. It is just about orthogonality!*
 
 Answers here.
 
