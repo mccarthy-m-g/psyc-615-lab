@@ -97,9 +97,11 @@ spiders_between_effsize <- cohens_d(
 
 An independent t-test was conducted to investigate the differences in anxiety between clients exposed to pictures or real spiders. Normality was achieved for clients exposed to pictures of spiders ($W(12) = 0.965$, $p = .852$) and for clients exposed to real spiders ($W(12) = 0.965$, $p = .852$). Homogeneity of variance was achieved according to the Levene’s Test for Equality of Variances, $F(1, 22) = 0.782$, $p = .386$. Contrary to Hypothesis 1, there was not a significant difference between clients exposed to pictures ($\mathit{M} = 40.00$, $\mathit{SD} = 9.29$, $n = 12$) and clients exposed to real spiders ($\mathit{M} = 47.00$, $\mathit{SD} = 11.03$, $n = 12$), which can be seen in Figure 1, $t(22) = 1.68$, $p = .107$, $d = 0.69$. 
 
-(ref:apa-figure-1) Mean differences in anxiety between clients exposed to pictures or real spiders. Error bars represent the 95% confidence intervals.
+```{r question-1a-figure}
+#| fig.cap: >
+#|  Mean differences in anxiety between clients exposed to pictures or real spiders.
+#|  Error bars represent the 95% confidence intervals.
 
-```{r question-1a-figure, fig.cap="(ref:apa-figure-1)"}
 # Note that in this chunk we do print the object we saved our plot to. This
 # will make it so the plot is output in the knitted document right where we
 # printed it. In general, for assignments, we want to print plots and tables,
@@ -196,7 +198,7 @@ spiders_within %>%
     x = "group",
     y = "anxiety_adj",
     add = "mean_ci",
-  xlab = "Group",
-  ylab = "Anxiety (Adjust)"
+    xlab = "Group",
+    ylab = "Anxiety (Adjust)"
   )
 ```
