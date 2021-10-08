@@ -123,8 +123,8 @@ You can follow up simple main effects using the familiar emmeans functions you h
 ```{r emmeans}
 homunculi_emm <- emmeans::emmeans(
   homunculi_model,
-  specs = "body_type",
-  by = "brain_type"
+  specs = "brain_type",
+  by = "body_type"
 )
 
 emmeans::contrast(
