@@ -89,6 +89,6 @@ Answers here.
 
 # Bonus
 
-*When would you not want to use pooled variance in your post-hoc analyses? (0.5 BONUS marks)*
+*If you had a factorial ANOVA with two IVs, and both main effects plus the interaction were significant, how would you proceed with the analysis and why? (0.5 BONUS marks, not to exceed 100%)*
 
 Answers here.
