@@ -145,7 +145,7 @@ contrast_sums
 Then you can tidy the emmeans contrast object.
 
 ```{r}
-birthdays_emm_contrast <- broom::tidy(birthdays_emm)
+birthdays_emm_contrast <- broom::tidy(birthdays_emm_contrast)
 birthdays_emm_contrast
 ```
 
