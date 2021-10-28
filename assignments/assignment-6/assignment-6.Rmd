@@ -80,7 +80,7 @@ Answers here.
 
 ## Question 3c
 
-*Based on the results of Mauchly’s test, would you proceed with the planned contrasts required to test the hypotheses? Why or why not? (2 marks). Hint: You must provide reasoning for each of the main effects to receive full marks.*
+*Based on the Mauchly’s test output, would you proceed with the planned contrasts required to test the hypotheses? Why or why not? (2 marks). Hint: You must provide reasoning for each of the main effects to receive full marks.*
 
 Answers here.
 
