@@ -24,18 +24,139 @@ here::i_am("labs/08_within-subjects-anova/help-yourself_assignment-6.Rmd")
 
 library(here)
 library(tidyverse)
+library(afex)
+library(effectsize)
+library(emmeans)
 library(ggpubr)
 
+source(here("R", "apa_legend.R"))
 ```
 
 As well as this Help Yourself's example data:
 
 ```{r example-data}
+# Note here that we specify the column types using the col_types argument
 scores <- readr::read_csv(
   here::here("data", "help-yourself_a6.csv"),
   col_types = "fffd"
 )
 ```
+
+## Higher Order ANOVA
+
+Higher order ANOVA uses the `aov_car()` function we learned about last week. The formula syntax is similar to a two-way ANOVA, except we also add an error term to our model for any within-subject variables. The same logic applies to a within-subjects ANOVA, except you would not have an interaction term.
+
+```{r higher-order}
+scores_model <- afex::aov_car(
+  score ~ task * level + Error(id/(task*level)),
+  type = 3,
+  data = scores
+)
+
+scores_model
+```
+
+We can run our assumption tests and get other information about the model using the `summary()` function. Just a side note, we have been using the `tidy()` function to clean up our models into nice output up until now, but you can use the `summary()` function in place of `tidy()` in most places.
+
+```{r summary}
+summary(scores_model)
+```
+
+Other than that, the rest of the familiar code for effect size and contrasts will work as usual here.
+
+## Effect sizes for within-subjects contrasts
+
+To get standardized effect sizes for contrasts you can calculate them by hand, create your own function to calculate them, or in some cases use a pre-existing R function. We haven't discussed this yet, but there are actually several different versions of Cohen's d, each with its own (intended) purpose and formula. So when you're reporting Cohen's d you should be aware of the formula you're using, and report the appropriate subscript so people know what denominator you're using to standardize the mean differences. If you're using your own formula in the denominator you should report the full equation somewhere in your report. This recommendation also applies retroactively to any of the previous situations you've reported Cohen's d. See *Cohen (1988), Statistical Power Analysis for the Behavioral Sciences* and the *Learning More* section for more info.
+
+The three versions we'll show below might be useful for within-subjects designs, depending on your reasons for calculating a standardized effect size. A note on these, taken from [Lakens](https://doi.org/10.3389/fpsyg.2013.00863):
+
+> When the standard deviations of both groups of observations are equal, Cohen's dav, and Cohen's drm are identical, and the effect size equals Cohen's ds (see article) for the same means and standard deviations in a between subject design. In general, Cohen's dav will be more similar to Cohen's ds (compared to Cohen's drm), except when correlations between measures are low, and the difference between the standard deviations is large. Cohen's drm is always more conservative, but with high correlations between observations, sometimes unreasonably conservative. When r is larger than 0.5, Cohen's dz will be larger than Cohen's drm and Cohen's dav, and when r is smaller than 0.5, Cohen's dz will be smaller than Cohen's drm and Cohen's dav. There are situations where reporting Cohen's dz is defensible (see article), but Lakens' general recommendation is to report Cohen's drm or Cohen's dav.
+
+### Cohen's dz
+
+The formula for Cohen's dz is:
+
+$$
+\textrm{Cohen′s } d_z = \frac{t}{\sqrt{n}}
+                      = \frac{
+                          M_{\text{diff}}
+                        }{
+                          \sqrt{\sum (x_{\text{diff} - M_{\text{diff}})}}{N - 1}}
+                        }
+                      \approx \frac{t}{\sqrt{df_{error}}}
+$$
+
+You can get an *approximation* of this effect size using the `t_to_d()` function from the **effectsize** package, assuming you have two equal group sizes for your contrast. This uses the test statistic and residual degrees of freedom to get an approximate effect size. You already know how to do contrasts so we're just showing you how the function works below.
+
+```{r t-to-d}
+effectsize::t_to_d(t = 2.5, df_error = 9, paired = TRUE)
+```
+
+And here's an example showing how to use it with the `mutate()` function. This could be useful if you tidy your emmeans contrasts into a data frame.
+
+```{r t-to-d-mutate}
+# A minimal example of some pretend contrast results
+pretend_contrast_results <- tibble::tibble(statistic = 2.5, df = 9)
+
+# Then we can just refer to the relevant columns to calculate the effect size
+dplyr::mutate(
+  pretend_contrast_results,
+  effectsize::t_to_d(t = statistic, df_error = df, paired = TRUE)
+)
+```
+
+Alternatively, you could use the `eff_size()` function from the **emmeans** package to calculate the exact effect size (and get all the nice extras like confidence intervals). All you would do is specify the the value of the denominator (in this case the square root of the sample size) in the `sigma` argument. All the `sigma` argument does is tell the function the value of the denominator to standardize the mean difference on, so this could be applied to any of the other Cohen's d formulas below as well. The only mild annoyance here is that you will have to call the `eff_size()` function multiple times, once for each contrast you need to give a unique value of `sigma` for.
+
+### Cohen's drm
+
+Alternatively, you can calculate Cohen's drm, which accounts for the correlation between your repeated measures.
+
+$$
+\textrm{Cohen′s } d_{rm} = \frac{ | M_1 - M2 |}{\sqrt{s^2_1 + s^2_2 - (2 r s_1 s_2)}} \times
+                          \sqrt{2(1 - r)}
+$$
+
+Where $r$ is the correlation between the two groups you're comparing.
+
+The `cohen.d` function from the **effsize** package (*not the effectsize package!*) can calculate this (and other variations of Cohen's d), as can the `eff_size()` function approach mentioned above (although here you would need to multiply the result by the second standardizer as well). We'll leave you to decide whether to use this or not, and figure it out on your own. You can always verify the results by calculating by hand! 
+
+### Cohen's dav
+
+Finally, you could use the average standard deviation of both your repeated measures (ignoring the correlation between them).
+
+$$
+\textrm{Cohen′s } d_{av} = \frac{
+                             M_{\text{diff}}
+                           }{
+                             \frac{s_1 + s_2}{2}
+                           }
+$$
+
+## Plotting emmeans
+
+For within-subjects designs you want to plot the confidence intervals given by emmeans, rather than the defaults ggpubr gives. To do this you have to use the `geom_errorbar()` function from the **ggplot2** package. We've abstracted how ggplot2 works from you since we have been using ggpubr for plotting, but if you look back to early Help Yourselfs some of the learning more sections link to ggplot2 resources.
+
+```{r plot-emmeans}
+scores_model_emm <- emmeans::emmeans(scores_model, specs = "task", by = "level")
+scores_model_emmeans <- broom::tidy(scores_model_emm, conf.int = TRUE)
+
+ggpubr::ggline(
+  scores_model_emmeans,
+  x = "level",
+  y = "estimate",
+  color = "task",
+  palette = "grey"
+) +
+  ggplot2::geom_errorbar(
+    aes(ymin = conf.low, ymax = conf.high, color = task),
+    width = 0.4
+  ) +
+  # Reminder, this is a custom function you have to source. See Help Yourself
+  # Assignment 1 if you forget how to do that.
+  apa_legend(position = "bottomleft")
+```
+
+You might also want to look into the **ggeffects** package as I believe the `ggemmeans()` function from that package can be used to get a data frame of values from which you can plot using the `add = "mean_ci"` you're accustomed to, instead of having to add a separate ggplot2 geom for the error bars. I haven't had time to play around with this though, so I'm not 100% sure.
 
 ## Learning more
 
@@ -44,3 +165,14 @@ scores <- readr::read_csv(
 - https://journals.physiology.org/doi/full/10.1152/advan.00042.2003
 - https://www.sciencedirect.com/science/article/pii/S0749596X07001337
 - https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1469-8986.1987.tb00324.x
+- Although see Gelman's discussion on why ANOVA is more important than ever https://projecteuclid.org/journals/annals-of-statistics/volume-33/issue-1/Analysis-of-variancewhy-it-is-more-important-than-ever/10.1214/009053604000001048.full
+
+### Cohen's d is not just one thing, even though we've treated it as such
+
+- http://jakewestfall.org/blog/index.php/2016/03/25/five-different-cohens-d-statistics-for-within-subject-designs/
+- https://www.frontiersin.org/articles/10.3389/fpsyg.2013.00863/full
+
+### Thinking critically about standardized effect sizes
+
+- http://www.floppybunny.org/robin/web/virtualclassroom/stats/basics/articles/effect_size/effect_size_baguley_2009.pdf
+- https://www.frontiersin.org/articles/10.3389/fpsyg.2013.00863/full

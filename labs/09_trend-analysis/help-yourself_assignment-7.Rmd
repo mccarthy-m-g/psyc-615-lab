@@ -24,6 +24,61 @@ here::i_am("labs/09_trend-analysis/help-yourself_assignment-7.Rmd")
 
 library(here)
 library(tidyverse)
+library(afex)
+library(effectsize)
+library(emmeans)
+library(broom)
 library(ggpubr)
-
 ```
+
+As well as this Help Yourself's example data:
+
+```{r example-data}
+# Note this is the same data from last week
+scores <- readr::read_csv(
+  here::here("data", "help-yourself_a6.csv"),
+  col_types = "fffd"
+)
+
+# However, we're going to filter it so it's just for a one-way within-subjects
+# design.
+scores <- dplyr::filter(scores, task == "math")
+```
+
+## Trend Analysis
+
+There isn't much new here from what you've been doing already, so we're just going to show you the code beginning to end.
+
+```{r trend-analysis}
+# First fit your ANOVA model, as usual
+scores_model <- afex::aov_car(
+  score ~ level + Error(id/(level)),
+  type = 3,
+  data = scores
+)
+
+# Second construct your reference grid, as usual
+scores_emm <- emmeans::emmeans(scores_model, specs = "level")
+
+# Third, do your contrasts. Note that we set the method to "poly" here. This is
+# how we test for different order trends using polynomial contrasts.
+scores_emm_contrast <- emmeans::contrast(
+  scores_emm,
+  method = "poly",
+  infer = TRUE,
+  adjust = "none"
+)
+
+# Fourth, convert t statistics to F statistics, and get the effect size for
+# each trend. Note that the numerator degrees of freedom for each contrast
+# is 1 when you convert to an F statistic.
+scores_emm_contrast <- broom::tidy(scores_emm_contrast)
+
+dplyr::mutate(
+  scores_emm_contrast,
+  statistic = statistic^2,
+  effectsize::F_to_omega2(statistic, df = 1, df_error = df)
+)
+```
+
+Finally, for plotting you can use the same code from Help Yourself Assignment 6, making the relevant adjustments for a one-way within-subjects ANOVA (since there we did a plot for higher-order).

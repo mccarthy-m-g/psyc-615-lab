@@ -38,11 +38,11 @@ grades <- readr::read_csv(here::here("data", "help-yourself_a5.csv"))
 
 ## Assumptions
 
-You will need a bit of new code for the new assumptions this week, although most use familiar functions.
+You will need a bit of new code for the one of the new assumptions this week, the other new assumptions just use ANOVAs so we won't cover those here.
 
 ### Covariate-dependent variable correlation
 
-The `cor.test()` function can be used to test the correlation between the covariate and the dependent variable using the `~ cv + dv` formula syntax.
+The `cor.test()` function can be used to test the correlation between the covariate and the dependent variable using the `~ covariate + dv` formula syntax.
 
 ```{r cor-test}
 cor.test(
@@ -58,30 +58,62 @@ Normality, homogeneity of variance, the one-way ANOVA between the independent va
 
 ## ANCOVA
 
-ANCOVA uses the familiar `aov()` function you have used throughout this course, adding the covariate into the formula is all that's needed.
+ANCOVA uses the familiar `aov()` function you have used throughout this course, adding the covariate into the formula is all that's needed. We also specify the contrast coding for the group variable to use orthogonal contrasts, rather than the traditional dummy coding (treatment contrasts) that are used by default in the `aov()` function. This ensures we partition variance correctly.
 
 ```{r ancova}
-grades_model <- aov(final_exam_grade ~ group + minutes_listening, data = grades)
-broom::tidy(grades_model)
-```
-
-However, the `aov()` function uses Type 1 sums of squares, which you do not want for ANCOVA. To caclulate ANCOVA with Type 3 sums of squares you can use the `Anova()` function from the **car** package, which takes the model above as its input.
-
-```{r car-anova}
-grades_model_t3 <- car::Anova(grades_model, type = 3)
-```
-
-If you want to do this in one step we made a custom `aov_psyc()` function for you to use. It returns a list with both the output from the `aov()` function and the `Anova()` function. You can extract either output from the list with the `$` extractor.
-
-```{r aov-psyc}
-source(here::here("R", "aov_psyc.R"))
-
-aov_psyc(
-  final_exam_grade ~ group + minutes_listening, 
-  type = 3,
+grades_model <- aov(
+  final_exam_grade ~ group + minutes_listening,
+  contrasts = list(group = contr.sum),
   data = grades
 )
 ```
+
+However, the `aov()` function uses Type 1 sums of squares, which you do not want for ANCOVA. To calculate ANCOVA with Type 3 sums of squares you can use the `Anova()` function from the **car** package, which takes the model above as its input, then specify the type of sums of squares you want.
+
+```{r car-anova}
+grades_model_t3 <- car::Anova(grades_model, type = 3)
+
+broom::tidy(grades_model_t3)
+```
+
+Alternatively, you can use the `aov_car()` function from the **afex** package. The only downside to this is that it doesn't support the `tidy()` function we've been using to tidy our model objects up with, unless we extract one of the tables stored in the model object. It's also a bit more verbose.
+
+```{r aov-car}
+# The ANOVA functions from the afex package require that your data has an ID
+# column, which is used for the error term, so we're adding one here
+grades <- dplyr::mutate(grades, student = paste0("p", 1:length(group)))
+
+grades_model_car <- afex::aov_car(
+  final_exam_grade ~ group + minutes_listening + Error(student),
+  data = grades,
+  type = 3,
+  factorize = FALSE # This is needed when running an ANCOVA
+)
+
+broom::tidy(grades_model_car$Anova)
+```
+
+If you find the extraction annoying you could just write a custom function, then save it to a script in the R directory so you can source it as needed.
+
+```{r tidy-afex}
+# The tidy function is a generic function that allows you to supply your own
+# tidy methods for objects of different classes. Here we're making a tidy
+# method for the afex_aov class.
+tidy.afex_aov <- function(x, ...) {
+  broom::tidy(x[["Anova"]])
+}
+
+# Now this works
+broom::tidy(grades_model_car)
+```
+
+Alternatively, you could just use the `summary()` function. This is the standard way to get summary output for a model object if you're working interactively. The reason we waited so long to show this is that up until now, the `broom::tidy()` function served the same purpose and also had the extra utility of putting our output in a data frame, allowing us to further use our output for other calculations.
+
+```{r summary}
+summary(grades_model_car)
+```
+
+### Effect size
 
 When you calculate effect size you should do it on the object created by the `Anova()` function.
 
@@ -89,9 +121,29 @@ When you calculate effect size you should do it on the object created by the `An
 effectsize::omega_squared(grades_model_t3)
 ```
 
+If you use the afex package you can just do it on the model object.
+
+```{r omega-squared-car}
+effectsize::omega_squared(grades_model_car)
+```
+
 ## Follow-ups
 
 Nothing new! The `emmeans()`, `contrasts()`, and `eff_size()` functions with their familiar syntax and arguments is all you need.
+
+However, to extract the residual standard deviation from the model using the `sigma()` function and the residual degrees of freedom using the `df.residual()` function, you have to do something slightly different depending on the function you chose above for the ANCOVA model.
+
+```{r sigma}
+# aov
+sigma(grades_model)
+df.residual(grades_model)
+
+# afex
+sigma(grades_model_car$lm)
+df.residual(grades_model_car$lm)
+```
+
+The `sigma()` and `df.residual()` functions are generics just like the `tidy()` function, so you could also write a custom function for these.
 
 ### Plotting emmeans
 

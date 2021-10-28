@@ -27,3 +27,36 @@ library(tidyverse)
 library(ggpubr)
 
 ```
+
+```{r}
+drinks <- readr::read_csv(
+  here::here("data", "help-yourself_a8.csv"),
+  col_types = "fffd"
+  )
+```
+
+## Mixed ANOVA
+
+You can probably guess how to do a mixed ANOVA already given what you've learned so far. But here's the code anyways!
+
+```{r mixed-anova}
+drinks_model <- afex::aov_car(
+  rating ~ drink * day  + Error(id/day),
+  type = 3,
+  data = drinks
+)
+
+summary(drinks_model)
+```
+
+That's it! We'll leave it up to you to figure out how to do assumptions, follow-ups, and visualizations. No new code is needed, so just look back to previous weeks and you'll be able to figure it out.
+
+## Learning more R beyond this course
+
+Thanks for sticking with R through the course! We hope you've enjoyed it and will continue to use it in the future. Given the time constraints of the course there's a lot we could not teach you about R programming, but hopefully you now feel confident to learn more on your own. There's a lot of high-quality free material you can use to learn more about R programming and using other statistical methods in R.
+
+I (Michael) keep a list of useful books on the wiki for my blog under the Library tab, which you can check out if you want somewhere to start from: https://github.com/mccarthy-m-g/tidytales/wiki/. Most of the books are free, a few are not. From that list I would recommend starting with R for Data Science; you'll get a lot out of that book. I would also recommend reading Statistical Rethinking at some point. It's about Bayesian statistics, but even if you aren't interested in Bayes, the book still has a lot to offer. And if you are serious about using R in your work I would also recommend reading Happy Git and GitHub for the UseR. Git is a version control software for programming projects, GitHub is sort of like a cloud repository for any projects you do that use Git. I use Git and GitHub for everything I do, it's a bit obtuse at first, but once you get the hang of it it becomes a critical part of your workflow. It also makes collaboration with others a lot easier. You can even file issues or make contributions to other R packages through GitHub.
+
+If you look at the Wrangle, Visualize, Model, and Communicate tabs on the wiki, you will also find lists of R packages that are useful for different things.
+
+You can also check out the [Big Book of R](https://www.bigbookofr.com), which is basically just a giant glossary of R books that are out there, arranged by topic.
