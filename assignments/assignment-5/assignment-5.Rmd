@@ -82,6 +82,8 @@ Answers here.
 
 # Question 2
 
-*In approximately half a page (one page maximum; double spaced), create and describe your own study that can be analyzed with ANCOVA, which must include one IV with four levels, one continuous DV, and two continuous appropriate covariates. Don’t forget to include the categories/scale for each variable. You DO NOT need to create data or run any analyses here. (4 marks) NOTE: The study must “make sense” theoretically (in terms of relationships between variables), but I’ll give +.5 BONUS for creativity here! Have fun with it!*
+*In approximately half a page (one page maximum; double spaced), create and describe your own study that can be analyzed with ANCOVA, which must include one IV with four levels, one continuous DV, and two continuous appropriate covariates. Don’t forget to include the categories/scale for each variable. You DO NOT need to create data or run any analyses here. (4 marks)*
+
+*NOTE: The study must “make sense” theoretically (in terms of relationships between variables), but I’ll give +.5 BONUS for creativity here! Have fun with it!*
 
 Answers here.
