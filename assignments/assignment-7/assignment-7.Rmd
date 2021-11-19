@@ -50,6 +50,14 @@ Answers here.
 
 *During the analysis, Brittany found a significant trend interaction between day and substance (alpha level of .05). Referencing Figure 1 and statistics from the SPSS output below, report and describe the appropriate trend for each substance (in APA format) with any necessary corrections. (5 marks)*
 
+```{r}
+knitr::include_graphics(here("images", "assignment-7_3b-tables.png"))
+```
+
+```{r}
+knitr::include_graphics(here("images", "assignment-7_3b-plot.png"))
+```
+
 # Results
 
 Answers here.
