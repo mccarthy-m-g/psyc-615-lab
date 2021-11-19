@@ -40,11 +40,11 @@ library(papaja)
 
 *Recently, a new trend has popped up in high-intensity industries like Silicon Valley: LSD taken daily through “micro-doses”, claiming to make users more focused, and thus more productive (https://www.scientificamerican.com/article/do-microdoses-of-lsd-change-your-mind/). Let’s imagine two new brands of “legal” LSD have entered the market, Drug Alpha and Drug Beta. Both claim to increase one’s ability to concentrate through regular daily use. The makers of Drug Alpha state that their drug will be effective right away, whereas the makers of Drug Beta advise that effects may take up to two weeks of regular use to emerge. You are interested in testing the companies claims that taking micro-doses of their LSD regularly increases peoples’ levels of concentration.*
 
-*You design a study in which participants were randomly assigned to receive daily micro-doses of one of the three drug conditions (Drug Alpha, Drug Beta, Placebo) over the course of a two-week period. Prior to receiving the drug, participants had their baseline concentration measured using the Frankfurt Adaptive Concentration Test, where they must respond to two target images whenever they appear amongst several distractor images (with the test adapting to their level of performance). This results in an accuracy score from 0-100, with higher numbers reflecting higher accuracy and thus better concentration. Concentration was measured again after 7 and 14 days of micro-dose administration.*
+*You design a study in which participants were randomly assigned to receive daily micro-doses of one of the three drug conditions (Drug Alpha, Drug Beta, Placebo) over the course of a two-week period. Prior to receiving the drug, participants had their baseline concentration measured using the Frankfurt Adaptive Concentration Test, where they must respond to two target images whenever they appear amongst several distractor images (with the test adapting to their level of performance). This results in an accuracy score from 0-10, with higher numbers reflecting higher accuracy and thus better concentration. Concentration was measured again after 7 and 14 days of micro-dose administration.*
 
 ## Question 1
 
-*Write out hypothesis(es) in sentence format that will address the research question, taking into account the information provided about efficacy about the drugs (and don’t forget about the placebo). (Do not look at the data first!).*
+*Write out your hypothesis(es) in sentence format that will address the research question, taking into account the information provided about efficacy about the drugs (and don’t forget about the placebo). (Do not look at the data first!).*
 
 Answers here.
 
@@ -60,7 +60,7 @@ Answers here.
 
 ## Question 3
 
-*Complete the analyses as per your plan and report the results in APA format. Treat this as an actual results section in something like your thesis, including all reporting on assumptions, steps taken to clean the data (if any), corrections/adjustments made, effect sizes (eta is okay), and appropriate figures or tables.*
+*Complete the analyses as per your plan and report the results in APA format. Treat this as an actual results section in something like your thesis or a manuscript, including all reporting on assumptions, steps taken to clean the data (if any), corrections/adjustments made, effect sizes (partial eta is okay), and appropriate figures or tables.*
 
 # Results
 
