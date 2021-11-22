@@ -51,11 +51,21 @@ summary(drinks_model)
 
 That's it! We'll leave it up to you to figure out how to do assumptions, follow-ups, and visualizations. No new code is needed, so just look back to previous weeks and you'll be able to figure it out.
 
-## Learning more R beyond this course
+## Learning more
+
+- Multiple corrections in multiway ANOVA, the Type 1 error rate isn't what you'd think! <https://link.springer.com/article/10.3758/s13423-015-0913-5>
+
+## Learning more beyond this course
 
 Thanks for sticking with R through the course! We hope you've enjoyed it and will continue to use it in the future. Given the time constraints of the course there's a lot we could not teach you about R programming, but hopefully you now feel confident to learn more on your own. There's a lot of high-quality free material you can use to learn more about R programming and using other statistical methods in R.
 
-I (Michael) keep a list of useful books on the wiki for my blog under the Library tab, which you can check out if you want somewhere to start from: https://github.com/mccarthy-m-g/tidytales/wiki/. Most of the books are free, a few are not. From that list I would recommend starting with R for Data Science; you'll get a lot out of that book. I would also recommend reading Statistical Rethinking at some point. It's about Bayesian statistics, but even if you aren't interested in Bayes, the book still has a lot to offer. And if you are serious about using R in your work I would also recommend reading Happy Git and GitHub for the UseR. Git is a version control software for programming projects, GitHub is sort of like a cloud repository for any projects you do that use Git. I use Git and GitHub for everything I do, it's a bit obtuse at first, but once you get the hang of it it becomes a critical part of your workflow. It also makes collaboration with others a lot easier. You can even file issues or make contributions to other R packages through GitHub.
+I (Michael) keep a list of useful books on the wiki for my blog under the Library tab, which you can check out if you want somewhere to start from: https://github.com/mccarthy-m-g/tidytales/wiki/. Most of the books are free, a few are not.
+
+From that list I would recommend starting with [R for Data Science](https://r4ds.had.co.nz); you'll get a lot out of that book. You should also finish the [Hands-on Programming with R](https://rstudio-education.github.io/hopr/) book you read at the start of this course if you haven't already. Finally, the [What they forgot to teach you about R](https://rstats.wtf) book covers some things we forgot to teach you about R.
+
+If you are serious about using R in your work I would also recommend reading [Happy Git and GitHub for the UseR](https://happygitwithr.com). Git is a version control software for programming projects, GitHub is sort of like a cloud repository for any projects you do that use Git. I use Git and GitHub for everything I do. It's a bit obtuse at first, but once you get the hang of it it becomes a critical part of your workflow. It also makes collaboration with others a lot easier. You can even file issues or make contributions to other R packages through GitHub.
+
+For stats books, I would recommend reading [Statistical Rethinking](https://xcelab.net/rm/statistical-rethinking/) at some point. It's about Bayesian statistics, but even if you aren't interested in Bayes, the book still has a lot to offer. As well as [An Introduction to Statistical Learning](https://www.statlearning.com), which gives an introduction to statistical learning methods (i.e., machine learning) aimed at less technical audiences. Anything written by Andrew Gelman is also an excellent choice. I would probably start any of these after completing PSYC 617, as it will give you a better foundation for the topics these books cover.
 
 If you look at the Wrangle, Visualize, Model, and Communicate tabs on the wiki, you will also find lists of R packages that are useful for different things.
 
